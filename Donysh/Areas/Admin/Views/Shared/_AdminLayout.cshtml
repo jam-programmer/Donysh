@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" class="light">
+<!-- BEGIN: Head -->
+<head>
+    <partial name="_MetaTags"/>
+</head>
+<!-- END: Head -->
+<body class="main">
+    <!-- BEGIN: Mobile Menu -->
+    <partial name="_MobileMenu" />
+    <!-- END: Mobile Menu -->
+    <div class="flex">
+        <!-- BEGIN: Side Menu -->
+        <partial name="_SideMenu" />
+        <!-- END: Side Menu -->
+        <!-- BEGIN: Content -->
+        <div class="content">
+            <!-- BEGIN: Top Bar -->
+            <partial name="_TopBar" />
+            <!-- END: Top Bar -->
+            <!-- START: Content -->
+            @RenderBody()
+            <!-- END: Content -->
+        </div>
+        <!-- END: Content -->
+    </div>
+  
+<partial name="_Scripts"/>
+</body>
+</html>

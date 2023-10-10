@@ -1,0 +1,51 @@
+﻿@model AddTeamDto
+@{
+    ViewData["Title"] = "Add Member";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (ViewBag.Alert != null)
+{
+    <div onclick="closeAlert()" style="width: 25%;" class="alert alert-warning-soft show flex items-center mt-5" id="closeAlert" role="alert">
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x block mx-auto"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <strong class="ml-5">  @ViewBag.Alert</strong>
+    </div>
+
+}
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+        <h2 class="font-medium text-base mr-auto">
+            Add Member
+        </h2>
+
+    </div>
+    <div id="input" class="p-5">
+        <form asp-area="Admin" asp-controller="Team" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="mb-5">
+                <div class="fallback">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
+                        <img id="imagePath" src="~/img/defualt.jpg">
+                    </div>
+                    <label for="AvatarFile" class="form-label mt-3">Avatar File</label><br/>
+                    <input onchange="ChangeImage(this)" asp-for="AvatarFile" type="file" id="image" class="mt-1" />
+                </div>
+                <div class="mt-5">
+                    <label for="FullName" class="form-label">First Name And Last Name</label>
+                    <input asp-for="FullName" id="FullName" placeholder="Name..." type="text" class="form-control">
+                </div>
+                <div class="mt-5">
+                    <label for="JobTitle" class="form-label">Job Title</label>
+                    <input asp-for="JobTitle" id="JobTitle" placeholder="Job Title..." type="text" class="form-control">
+                </div>
+            </div>
+            <button class=" btn btn-primary " type="submit">Submit</button>
+            <a asp-controller="Team" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />
