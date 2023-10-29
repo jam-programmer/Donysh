@@ -13,7 +13,7 @@ namespace Infrastructure.Mapping.Register
         {
             
             builder.ApplyConfiguration(new AboutMapping());
-            builder.ApplyConfiguration(new CategoryMapping());
+            builder.ApplyConfiguration(new ScopeWorkMapping());
             builder.ApplyConfiguration(new CompanyMapping());
             builder.ApplyConfiguration(new ProjectMapping());
             builder.ApplyConfiguration(new RequestMapping());

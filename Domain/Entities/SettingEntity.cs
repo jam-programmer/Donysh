@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public partial class SettingEntity
+    public partial class SettingEntity:BaseEntity
     {
-        //public string SettingKey { set; get; } = "DonyshSettingKey";
+        
         public string? Email { set; get; }
         public string? PhoneNumber { set; get; } 
         public string? Address { set; get; }

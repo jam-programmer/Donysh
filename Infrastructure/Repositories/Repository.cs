@@ -62,5 +62,15 @@ namespace Infrastructure.Repositories
             return await _context.Set<TEntity>()
                 .Where(w=>w.IsDeleted==true).IgnoreQueryFilters().CountAsync();
         }
+
+        public async Task<TEntity?> FirstOrDefaultAsync()
+        {
+            return await _context.Set<TEntity>().FirstOrDefaultAsync();
+        }
+
+        public async Task<ICollection<TEntity>> GetAll()
+        {
+            return await _context.Set<TEntity>().ToListAsync();
+        }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
@@ -17,7 +12,33 @@ namespace Domain.Interfaces
        /// <param name="page"></param>
        /// <param name="pageSize"></param>
        /// <returns>List Of Entity</returns>
-        Task<List<TEntity>> GetListAsync(bool isDelete,string storedProcedure, int page, int pageSize, string search = "");
+        Task<List<TEntity>> GetListAsync(bool isDelete, string storedProcedure, int page, int pageSize, string search = "");
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="tableResult"></param>
+        /// <param name="entityId"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        Task InsertWithOutColumn(string table, string entityId, List<string> values);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="tableResult"></param>
+        /// <param name="entityKey"></param>
+        /// <param name="entityValue"></param>
+        /// <returns></returns>
+        Task<List<string>> GetRelations(string table, string tableResult, string entityKey,string entityValue);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="deleteKey"></param>
+        /// <param name="deleteValue"></param>
+        /// <returns></returns>
+        Task DeleteAsync(string table,string deleteKey,string deleteValue);
     }
 }

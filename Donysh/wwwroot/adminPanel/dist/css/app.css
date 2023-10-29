@@ -4376,11 +4376,12 @@ video {
 	background-color: rgba(49, 58, 85, var(--tw-bg-opacity));
 }
 .main {
+    background-color: #57a297;
     background-repeat: no-repeat;
     background-attachment: fixed;
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
-  }
+}
 .top-bar {
     height: 67px;
     z-index: 51;

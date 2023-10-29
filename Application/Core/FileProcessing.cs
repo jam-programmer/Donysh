@@ -22,7 +22,7 @@ namespace Application.Core
 
         public static void RemoveFile(string fileName, string folderName)
         {
-            if (fileName != "default.png" && !string.IsNullOrEmpty(fileName))
+            if (fileName != "default.jpg" && !string.IsNullOrEmpty(fileName))
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folderName, fileName);
                 if (File.Exists(path))
@@ -49,7 +49,7 @@ namespace Application.Core
         {
             if (file == null && string.IsNullOrEmpty(fileName))
             {
-                return "default.png";
+                return "default.jpg";
             }
 
             if (file == null && !string.IsNullOrEmpty(fileName))
@@ -66,7 +66,9 @@ namespace Application.Core
                 }
                 return path;
             }
-            return "default.png";
+            return "default.jpg";
         }
+
+        
     }
 }

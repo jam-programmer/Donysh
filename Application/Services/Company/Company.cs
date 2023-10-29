@@ -1,7 +1,7 @@
 ﻿using Application.ConfigMapster.CompanyMap;
 using Application.Core;
 using Application.DataTransferObjects.Company;
-using Application.ViewModels.Category;
+using Application.ViewModels.ScopeWork;
 using Application.ViewModels.Company;
 using Application.ViewModels.Main;
 using Domain.Entities;

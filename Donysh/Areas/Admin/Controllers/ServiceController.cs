@@ -1,12 +1,14 @@
-﻿using Application.DataTransferObjects.Category.CategoryValidator;
-using Application.DataTransferObjects.Category;
+﻿using Application.DataTransferObjects.ScopeWork.ScopeWorkValidator;
+using Application.DataTransferObjects.ScopeWork;
 using Application.DataTransferObjects.Service;
 using Application.DataTransferObjects.Service.ServiceValidator;
 using Application.Services.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Donysh.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class ServiceController : Controller
     {

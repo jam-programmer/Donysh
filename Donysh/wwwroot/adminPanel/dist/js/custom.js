@@ -1,18 +1,19 @@
-﻿function ChangeImage(input) {
+﻿function ChangeImage(input,id) {
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imagePath').attr('src', e.target.result);
+            $('#imagePath_'+id).attr('src', e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#image").change(function () {
+$("#image_"+id).change(function () {
     readURL(this);
 });
+
 //////////////////////////////////////////////////
 
 function Delete(id, controller) {

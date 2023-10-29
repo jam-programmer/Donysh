@@ -25,8 +25,14 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.AboutEntity", b =>
                 {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -34,30 +40,15 @@ namespace Infrastructure.Migrations
                     b.Property<byte[]>("File")
                         .HasColumnType("varbinary(max)");
 
-                    b.ToTable("About", "Dy");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CategoryEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreateTime")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("UpdateTime")
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", "Dy");
+                    b.ToTable("About", "Dy");
                 });
 
             modelBuilder.Entity("Domain.Entities.CompanyEntity", b =>
@@ -127,6 +118,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("OwnerOrDeveloper")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProjectImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProjectName")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -144,6 +138,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ReferenceContactPhone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ScopeForeignKey")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -156,6 +153,8 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectName");
+
+                    b.HasIndex("ScopeForeignKey");
 
                     b.HasIndex("StatusForeignKey");
 
@@ -200,6 +199,29 @@ namespace Infrastructure.Migrations
                     b.ToTable("Request", "Dy");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ScopeWorkEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ScopeWork", "Dy");
+                });
+
             modelBuilder.Entity("Domain.Entities.ServiceEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -229,6 +251,9 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.SettingEntity", b =>
                 {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("AboutDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -237,6 +262,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -249,6 +277,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Instagram")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Linkedin")
                         .HasColumnType("nvarchar(max)");
@@ -276,6 +307,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Setting", "Dy");
                 });
@@ -566,9 +602,15 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.ProjectEntity", b =>
                 {
+                    b.HasOne("Domain.Entities.ScopeWorkEntity", "ScopeWork")
+                        .WithMany("Projects")
+                        .HasForeignKey("ScopeForeignKey");
+
                     b.HasOne("Domain.Entities.StatusEntity", "Status")
                         .WithMany("Projects")
                         .HasForeignKey("StatusForeignKey");
+
+                    b.Navigation("ScopeWork");
 
                     b.Navigation("Status");
                 });
@@ -652,6 +694,11 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.ScopeWorkEntity", b =>
+                {
+                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("Domain.Entities.StatusEntity", b =>

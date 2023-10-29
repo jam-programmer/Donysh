@@ -14,6 +14,35 @@ builder.Services.AddSingleton<Generator>();
 builder.Services.InfrastructureServices(builder.Configuration);
 builder.Services.ApplicationServices(builder.Configuration);
 //*************************CustomConfiguration
+
+//Identity
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.User.RequireUniqueEmail = true;
+    option.Password.RequireNonAlphanumeric = true;
+    option.Password.RequiredLength = 6;
+    option.SignIn.RequireConfirmedEmail = true;
+    option.SignIn.RequireConfirmedAccount = false;
+    option.SignIn.RequireConfirmedPhoneNumber = false;
+    option.Lockout.MaxFailedAccessAttempts = 4;
+    option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    option.User.RequireUniqueEmail = true;
+    option.Password.RequireDigit = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequiredUniqueChars = 1;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireLowercase = false;
+});
+builder.Services.ConfigureApplicationCookie(cooke =>
+{
+    cooke.ExpireTimeSpan = TimeSpan.FromDays(30);
+    cooke.LoginPath = "/Account/SignIn";
+    cooke.AccessDeniedPath = "/";
+    cooke.SlidingExpiration = true;
+});
+//Identity
+
 var app = builder.Build();
 
 

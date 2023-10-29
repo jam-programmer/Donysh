@@ -13,8 +13,9 @@ namespace Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<SettingEntity> builder)
         {
+            builder.HasKey(k => k.Id);
             builder.ToTable("Setting");
-            builder.HasNoKey();
+       
         }
     }
 }

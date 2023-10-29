@@ -54,5 +54,11 @@ namespace Domain.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<int> GetTrashCount();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<TEntity?> FirstOrDefaultAsync();
+        Task<ICollection<TEntity>> GetAll();
     }
 }

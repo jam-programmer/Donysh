@@ -177,5 +177,19 @@ namespace Application.Services.Service
             }
             return result;
         }
+
+        public async Task<List<ItemViewModel>> GetServiceItemAsync()
+        {
+            var model =await _repository.GetAll();
+            List<ItemViewModel> items = new List<ItemViewModel>();
+            foreach (var item in model)
+            {
+                items.Add(new ItemViewModel()
+                {
+                    Id = item.Id,Title = item.Title
+                });
+            }
+            return items;
+        }
     }
 }

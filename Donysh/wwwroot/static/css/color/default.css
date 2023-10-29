@@ -1,0 +1,29 @@
+::selection {
+  background-color:#fc8902;
+  color: #fff;
+}
+::-moz-selection {
+  background-color:#fc8902;
+  color: #fff;
+}
+
+
+.footer-section .social-icons li a,
+.theme-color,
+a {
+  color:#fc8902;
+}
+
+
+.fixed-header.header-nav .navbar-nav .nav-link:after,
+.m-btn,
+.theme-after:after,
+.theme-before:before,
+.theme-bg {
+  background: #fc8902; 
+}
+
+.our-team a:hover:after,
+.our-team a:hover:before {
+  box-shadow: 4px -4px 0px 0px #fc8902;
+}

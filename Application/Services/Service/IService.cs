@@ -57,5 +57,10 @@ namespace Application.Services.Service
         /// <param name="id"></param>
         /// <returns></returns>
         Task<bool> RemoveServiceAsync(string id);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<ItemViewModel>> GetServiceItemAsync();
     }
 }

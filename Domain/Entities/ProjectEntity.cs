@@ -2,6 +2,7 @@
 {
     public partial class ProjectEntity : BaseEntity
     {
+        public string? ProjectImage { set; get; }
         public string? ProjectName { set; get; }
         public string? Location { set; get; }
         public string? Description { set; get; }
@@ -21,6 +22,8 @@
         public List<ServiceEntity>? Service { set; get; }
         public StatusEntity? Status { set; get; }
         public string? StatusForeignKey { set; get; }
+        public string? ScopeForeignKey { set; get; }
+        public ScopeWorkEntity? ScopeWork { set; get; }
         #endregion
     }
 }

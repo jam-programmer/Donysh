@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public partial class AboutEntity
+    public partial class AboutEntity:BaseEntity
     {
         //public string? AboutKey { set; get; } = "DonyshAboutKey";
         public string? Banner { set; get; }

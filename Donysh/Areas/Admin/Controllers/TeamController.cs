@@ -2,11 +2,13 @@
 using Application.DataTransferObjects.Team.TeamValidator;
 using Application.Services.Team;
 using Donysh.Tools;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Donysh.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class TeamController : Controller
     {
         private readonly ITeam _team;

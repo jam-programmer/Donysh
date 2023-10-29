@@ -9,8 +9,8 @@ namespace Infrastructure.Mapping
         public void Configure(EntityTypeBuilder<AboutEntity> builder)
         {
             builder.ToTable("About");
-            builder.HasNoKey();
-           
+            builder.HasKey(k => k.Id);
+
         }
     }
 }

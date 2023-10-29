@@ -1,0 +1,93 @@
+﻿@model UpdateUserDto
+@{
+    ViewData["Title"] = "Update User";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@if (ViewBag.Alert != null)
+{
+    <div onclick="closeAlert()" style="width: 60%;" class="alert alert-warning-soft show flex items-center mt-5" id="closeAlert" role="alert">
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x block mx-auto"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <strong class="ml-5">  @ViewBag.Alert</strong>
+    </div>
+
+}
+
+<form asp-area="Admin" asp-controller="User" asp-action="Edit" method="post">
+
+    <div class="grid grid-cols-12 gap-6 mt-2">
+        <div class="intro-y col-span-12 lg:col-span-6 box mt-5 ">
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    Basic Information
+                </h2>
+
+            </div>
+            <div id="input1" class="p-5">
+                <div class="col-6">
+                    <label for="UserName" class="form-label mt-3">User Name</label>
+                    <input asp-for="UserName" id="UserName" placeholder="User Name..." type="text" class="form-control">
+                </div>
+
+                <div class="col-6">
+                    <label for="Email" class="form-label mt-3">Email</label>
+                    <input asp-for="Email" id="Email" placeholder="Email..." type="email" class="form-control">
+                </div>
+                <div class="col-6">
+                    <label for="PhoneNumber" class="form-label mt-3">Phone Number</label>
+                    <input asp-for="PhoneNumber" id="PhoneNumber" placeholder="Phone Number..." type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="intro-y col-span-12 lg:col-span-6 box mt-5 ">
+            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    Identity information
+                </h2>
+
+            </div>
+            <div id="input2" class="p-5">
+
+                <div class="col-6">
+                    <label for="Roles" class="form-label mt-3">Roles</label>
+
+                    <select asp-for="Role" data-placeholder="Select User Role" asp-items="@ViewBag.Roles" class="tom-select w-full" multiple>
+                    </select>
+                </div>
+
+
+
+                <div class="col-6">
+                    <label for="password" class="form-label mt-3">password</label>
+                    <input asp-for="Password" id="password" placeholder="password" type="password" class="form-control">
+                </div>
+
+                <div class="col-6">
+                    <label for="PasswordConfirmed" class="form-label mt-3">Password Confirmed</label>
+                    <input asp-for="PasswordConfirmed" id="PasswordConfirmed"
+                           placeholder="Email..." type="password" class="form-control">
+                </div>
+                <div class="form-check mt-5">
+                    <input id="vertical-form-3" asp-for="Active" class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label" for="vertical-form-3">Active User</label>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" asp-for="Id"/>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm mt-5">Submit</button>
+    <a asp-controller="User" asp-action="Index" asp-area="Admin" class="btn btn-warning btn-sm text-white">Cancel</a>
+
+
+</form>
+
+
+
+
+

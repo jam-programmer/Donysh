@@ -2,10 +2,12 @@
 using Application.DataTransferObjects.Company.CompanyValidator;
 using Application.Services.Company;
 using Donysh.Tools;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Donysh.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class CompanyController : Controller
     {

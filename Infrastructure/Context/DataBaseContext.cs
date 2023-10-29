@@ -16,7 +16,7 @@ namespace Infrastructure.Context
 
         }
         public virtual DbSet<AboutEntity>? About { set; get; }
-        public virtual DbSet<CategoryEntity>? Category { set; get; }
+        public virtual DbSet<ScopeWorkEntity>? Scope { set; get; }
         public virtual DbSet<CompanyEntity>? Company { set; get; }
         public virtual DbSet<ProjectEntity>? Project { set; get; }
         public virtual DbSet<RequestEntity>? Request { set; get; }
