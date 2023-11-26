@@ -1,7 +1,7 @@
 ﻿<nav class="side-nav">
     <a href="" class="intro-x flex items-center pl-5 pt-4">
         <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="~/adminPanel/dist/images/logo.svg">
-        <span class="hidden xl:block text-white text-lg ml-3"> Ru<span class="font-medium">bick</span> </span>
+        <span class="hidden xl:block text-white text-lg ml-3"> Admin<span class="font-medium">Panel</span> </span>
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
@@ -9,42 +9,44 @@
 
 
 
-
         <li>
             <a href="javascript:;" class="side-menu">
-                <div class="side-menu__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award block mx-auto"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>   <div class="side-menu__title">
-                    Roles
+                <div class="side-menu__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text block mx-auto"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                <div class="side-menu__title">
+                   Pages
                     <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
                 </div>
             </a>
             <ul class="">
                 <li>
-                    <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="side-menu">
+                    <a asp-area="Admin" asp-controller="Page" asp-action="Index" class="side-menu">
                         <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical block mx-auto"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg> </div>
-                        <div class="side-menu__title"> List of roles </div>
+                        <div class="side-menu__title"> List of pages </div>
                     </a>
                 </li>
                 <li>
-                    <a asp-area="Admin" asp-controller="Role" asp-action="Create" class="side-menu">
+                    <a asp-area="Admin" asp-controller="Page" asp-action="Create" class="side-menu">
                         <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
-                        <div class="side-menu__title"> Add Role </div>
+                        <div class="side-menu__title"> Add Scope </div>
                     </a>
                 </li>
-               
+              
             </ul>
         </li>
-    
-    
-    
-    
-    
-    
-    
-    
 
-      
-    <li>
+
+
+
+
+
+
+
+
+
+
+
+
+        <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers block mx-auto"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg> </div>
                 <div class="side-menu__title">
@@ -80,7 +82,8 @@
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity block mx-auto"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>         </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity block mx-auto"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
                 <div class="side-menu__title">
                     Statuses
                     <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
@@ -112,7 +115,8 @@
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box block mx-auto"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>       </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box block mx-auto"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
                 <div class="side-menu__title">
                     Companies
                     <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
@@ -144,7 +148,8 @@
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool block mx-auto"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>     </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool block mx-auto"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                </div>
                 <div class="side-menu__title">
                     Services
                     <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
@@ -207,20 +212,21 @@
                 </li>
             </ul>
         </li>
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
 
 
 
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users block mx-auto"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>      </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users block mx-auto"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
                 <div class="side-menu__title">
                     Members
                     <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
@@ -247,7 +253,7 @@
                 </li>
             </ul>
         </li>
-        
+
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon">
@@ -261,15 +267,98 @@
                 <li>
                     <a asp-area="Admin" asp-controller="Setting" asp-action="General" class="side-menu">
                         <div class="side-menu__icon">
-                        
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders block mx-auto"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-                            </div>
+                        </div>
                         <div class="side-menu__title"> General </div>
                     </a>
                 </li>
-               
+                <li>
+                    <a asp-area="Admin" asp-controller="Setting" asp-action="About" class="side-menu">
+                        <div class="side-menu__icon">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign block mx-auto"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>     </div>
+                        <div class="side-menu__title"> About </div>
+                    </a>
+                </li> 
+                
+                
+                
+                <li>
+                    <a asp-area="Admin" asp-controller="Contact" asp-action="Index" class="side-menu">
+                        <div class="side-menu__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail block mx-auto"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>      <div class="side-menu__title"> Contact </div>
+                    </a>
+                </li>  
+                
+                
+                <li>
+                    <a asp-area="Admin" asp-controller="Request" asp-action="Index" class="side-menu">
+                        <div class="side-menu__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check block mx-auto"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                            </div>      <div class="side-menu__title"> Requests </div>
+                    </a>
+                </li>
             </ul>
         </li>
+
+
+
+        <li>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award block mx-auto"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> 
+                </div>   <div class="side-menu__title">
+                    Authentication
+                        <div class="side-menu__sub-icon "> <i data-feather="chevron-down"></i> </div>
+                    </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="side-menu">
+                        <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical block mx-auto"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg> </div>
+                        <div class="side-menu__title"> List of roles </div>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a asp-area="Admin" asp-controller="User" asp-action="Index" class="side-menu">
+                        <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical block mx-auto"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg> </div>
+                        <div class="side-menu__title"> List of users </div>
+                    </a>
+                </li>
+                
+                
+                
+                
+
+                <li>
+                    <a asp-area="Admin" asp-controller="Role" asp-action="Create" class="side-menu">
+                        <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                        <div class="side-menu__title"> Add Role </div>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="User" asp-action="Create" class="side-menu">
+                        <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus block mx-auto"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                        <div class="side-menu__title"> Add User </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    
+    <li>
+            <a href="/Account/SignOut" class="side-menu">
+            <div class="side-menu__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out block mx-auto"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>   </div>
+                <div class="side-menu__title"> Exit </div>
+        </a>
+    </li>
+    
+    
+    
 
     </ul>
 </nav>

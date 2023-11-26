@@ -1,0 +1,20 @@
+﻿@model HomeCompanySection
+
+
+<section class="section theme-bg p-30px" style="margin-bottom: 350px;">
+    <div class="row">
+        <div id="brand-slider-single" class="owl-carousel">
+            
+            @foreach (var item in Model.Companies!)
+            {
+            
+                    <div class="brand-box">
+                        <a href="@item.Link"><img src="~/Company/@item.LogoPath" alt="@item.Name" title="@item.Name"></a>
+                    </div>
+               
+            }
+          
+        </div> <!-- owl -->
+
+    </div> <!-- row -->
+</section>

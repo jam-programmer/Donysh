@@ -1,0 +1,32 @@
+﻿@model HomeTeamSection
+
+<section id="team" class="section gray-bg">
+    <div class="container">
+        <div class="row justify-content-center m-45px-b md-m-25px-b">
+            <div class="col-md-10 col-lg-5">
+                <div class="section-title">
+                    <h2 class="theme-after">CREATIVE TEAM</h2>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div> <!-- row -->
+        <div class="row">
+         
+            @foreach (var item in Model.Team!)
+            {
+                <div class="col-md-6 col-lg-3 m-15px-tb">
+                    <div class="our-team">
+                        <a href="#">
+                            <div class="img theme-before" style="background-image: url(/Team/@item.AvatarPath);"></div>
+                            <div class="info">
+                                <h6 class="theme-bg">@item.FullName</h6>
+                                <span>@item.JobTitle</span>
+                            </div>
+                        </a>
+                    </div>
+                </div> <!-- col -->
+            }
+         
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>

@@ -4,10 +4,12 @@ using Domain.Interfaces;
 using Infrastructure.Configuration;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Repositories
 {
-    public class DapperRepository<TEntity> : IDapper<TEntity> where TEntity : BaseEntity
+    public class DapperRepository<TEntity> : IDapper<TEntity> 
     {
         private readonly SqlConnection _connection;
         public DapperRepository()
@@ -32,6 +34,48 @@ namespace Infrastructure.Repositories
             {
                 _connection.Dispose();
                 _connection.Close();
+            }
+        }
+
+        public async Task<List<TEntity>> Execute(string storedProcedure, object parmeter)
+        {
+            if (string.IsNullOrEmpty(storedProcedure))
+            {
+
+            }
+            try
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Home", parmeter, DbType.Boolean, ParameterDirection.Input);
+                await  _connection.OpenAsync();
+              var model =await _connection.QueryAsync<TEntity>(storedProcedure, parameters ,commandType: CommandType.StoredProcedure);
+              return model.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<List<TEntity>> ExecuteQuery(string query)
+        {
+
+            if (string.IsNullOrEmpty(query))
+            {
+
+            }
+            try
+            {
+
+                await _connection.OpenAsync();
+                var model = await _connection.QueryAsync<TEntity>(query, commandType: CommandType.Text);
+                return model.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
 

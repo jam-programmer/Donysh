@@ -59,6 +59,15 @@ namespace Domain.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<TEntity?> FirstOrDefaultAsync();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         Task<ICollection<TEntity>> GetAll();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<IQueryable<TEntity>> GetByQuery();
     }
 }

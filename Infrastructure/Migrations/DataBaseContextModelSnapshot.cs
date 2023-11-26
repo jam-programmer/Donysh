@@ -37,9 +37,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("File")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -82,6 +79,108 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Company", "Dy");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ContactEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contact", "Dy");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PageEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Location")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Page", "Dy");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PictureEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Alt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectForeignKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Picture", "Dy");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProjectEntity", b =>
@@ -169,6 +268,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CreateTime")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -233,8 +335,14 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("SmallDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -257,10 +365,19 @@ namespace Infrastructure.Migrations
                     b.Property<string>("AboutDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AboutImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Banner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BannerPageHeader")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompletedProject")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("CreateTime")
@@ -310,6 +427,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTimeOffset>("UpdateTime")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("WorkExperience")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -598,6 +718,15 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("RequestEntityServiceEntity", "Dy");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PictureEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.ProjectEntity", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProjectEntity", b =>

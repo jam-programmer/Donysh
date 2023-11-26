@@ -72,5 +72,10 @@ namespace Infrastructure.Repositories
         {
             return await _context.Set<TEntity>().ToListAsync();
         }
+
+        public async Task<IQueryable<TEntity>> GetByQuery()
+        {
+            return _context.Set<TEntity>().AsQueryable();
+        }
     }
 }

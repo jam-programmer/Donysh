@@ -31,5 +31,19 @@ namespace Donysh.Areas.Admin.Controllers
             await _setting.UpdateSetting(setting);
             return RedirectToAction(nameof(General));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> About()
+        {
+            ViewBag.Base = _generator.UrlSite() + "/About/";
+            var pageModel=await _setting.GetAbout();  
+            return View(pageModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> About(AboutDto about)
+        {
+            await _setting.UpdateAbout(about);
+            return RedirectToAction(nameof(About));
+        }
     }
 }

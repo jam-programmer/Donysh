@@ -5,6 +5,7 @@ using Application.DataTransferObjects.Service.ServiceValidator;
 using Application.Services.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Donysh.Tools;
 
 namespace Donysh.Areas.Admin.Controllers
 {
@@ -13,10 +14,12 @@ namespace Donysh.Areas.Admin.Controllers
     public class ServiceController : Controller
     {
         private readonly IService _service;
+        private readonly Generator _generator;
 
-        public ServiceController(IService service)
+        public ServiceController(IService service, Generator generator)
         {
             _service = service;
+            _generator = generator;
         }
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10, string search = "")
         {
@@ -49,6 +52,7 @@ namespace Donysh.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
+            ViewBag.Base = _generator.UrlSite() + "/Service/";
             var pageModel = await _service.GetServiceById(id);
             if (pageModel == null)
             {

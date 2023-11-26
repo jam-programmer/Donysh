@@ -19,6 +19,10 @@ namespace Donysh.Controllers
         [HttpGet]
         public Task<IActionResult> SignIn()
         {
+            if (User.Identity!.IsAuthenticated)
+            {
+                return Task.FromResult<IActionResult>(Redirect("/"));
+            }
             return Task.FromResult<IActionResult>(View());
         }
 
@@ -89,6 +93,18 @@ namespace Donysh.Controllers
                 }
             }
             return View(model);
+        }
+
+        [HttpGet]
+     
+        public async Task<IActionResult> SignOut()
+        {
+            if (!User.Identity!.IsAuthenticated)
+            {
+                return Redirect("/");
+            }
+            await _signInManager.SignOutAsync();
+            return Redirect("/");
         }
     }
 }

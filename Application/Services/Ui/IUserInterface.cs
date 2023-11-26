@@ -1,0 +1,30 @@
+﻿using Application.ViewModels.Main;
+using Application.ViewModels.Ui.General;
+using Application.ViewModels.Ui.Home;
+using Application.ViewModels.Ui.Project;
+using Application.ViewModels.Ui.Service;
+
+namespace Application.Services.Ui
+{
+    public interface IUserInterface
+    {
+        Task<HomeHeaderSection> GetHomeTopSection();
+        Task<HomeAboutSection> GetHomeAboutSection();
+        Task<HomeServiceSection> GetHomeServiceSection();
+        Task<HomePortfolioSection> GetHomePortfolioSection(bool home);
+        Task<HomeTeamSection> GetHomeTeamSection();
+        Task<HomeCompanySection> GetHomeCompanySection();
+        Task<HomeInformationSection> GetHomeInformationSection();
+        Task<HeaderPage> GetHeaderPage();
+        Task<ProjectDetail> GetProjectById(string id);
+        Task<ServiceDetail> GetServiceDetailById(string id);
+        Task<PdfOptions> ProjectPdfOption(string projectId);
+        Task<Footer> GetFooter();
+        Task<PageDetail> GetPage(string id);
+        Task<Header> GetMenu();
+        Task<ListGenerics<ProjectCard>> GetListProject(int page);
+        Task<bool> AddRequest(RequestInfo request);
+        Task<AboutPage> GetAboutPage();
+        Task<bool> AddContactRequest(RequestContact request);
+    }
+}

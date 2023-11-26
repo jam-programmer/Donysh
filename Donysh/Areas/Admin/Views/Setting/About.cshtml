@@ -1,0 +1,59 @@
+﻿@model AboutDto
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Script{
+    <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
+    <script src="~/adminPanel/src/js/ckeditor.js"></script>
+    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script>
+}
+
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+        <h2 class="font-medium text-base mr-auto">
+            About
+        </h2>
+
+    </div>
+    <div id="input" class="p-5">
+        <form asp-area="Admin" asp-controller="Setting" asp-action="About" enctype="multipart/form-data" method="post">
+            <div class="mb-5">
+                
+               
+                <div class="mt-4">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
+                        @if (Model.Banner == "default.jpg")
+                        {
+                            <img id="imagePath_1" src="~/img/default.jpg">
+                
+                        }
+                        else
+                        {
+                            <img id="imagePath_1" src="@(ViewBag.Base + Model.Banner)">
+                
+                        }
+                    </div>
+                    <label for="image_1" class="form-label mt-3"> File</label><br />
+                    <input onchange="ChangeImage(this,1)" asp-for="File"  type="file" id="image_1" class="mt-1" />
+                </div>
+                <div class="intro-y col-span-12 lg:col-span-12  mt-5 ">
+                   <input type="hidden" asp-for="Id"/>
+                   <input type="hidden" asp-for="Banner"/>
+                    <div >
+                        <div class="mb-5">
+                            <label class="form-label">Body</label>
+                            <textarea asp-for="Description" class="form-control editor ck ck-editor__main"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class=" btn btn-primary " type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+

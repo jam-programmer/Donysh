@@ -1,0 +1,84 @@
+﻿@model HomeInformationSection
+@{
+    ViewData["Title"] = "Contatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Component.InvokeAsync("HeaderComponent","Contat Us");
+<section class="section gray-bg">
+    <div class="container">
+        <div class="row justify-content-center m-60px-b  md-m-40px-b">
+            <div class="col-12 col-md-10 col-lg-7">
+                <div class="section-title text-center">
+                    <label>Contact</label>
+                    <h2 class="theme-after">LET’S GET IN TOUCH!</h2>
+                    <div class="title-border"><span class="lg"></span><span class="md"></span><span class="sm"></span></div>
+                   </div>
+            </div>
+        </div> <!-- row -->
+
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="contact-form md-m-30px-b">
+                    <h2>We love to hear from you</h2>
+                   
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="name" placeholder="Name" class="form-control" type="text">
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="email" placeholder="Email" class="form-control" type="email">
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input id="subject" placeholder="Subject" class="form-control" type="text">
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea id="comment" placeholder="Details" rows="3" class="form-control"></textarea>
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="send">
+                                    <button onclick="ContactRequest()" class="m-btn m-btn-theme"><i class="fa fa-envelope-o" aria-hidden="true"></i>Send</button>
+                                </div>
+                            </div>
+                        </div>
+                 
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-box m-20px-b">
+                    <i class="icon fas fa-map-marker-alt theme-color"></i>
+                    <div class="feature-content">
+                        <h3>Address</h3>
+                        <p>@Model.Address </p>
+                    </div>
+                </div> <!-- feature-box-02 -->
+                <div class="feature-box box02 m-20px-b">
+                    <i class="icon  far fa-envelope theme-color"></i>
+                    <div class="feature-content">
+                        <h3>E-mail Us</h3>
+                        <p>@Model.Email</p>
+                    </div>
+                </div> <!-- feature-box-02 -->
+                <div class="feature-box m-20px-b">
+                    <i class="icon  fas fa-mobile-alt theme-color"></i>
+                    <div class="feature-content">
+                        <h3>Contact Us</h3>
+                        <p>@Model.PhoneNumber</p>
+                    </div>
+                </div> <!-- feature-box-02 -->
+            </div>
+        </div>
+    </div> <!-- container -->
+</section>
+

@@ -1,6 +1,7 @@
 ﻿using Application.ConfigMapster.ServiceMap;
 using Application.Core;
 using Application.DataTransferObjects.Service;
+using Application.Services.Company;
 using Application.ViewModels.Main;
 using Application.ViewModels.Service;
 using Domain.Entities;
@@ -75,6 +76,7 @@ namespace Application.Services.Service
             }
 
             service = model.Adapt<ServiceEntity>(ServiceMapster.MapServiceToUpdateServiceDto());
+            service.Image = FileProcessing.FileUpload(model.ImageFile, model.Image, "Service");
             service.UpdateTime = DateTimeOffset.Now;
             await _repository.Update(service);
         }

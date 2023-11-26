@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomeHeaderSection
+@{
+    ViewData["Title"] = "Home";
 }
+<section id="home" class="home-banner bg-center-center bg-cover" style="background-image: url(setting/@Model.Banner);">
+    <div id="particles-box"></div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="container">
+        <div class="row full-screen align-items-center">
+            <div class="col col-md-7 col-lg-7 col-xl-9 md-p-30px-b p-50px-tb">
+                <div class="home-text-center theme-after p-50px-r md-p-0px-r">
+                    <label>Welcome To</label>
+                    <h1 class="font-alt">@Model.SiteTitle</h1>
+                    <p>
+                        @Html.Raw(Model.Description)
+                    </p>
+                    <div class="app-btn-set">
+                        <a asp-controller="Home" asp-action="About" class="m-btn" data-text="Free Trial">About US</a>
+                    </div>
+
+                </div> <!-- home-text-center -->
+            </div> <!-- col -->
+            <div class="col-md-5 col-lg-5 col-xl-3 p-60px-t md-p-20px-t home-right-img text-center">
+                <img src="/Setting/@Model.Logo" title="" alt="@Model.SiteTitle">
+            </div> <!-- col -->
+        </div> <!-- row -->
+    </div><!-- container -->
+    <canvas class="particles-js-canvas-el" width="1628" height="695" style="width: 100%; height: 100%;"></canvas>
+</section>
+@await Component.InvokeAsync("InformationSectionComponent")
+@await Component.InvokeAsync("AboutSectionComponent")
+@await Component.InvokeAsync("ServiceSectionComponent")
+@await Component.InvokeAsync("PortfolioSectionComponent")
+@await Component.InvokeAsync("TeamSectionComponent")
+@await Component.InvokeAsync("CompanySectionComponent")

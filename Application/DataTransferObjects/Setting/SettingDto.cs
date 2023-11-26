@@ -45,5 +45,11 @@ namespace Application.DataTransferObjects.Setting
         public string? FaceBook { set; get; }
 
         public string? Instagram { set; get; }
+        public IFormFile? AboutImageFile { set; get; }
+        public string? AboutImage { set; get; }
+        public string? WorkExperience { set; get; }
+        public string? CompletedProject { set; get; }
+        public string? BannerPageHeader { set; get; }
+        public IFormFile? BannerPageHeaderFile { set; get; }
     }
 }

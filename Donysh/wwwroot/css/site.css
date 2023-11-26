@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+.slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+}
+
+.Tag {
+    padding: 5px;
+    border: 1px solid black;
+}

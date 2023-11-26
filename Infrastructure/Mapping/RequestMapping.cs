@@ -17,7 +17,7 @@ namespace Infrastructure.Mapping
             builder.HasIndex(i => i.FirstName);
             builder.HasIndex(i => i.LastName);
             builder.HasKey(k => k.Id);
-            builder.HasQueryFilter(f => f.IsDeleted == true);
+            builder.HasQueryFilter(f => f.IsDeleted == false);
             builder.Property(p => p.Email).IsRequired()
                 .HasMaxLength(150);
             builder.Property(p => p.FirstName).IsRequired()

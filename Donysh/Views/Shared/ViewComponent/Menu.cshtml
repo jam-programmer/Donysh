@@ -1,0 +1,14 @@
+﻿@model Header
+
+<li>
+    <a class="nav-link" href="javascript:;">Pages</a>
+    <span class="sub-menu-toggle" data-toggle="dropdown" aria-haspopup="true"><i class="ti-angle-down"></i></span>
+    <ul class="sub-menu">
+       @foreach (var item in Model.Menu)
+       {
+           <li>
+                <a asp-controller="Home" asp-action="Page" asp-route-title="@item.Title" asp-route-page="@item.Id">@item.Title</a>
+           </li>
+       }
+    </ul>
+</li> 

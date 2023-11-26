@@ -1,46 +1,8 @@
-﻿<footer class="footer">
+﻿<footer class="footer" style="margin-top: 50px;">
     <section class="footer-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 col-lg-5 sm-m-15px-tb md-m-30px-b">
-                    <h4 class="font-alt">About Us</h4>
-                    <p class="footer-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation
-                    </p>
-                    <ul class="social-icons">
-                        <li><a class="facebook" href="#"><i class="fab fa-facebook-square"></i></a></li>
-                        <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a class="google" href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a class="linkedin" href="https://instagram.com/javadabbasi66"><i class="fab fa-instagram"></i></a></li>
-                    </ul>
-                </div> <!-- col -->
-
-                <div class="col-6 col-md-5 col-lg-2 sm-m-15px-tb">
-                    <h4 class="font-alt">COMPANY LINKS</h4>
-
-                    <ul class="fot-link">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Free Tools</a></li>
-                        <li><a href="#">Career</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div> <!-- col -->
-
-                <div class="col-6 col-md-5 col-lg-2 sm-m-15px-tb">
-                    <h4 class="font-alt">OUR SERVICES</h4>
-                    <ul class="fot-link">
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Construction</a></li>
-                        <li><a href="#">Renovation</a></li>
-                        <li><a href="#">Architecture Design</a></li>
-                        <li><a href="#">Roofing</a></li>
-                        <li><a href="#">Painting</a></li>
-                    </ul>
-                </div><!-- col -->
+                @await Component.InvokeAsync("FooterComponent")
 
                 <div class="col-md-5 col-lg-3 sm-m-15px-tb">
                     <div class="p-25px-l sm-p-0px-l md-p-0px-l md-m-30px-t">
@@ -60,7 +22,9 @@
         <div class="footer-copy">
             <div class="row">
                 <div class="col-12">
-                    <p>All © Copyright by Javad Abbasi . All Rights Reserved.</p>
+                    <p>
+                        Powered by <a href="https://darnogroup.com/">Darno Group </a>- Donysh Building Finishes © 2023 All Rights Reserved
+                    </p>
                 </div><!-- col -->
             </div> <!-- row -->
         </div> <!-- footer-copy -->

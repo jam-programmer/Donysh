@@ -26,13 +26,28 @@
     <div id="input" class="p-5">
         <form asp-area="Admin" asp-controller="Team" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div class="mb-5">
+              
+                
                 <div class="fallback">
                     <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                        <img id="imagePath" src="@(ViewBag.Base+Model.AvatarPath)">
+                        @if (Model.AvatarPath == "default.jpg")
+                        {
+                            <img id="imagePath_1" src="~/img/default.jpg">
+                        }
+                        else
+                        {
+                            <img id="imagePath_1" src="~/Team/@Model.AvatarPath">
+                        }
                     </div>
-                    <label for="AvatarFile" class="form-label mt-3">Avatar File</label><br />
-                    <input onchange="ChangeImage(this)" asp-for="Avatar" type="file" id="image" class="mt-1" />
+                    <label for="image_1" class="form-label mt-3">Avatar File</label><br />
+                    <input onchange="ChangeImage(this,1)" asp-for="Avatar" type="file" id="image_1" class="mt-1" />
                 </div>
+                
+                
+                
+                
+                
+
                 <div class="mt-5">
                     <label for="FullName" class="form-label">First Name And Last Name</label>
                     <input asp-for="FullName" id="FullName" placeholder="Name..." type="text" class="form-control">

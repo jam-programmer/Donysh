@@ -25,5 +25,9 @@ namespace Domain.Entities
         public string? Twitter { set; get; }
         public string? FaceBook { set; get; }
         public string? Instagram { set; get; }
+        public string? AboutImage { set;get; }
+        public string? WorkExperience { set; get; }
+        public string? CompletedProject { set; get; }
+        public string? BannerPageHeader { set; get; }
     }
 }

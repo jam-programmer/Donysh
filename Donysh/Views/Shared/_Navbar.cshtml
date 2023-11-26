@@ -3,50 +3,35 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="#">
-                PADBANA <span>Construction</span>
+                Donysh <span>Donysh Building Finishes </span>
             </a>
             <!-- / -->
             <!-- Top Menu -->
             <div class="navbar-collapse top-menu flex-column collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
-                    <li><a class="nav-link active" href="#home">Home</a></li>
-                    <li><a class="nav-link" href="#about">About</a></li>
-                    <li><a class="nav-link" href="#services">Services</a></li>
-                    <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link" href="#team">Team</a></li>
-                    <li>
-                        <a class="nav-link" href="javascript:;">Pages</a>
-                        <span class="sub-menu-toggle" data-toggle="dropdown" aria-haspopup="true"><i class="ti-angle-down"></i></span>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="aboutus.html">About Us</a>
-                            </li>
-                            <li>
-                                <a href="services.html">Services</a>
-                            </li>
-                            <li>
-                                <a href="faqs.html">Faq's</a>
-                            </li>
-                            <li>
-                                <a href="team.html">Team</a>
-                            </li>
-                            <li>
-                                <a href="contatus.html">Contact us</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li><a class="nav-link " href="/">Home</a></li>
+                    
+                    <li><a class="nav-link" asp-controller="Project" asp-action="Projects">Projects</a></li>
+                    <li><a class="nav-link" asp-controller="Service" asp-action="Services">Services</a></li>
+                    <li><a class="nav-link" asp-controller="Home" asp-action="Request">REQUEST A QUOTE</a></li>
+                    
+                  
+               
+                    @await Component.InvokeAsync("MenuComponent")
+
+
+                    @if (User.Identity!.IsAuthenticated)
+                           {
+                               <li>
+                                   <a class="nav-link" href="/admin">Admin Panel</a>
+                               </li>
+                           }
                 </ul>
 
             </div>
             <ul class="navbar-nav extra-menu">
                 <li class="search-box">
-                    <a class="nav-link search-toggle" href="javascript:void(0);"><i class="fa fa-search search_click"></i></a>
-                    <div class="searh-form">
-                        <form>
-                            <input class="input-search" type="text" name="search" placeholder="Search">
-                            <button class="searc-btn"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
+                   
                     <!-- Mobile Toggle -->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span></span>

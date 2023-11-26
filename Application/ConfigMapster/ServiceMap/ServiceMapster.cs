@@ -1,4 +1,5 @@
-﻿using Application.DataTransferObjects.Service;
+﻿using Application.Core;
+using Application.DataTransferObjects.Service;
 using Application.ViewModels.Service;
 using Domain.Entities;
 using Mapster;
@@ -21,9 +22,11 @@ namespace Application.ConfigMapster.ServiceMap
         {
             var config = new TypeAdapterConfig();
             config.NewConfig<ServiceEntity, UpdateServiceDto>()
+                .Map(d=>d.Image,d=>d.Image)
                 .Map(d => d.Id, e => e.Id)
                 .Map(d => d.Title, e => e.Title)
-                .Map(d => d.Description, e => e.Description)
+                .Map(d=>d.SmallDescription,e=>e.SmallDescription)
+               .Map(d => d.Description, e => e.Description)
                 .Compile();
             return config;
         }
@@ -31,9 +34,10 @@ namespace Application.ConfigMapster.ServiceMap
         public static TypeAdapterConfig MapServiceToAddServiceDto()
         {
             var config = new TypeAdapterConfig();
-            config.NewConfig<ServiceEntity, AddServiceDto>()
-              
+            config.NewConfig<AddServiceDto,ServiceEntity >()
+                .Map( d => d.Image,e=>FileProcessing.FileUpload(e.ImageFile, null, "Service"))
                 .Map(d => d.Title, e => e.Title)
+                .Map(d => d.SmallDescription, e => e.SmallDescription)
                 .Map(d => d.Description, e => e.Description)
                 .Compile();
             return config;

@@ -1,11 +1,7 @@
-﻿using Application.DataTransferObjects.Project;
-using Application.ViewModels.Project;
+﻿using Application.DataTransferObjects.Picture;
+using Application.DataTransferObjects.Project;
 using Application.ViewModels.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Application.ViewModels.Project;
 
 namespace Application.Services.Project
 {
@@ -19,5 +15,8 @@ namespace Application.Services.Project
         Task<bool> DeleteProjectById(string id);
         Task<bool> BackProjectById(string id);
         Task<bool> RemoveProjectById(string id);
+        Task<List<PictureViewModel>> GetPicturesOfProject(string projectId);
+        Task AddPicture(AddPictureDto model);
+        Task<bool> RemoveImage(string id);
     }
 }

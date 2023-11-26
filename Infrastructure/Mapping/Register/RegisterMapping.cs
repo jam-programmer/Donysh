@@ -21,6 +21,8 @@ namespace Infrastructure.Mapping.Register
             builder.ApplyConfiguration(new StatusMapping());
             builder.ApplyConfiguration(new TeamMapping());
             builder.ApplyConfiguration(new SettingMapping());
+            builder.ApplyConfiguration(new PictureMapping());
+            builder.ApplyConfiguration(new ContactMapping());
         }
 
     }

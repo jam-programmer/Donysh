@@ -1,0 +1,37 @@
+﻿@model Footer
+<div class="col-md-12 col-lg-5 sm-m-15px-tb md-m-30px-b">
+    <h4 class="font-alt">About Us</h4>
+    <p class="footer-text">
+        @Html.Raw(Model.ColumnOne.AboutDescription)
+    </p>
+    <ul class="social-icons">
+        <li><a class="facebook" href="@Model.ColumnOne.FaceBook"><i class="fab fa-facebook-square"></i></a></li>
+        <li><a class="twitter" href="@Model.ColumnOne.Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li><a class="google" href="@Model.ColumnOne.Linkedin"><i class="fab fa-linkedin"></i></a></li>
+        <li><a class="linkedin" href="@Model.ColumnOne.Instagram"><i class="fab fa-instagram"></i></a></li>
+    </ul>
+</div> <!-- col -->
+
+<div class="col-6 col-md-5 col-lg-2 sm-m-15px-tb">
+    <h4 class="font-alt">Pages</h4>
+
+    <ul class="fot-link">
+       @foreach (var item in  Model.ColumnTwo!)
+       {
+            <li><a asp-controller="Home" asp-action="Page" asp-route-title="@item.Title" asp-route-page="@item.Id">@item.Title</a></li>
+       }
+    </ul>
+</div> <!-- col -->
+
+        
+<div class="col-6 col-md-5 col-lg-2 sm-m-15px-tb">
+    <h4 class="font-alt">Links</h4>
+
+    <ul class="fot-link">
+       
+            <li><a asp-controller="Home" asp-action="About">About</a></li>
+        <li><a asp-controller="Service" asp-action="Services">Services</a></li>
+        <li><a asp-controller="Project" asp-action="Projects">Projects</a></li>
+        
+    </ul>
+</div> <!-- col -->

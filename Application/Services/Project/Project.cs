@@ -1,11 +1,14 @@
-﻿using Application.ConfigMapster.ProjectMap;
+﻿using Application.ConfigMapster.PictureMap;
+using Application.ConfigMapster.ProjectMap;
 using Application.Core;
+using Application.DataTransferObjects.Picture;
 using Application.DataTransferObjects.Project;
 using Application.ViewModels.Main;
 using Application.ViewModels.Project;
 using Domain.Entities;
 using Domain.Interfaces;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Project
 {
@@ -13,12 +16,15 @@ namespace Application.Services.Project
     {
         private readonly IDapper<ProjectEntity> _dapper;
         private readonly IRepository<ProjectEntity> _repository;
+        private readonly IRepository<PictureEntity> _pictureRepository;
 
-        public Project(IDapper<ProjectEntity> dapper, IRepository<ProjectEntity> repository)
+        public Project(IDapper<ProjectEntity> dapper, IRepository<ProjectEntity> repository, IRepository<PictureEntity> pictureRepository)
         {
             _dapper = dapper;
             _repository = repository;
+            _pictureRepository = pictureRepository;
         }
+        
         public async Task AddProject(AddProjectDto model)
         {
             ProjectEntity project = model.Adapt<ProjectEntity>(ProjectMapster.MapProjectToAddProjectDto());
@@ -145,6 +151,45 @@ namespace Application.Services.Project
 
 
             
+        }
+
+        public async Task<List<PictureViewModel>> GetPicturesOfProject(string projectId)
+        {
+            var pictures =await _pictureRepository.GetByQuery();
+          var result=  await pictures.Where(w => w.ProjectForeignKey == projectId).ToListAsync();
+            List<PictureViewModel> picture = result.Adapt<List<PictureViewModel>>();
+            return picture;
+        }
+
+        public async Task AddPicture(AddPictureDto model)
+        {
+            PictureEntity picture = model.Adapt<PictureEntity>(PictureMapster.AddPictureToPictureEntity());
+            await _pictureRepository.Insert(picture);
+        }
+
+        public async Task<bool> RemoveImage(string id)
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(id))
+            {
+                result = false;
+            }
+            var picture = await _pictureRepository.GetByIdAsync(id);
+            if (picture != null)
+            {
+
+                try
+                {
+                    if (picture.Path != null) FileProcessing.RemoveFile(picture.Path!, "Picture");
+                    await _pictureRepository.Delete(picture);
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
 
         public async Task UpdateProject(UpdateProjectDto model)

@@ -1,0 +1,33 @@
+﻿@model Application.ViewModels.Contact.ContactDetail
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="intro-y news xl:w-5/5 p-5 box mt-8">
+    <!-- BEGIN: Blog Layout -->
+    <h2 class="intro-y font-medium text-xl sm:text-2xl">
+       @Model.Subject
+    </h2>
+    <div class="intro-y text-gray-700 dark:text-gray-600 mt-3 text-xs sm:text-sm"> @Model.CreateTime  </div>
+    <div class="intro-y mt-6">
+      
+    </div>
+    
+    <div class="intro-y text-justify leading-relaxed">
+       
+        <p>
+          @Model.Description   </p>
+    </div>
+    <div class="intro-y flex text-xs sm:text-sm flex-col sm:flex-row items-center mt-5 pt-5 border-t border-gray-200 dark:border-dark-5">
+        <div class="flex items-center">
+           
+            <div class="mr-3 ml-auto">
+                <a href="" class="font-medium">@Model.FullName</a>
+                <div class="text-gray-600"> @Model.Email</div>
+            </div>
+        </div>
+       
+    </div>
+    <!-- END: Blog Layout -->
+   
+</div>

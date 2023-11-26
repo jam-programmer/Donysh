@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces
 {
-    public partial interface IDapper<TEntity> where TEntity : BaseEntity
+    public partial interface IDapper<TEntity> 
     {  /// <summary>
        /// Get List With Pagination And Search
        /// </summary>
@@ -40,5 +40,14 @@ namespace Domain.Interfaces
         /// <param name="deleteValue"></param>
         /// <returns></returns>
         Task DeleteAsync(string table,string deleteKey,string deleteValue);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="storedProcedure"></param>
+        /// <returns></returns>
+        Task<List<TEntity>> Execute(string storedProcedure,object parmeter);
+
+        Task<List<TEntity>> ExecuteQuery(string query);
+
     }
 }

@@ -1,0 +1,67 @@
+﻿@using Domain.Enum
+@model AddPageDto
+@{
+    ViewData["Title"] = "Add Page";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (ViewBag.Alert != null)
+{
+    <div onclick="closeAlert()" style="width: 60%;" class="alert alert-warning-soft show flex items-center mt-5" id="closeAlert" role="alert">
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x block mx-auto"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <strong class="ml-5">  @ViewBag.Alert</strong>
+    </div>
+
+}
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+        <h2 class="font-medium text-base mr-auto">
+            Add Page
+        </h2>
+
+    </div>
+    <div id="input" class="p-5">
+        <form asp-area="Admin" asp-controller="Page" asp-action="Create"  method="post">
+            <div class="mb-5 grid grid-cols-12 gap-6">
+                <div class="intro-y col-span-12 lg:col-span-8">
+                    <label for="NamePage" class="form-label mt-3">Page Title</label>
+                    <input asp-for="Title" id="NamePage" placeholder="Name..." type="text" class="form-control">
+                </div>
+               
+                <div class="intro-y col-span-12 lg:col-span-4">
+                    <div>
+                        <label for="status" class="form-label mt-3">Location</label>
+                        <select class="form-select  sm:mr-2" id="status" asp-for="Location" asp-items="Html.GetEnumSelectList<TabLocation>()">
+                            <option disabled="disabled">Please select a Location</option>
+
+                        </select>
+                    </div>
+                
+                
+                </div>
+                <div class="intro-y col-span-12 lg:col-span-12  mt-5 ">
+                   
+                    <div >
+                        <div class="mb-5">
+                            <label class="form-label">Body</label>
+                            <textarea asp-for="Body" class="form-control editor ck ck-editor__main"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class=" btn btn-primary " type="submit">Submit</button>
+            <a asp-controller="Page" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Script{
+    <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
+    <script src="~/adminPanel/src/js/ckeditor.js"></script>
+    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script>
+}

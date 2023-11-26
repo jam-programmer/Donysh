@@ -1,0 +1,76 @@
+﻿@using Application.ViewModels.Main
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "REQUEST A QUOTE";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Component.InvokeAsync("HeaderComponent","REQUEST A QUOTE")
+
+<section class="section gray-bg">
+    <div class="container">
+        <div class="row justify-content-center m-60px-b  md-m-40px-b">
+            <div class="col-12 col-md-10 col-lg-7">
+                <div class="section-title text-center">
+                    <label>REQUEST A QUOTE</label>
+                    <h2 class="theme-after">REQUEST A QUOTE</h2>
+                    <div class="title-border"><span class="lg"></span><span class="md"></span><span class="sm"></span></div>
+                    @* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> *@
+                </div>
+            </div>
+        </div> <!-- row -->
+
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-8">
+                <div class="contact-form md-m-30px-b">
+                    <h2>We love to hear from you</h2>
+                   
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="firstName" placeholder="First Name" class="form-control" type="text">
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="lastName" placeholder="Last Name" class="form-control" type="text">
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input id="email" placeholder="Email" class="form-control" type="email">
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea id="detail" placeholder="Details" rows="3" class="form-control"></textarea>
+                                    <span class="input-focus-effect"></span>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                            @foreach (var item in (ViewBag.Services as List<ItemViewModel>)!)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="service" value="@item.Id">
+                                    <label class="form-check-label text-dark" >@item.Title</label>
+                                </div>
+                            }
+                            </div>
+                            <div class="col-md-12">
+                                <div class="send">
+                                    <button class="m-btn m-btn-theme" onclick="Request()"><i class="fa fa-envelope-o" aria-hidden="true"></i>Send</button>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    
+                </div>
+            </div>
+           
+        </div>
+    </div> <!-- container -->
+</section>
+

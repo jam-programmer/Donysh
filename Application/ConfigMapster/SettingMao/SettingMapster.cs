@@ -15,7 +15,7 @@ namespace Application.ConfigMapster.SettingMao
         {
             var config=new TypeAdapterConfig();
             config.NewConfig<SettingEntity, SettingDto>()
-            
+                 
                 .Map(d => d.AboutDescription, e => e.AboutDescription)
                 .Map(d => d.Address, e => e.Address)
                 .Map(d => d.Banner, e => e.Banner)
@@ -31,7 +31,13 @@ namespace Application.ConfigMapster.SettingMao
                 .Map(d => d.ServiceDescription, e => e.ServiceDescription)
                 .Map(d => d.SiteTitle, e => e.SiteTitle)
                 .Map(d => d.TeamDescription, e => e.TeamDescription)
-                .Map(d => d.Twitter, e => e.Twitter).Compile();
+                .Map(d => d.Twitter, e => e.Twitter)
+                .Map(d => d.CompletedProject, e => e.CompletedProject)
+                .Map(d => d.WorkExperience, e => e.WorkExperience)
+                .Map(d => d.BannerPageHeader, e => e.BannerPageHeader)
+                .Map(d => d.AboutImage, e => e.AboutImage)
+                .Map(d => d.Twitter, e => e.Twitter)
+                .Compile();
             return config;
 
         }

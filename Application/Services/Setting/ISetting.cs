@@ -11,5 +11,11 @@ namespace Application.Services.Setting
     {
         Task UpdateSetting(SettingDto? setting);
         Task<SettingDto> GetSetting();  
+
+
+
+
+        Task UpdateAbout(AboutDto about);
+        Task<AboutDto> GetAbout();  
     }
 }

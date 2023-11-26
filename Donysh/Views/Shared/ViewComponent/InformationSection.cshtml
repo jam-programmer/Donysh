@@ -1,0 +1,37 @@
+﻿@model HomeInformationSection
+
+<section id="about" class="section feature-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 m-15px-tb">
+                <div class="feature-box" style="background-image: url(static/img/feature-box-bg.png);">
+                    <div class="icon">
+                        <i class="fa fa-map theme-color"></i>
+                    </div>
+                    @* <h3 class="font-alt">Satisfy Clients</h3> *@
+                    <p>@Model.Address</p>
+                </div>
+            </div> <!-- col -->
+
+            <div class="col-md-4 m-15px-tb">
+                <div class="feature-box box02" style="background-image: url(static/img/feature-box-bg.png);">
+                    <div class="icon">
+                        <i class="fa fa-phone theme-color"></i>
+                    </div>
+                    <h3 class="font-alt">HIGH QUALITY</h3>
+                    <p>@Model.PhoneNumber</p>
+                </div>
+            </div> <!-- col -->
+
+            <div class="col-md-4 m-15px-tb">
+                <div class="feature-box" style="background-image: url(static/img/feature-box-bg.png);">
+                    <div class="icon">
+                        <i class="fa fa-envelope theme-color"></i>
+                    </div>
+                    <h3 class="font-alt">24/7 SUPPORT</h3>
+                    <p>@Model.Email</p>
+                </div>
+            </div> <!-- col -->
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>

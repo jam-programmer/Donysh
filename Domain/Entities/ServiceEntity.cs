@@ -8,6 +8,8 @@ namespace Domain.Entities
 {
     public partial class ServiceEntity:BaseEntity
     {
+        public string? Image { set; get; }
+        public string? SmallDescription { set; get; }
         public string? Title { get; set; }
         public string? Description { get; set; }
         public List<ProjectEntity>? Projects { get; set; }

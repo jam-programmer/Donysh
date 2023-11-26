@@ -24,7 +24,9 @@ namespace Infrastructure.Context
         public virtual DbSet<ServiceEntity>? Service { set; get; }
         public virtual DbSet<SettingEntity>? Setting { set; get; }
         public virtual DbSet<TeamEntity>? Team { set; get; }
-     
+        public virtual DbSet<PictureEntity>? Picture { set; get; }
+        public virtual DbSet<PageEntity>? Page { set; get; }    
+        public virtual DbSet<ContactEntity>? Contact { set; get; }    
         protected override void OnModelCreating(ModelBuilder builder)
         {
 

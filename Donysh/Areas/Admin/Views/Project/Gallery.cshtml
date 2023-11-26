@@ -1,0 +1,86 @@
+﻿@model List<PictureViewModel>
+@{
+    ViewData["Title"] = "Gallery";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="intro-y text-lg font-medium mt-5">
+    Gallery
+</h2>
+
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+
+        <a asp-area="Admin" asp-controller="Project" asp-action="CreatePicture" asp-route-id="@ViewBag.Parent" class="btn btn-primary shadow-md mr-2  ">Add Picture</a>
+        <a asp-area="Admin" asp-controller="Project" asp-action="Index" class="btn btn-sm btn-success shadow-md mr-2">Back To Projects</a>
+        <div class="hidden md:block mx-auto text-gray-600">Showing 1 to 10 of 150 entries</div>
+          </div>
+    <!-- BEGIN: Data List -->
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report -mt-2">
+            <thead>
+                <tr>
+                    <th style="width:25%;">Project Image</th>
+
+                    <th class="whitespace-nowrap">Title</th>
+                  
+                    <th class="text-center whitespace-nowrap">Activities</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr class="intro-x" id="item_@(item.Id)">
+                    <td>
+
+
+                        @if (item.Path == "default.jpg")
+                        {
+                            <img src="~/img/default.jpg" width="100" height="40" />
+                        }
+                        else
+                        {
+                            <img src="@(ViewBag.Base+item.Path)"
+                                 width="100" height="40" />
+                        }
+                    </td>
+                    <td class="w-40">
+                        @item.Title
+                    </td>
+                           
+                    <td class="table-report__action w-56">
+                        <div class="flex justify-center items-center">
+                                 
+
+
+                            <a onclick="Delete('@item.Id','Picture')" class="delete-btn text-theme-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-4 h-4 mr-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Delete
+                            </a>
+
+
+                        </div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+            }
+
+
+
+            </tbody>
+        </table>
+    </div>
+    <!-- END: Data List -->
+    <!-- BEGIN: Pagination -->
+ 
+
+</div>
+

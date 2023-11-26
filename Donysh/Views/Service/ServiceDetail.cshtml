@@ -1,0 +1,51 @@
+﻿@model ServiceDetail
+@{
+    ViewData["Title"] = "ServiceDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@await Component.InvokeAsync("HeaderComponent","Service Detail")
+
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-5 sm-m-30px-b">
+                <img src="~/Service/@Model.Image" title="Dome" alt="Dome">
+            </div>
+            <div class="col-md-7">
+                <div class="right-img-block">
+                    <div class="section-title">
+                        <h2 class="theme-after">@Model.Title</h2>
+                        <div class="col-md-11 col-lg-11 text-center p-0px-lr m-10px-t">
+                            <p>@Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- col -->
+        </div><!-- row -->
+    </div>
+
+    <div class="container">
+     
+        <div class="text-center mt-4"> <h2>Projects</h2></div>
+        <div class="portfolio-content lightbox-gallery" style="position: relative; height: 548.953px;">
+            <ul class="portfolio-cols portfolio-cols-4">
+               
+              @foreach (var item in Model.Projects)
+              {
+                  <li class="portfolio-item " style="position: absolute; left: 0px; top: 0px;">
+                      <div class="portfolio-col portfolio-hover-04">
+                            <img src="~/Project/@item.ProjectImage" title="@item.ProjectName" alt="@item.ProjectName">
+                          <a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id" class="overlay theme-bg"></a>
+                          <div class="hover text-center p-10px">
+                                <p class="font-alt color-white m-0px font-w-500 letter-spacing-1 font-alt font-18">@item.ProjectName</p>
+                              <label class="font-13 color-white font-w-300 letter-spacing-1">@item.ServiceTitle</label>
+                          </div> <!-- hover -->
+                      </div> <!-- .portfolio-co -->
+                  </li> <!-- col -->
+              }
+            </ul> <!-- row -->
+        </div> <!-- portfolio content -->
+    </div> <!-- container -->
+</section>

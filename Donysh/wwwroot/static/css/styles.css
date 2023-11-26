@@ -2388,9 +2388,16 @@ color: #fc8902;
 * 19. Footer
 -----------------------------------*/
 .footer {
-  position: relative;
-  overflow: hidden;
-  background-color: #101010;
+   
+    position: relative;
+    /* overflow: hidden; */
+    background-color: #101010;
+    /* background-color: #F3F3F3; */
+    padding-top: 10px;
+    padding-bottom: 0px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer-section {
