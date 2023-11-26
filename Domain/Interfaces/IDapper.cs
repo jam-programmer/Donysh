@@ -48,6 +48,6 @@ namespace Domain.Interfaces
         Task<List<TEntity>> Execute(string storedProcedure,object parmeter);
 
         Task<List<TEntity>> ExecuteQuery(string query);
-
+        Task<TEntity> ExecuteSP(string sp);
     }
 }

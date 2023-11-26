@@ -48,6 +48,8 @@ namespace Application.Services.Request
 
             }
 
+            result.Show = true;
+            await _repository.Update(result);
             request.Services = items;
             return request;
         }
@@ -83,14 +85,14 @@ namespace Application.Services.Request
             {
                 result = false;
             }
-            var contact = await _repository.GetByIdAsync(id);
-            if (contact != null)
+            var request = await _repository.GetByIdAsync(id);
+            if (request != null)
             {
 
                 try
                 {
 
-                    await _repository.Delete(contact);
+                    await _repository.Delete(request);
                     result = true;
                 }
                 catch (Exception e)
@@ -100,5 +102,7 @@ namespace Application.Services.Request
             }
             return result;
         }
+
+       
     }
 }

@@ -313,7 +313,10 @@ namespace Application.Services.Ui
             try
             {
                 await _requestRepository.Insert(requestEntity);
-                await _dapper.InsertWithOutColumn("Dy.RequestEntityServiceEntity", requestEntity.Id, request.Services);
+                if (request.Services.Count > 0)
+                {
+                    await _dapper.InsertWithOutColumn("Dy.RequestEntityServiceEntity", requestEntity.Id, request.Services);
+                }
                 return true;
             }
             catch (Exception e)

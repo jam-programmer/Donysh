@@ -8,6 +8,7 @@ namespace Application.ViewModels.Contact
 {
     public class ContactViewModel
     {
+        public bool Show { set; get; }
         public string FullName { set; get; }
         public string Id { set; get; }
         public string Subject { set; get; }

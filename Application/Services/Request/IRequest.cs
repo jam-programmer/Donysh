@@ -8,6 +8,6 @@ namespace Application.Services.Request
     {
         Task<ListGenerics<RequestViewModel>> GetRequestAsync(int page, int pageSize, string search = "");
         Task<RequestDetail> GetById(string id);
-        Task<bool> RemoveById(string id);
+        Task<bool> RemoveById(string id); 
     }
 }

@@ -12,6 +12,7 @@ using Application.Services.Status;
 using Application.Services.Team;
 using Application.Services.Ui;
 using Microsoft.Extensions.DependencyInjection;
+using Application.Services.Dashboard;
 
 namespace Application.Configuration
 {
@@ -32,6 +33,7 @@ namespace Application.Configuration
             service.AddScoped<IPage, Page>();
             service.AddScoped<IContact,Contact>();
             service.AddScoped<IRequest,Request>();
+            service.AddScoped<IDashboard, Dashboard>();
         }
     }
 }

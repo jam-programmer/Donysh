@@ -8,6 +8,7 @@ namespace Application.ViewModels.Request
 {
     public class RequestViewModel
     {
+        public bool Show { set; get; } 
         public string? Email { set; get; }
         public string? FirstName { set; get; }
         public string? LastName { set; get; }

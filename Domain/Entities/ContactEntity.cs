@@ -12,6 +12,6 @@ namespace Domain.Entities
         public string Email { set; get; }
         public string Subject { set; get; }
         public string Description { set; get; }
-
+        public bool Show { set; get; } = false;
     }
 }

@@ -14,5 +14,6 @@ namespace Application.Services.Contact
         Task<ListGenerics<ContactViewModel>> GetContactAsync(int page, int pageSize, string search = "");
         Task<ContactDetail> GetById(string id);
         Task<bool> RemoveById(string id);
+      
     }
 }

@@ -78,7 +78,27 @@ namespace Infrastructure.Repositories
                 throw;
             }
         }
+        public async Task<TEntity> ExecuteSP(string sp)
+        {
 
+            if (string.IsNullOrEmpty(sp))
+            {
+
+            }
+            try
+            {
+
+                await _connection.OpenAsync();
+                var model = await _connection.QueryAsync<TEntity>(sp, commandType: CommandType.StoredProcedure);
+
+                return model.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         public async Task<List<TEntity>> GetListAsync(bool isDelete, string storedProcedure, int page, int pageSize, string search = "")
         {
             IEnumerable<TEntity> entities;

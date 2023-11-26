@@ -29,8 +29,11 @@ namespace Application.Services.Contact
             GetById(string id)
         {
             var model = await _repository.GetByIdAsync(id);
+            model.Show = true;
+            await _repository.Update(model);
             ContactDetail detail = new();
             detail = model.Adapt<ContactDetail>();
+          
             return detail;
         }
 
@@ -82,5 +85,7 @@ namespace Application.Services.Contact
             }
             return result;
         }
+
+       
     }
 }

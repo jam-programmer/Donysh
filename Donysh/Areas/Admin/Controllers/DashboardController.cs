@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Application.Services.Dashboard;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Donysh.Areas.Admin.Controllers
@@ -7,11 +8,17 @@ namespace Donysh.Areas.Admin.Controllers
     [Authorize]
     public class DashboardController : Controller
     {
+        private readonly IDashboard _dashboard;
+        public DashboardController(IDashboard dashboard)
+        {
+            _dashboard = dashboard;   
+        }
         [HttpGet]
         [Route("Admin")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var pageModel=await _dashboard.GetDashboardAsync();
+            return View(pageModel);
         }
     }
 }
