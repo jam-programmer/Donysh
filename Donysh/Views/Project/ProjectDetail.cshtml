@@ -7,7 +7,7 @@
 
 @await Component.InvokeAsync("HeaderComponent","Project Detail")
 
-<section class="mb-5" style="margin-bottom: 380px;">
+<section class="mb-5 p-5" style="margin-bottom: 500px;">
 
     <div class="container">
         <div class="row p-3">
@@ -21,85 +21,167 @@
                     <div class="slide">
                         <img src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName">
                     </div>
-                    
 
-                   @if (Model.Pictures!.Count>1)
-                   {
-                       @foreach (var item in Model.Pictures)
-                       {
-                           <div class="slide">
-                               <img src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title"/>
-                           </div>
-                       }
-                   }
-                 
+
+                    @if (Model.Pictures!.Count > 1)
+                    {
+                        @foreach (var item in Model.Pictures)
+                        {
+                                   <div class="slide">
+                                       <img src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title"/>
+                                   </div>
+                        }
+                    }
+
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 
+
                 <ul class="list-group">
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Builder:</span> @Model.Builder</h6></li>
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Architect:</span> @Model.Architect</h6></li>
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Contract Amount:</span> @Model.ContractAmount</h6></li>
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Owner/Developer:</span> @Model.OwnerOrDeveloper</h6></li>
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Location:</span> @Model.Location</h6></li>
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Status:</span> @Model.Status</h6></li>
-                    <li class="list-group-item"><h6 class="text-dark"><span class="text-warning">Scope:</span> @Model.Scope</h6></li>
+
+                    @if (Model.IsBuilder)
+                    {
+                            <li class="list-group-item">
+                                <h6 class="text-dark"><span class="text-warning">Builder:</span> @Model.Builder</h6>
+                            </li>
+                    }
+                    @if (Model.IsArchitect)
+                    {
+
+                          <li class="list-group-item">
+                              <h6 class="text-dark"><span class="text-warning">Architect:</span> @Model.Architect</h6>
+                          </li>
+                    }
+
+
+                    @if (Model.IsContractAmount)
+                    {
+                            <li class="list-group-item">
+                                <h6 class="text-dark"><span class="text-warning">Contract Amount:</span> @Model.ContractAmount</h6>
+                            </li>
+                    }
+
+                    @if (Model.IsOwnerOrDeveloper)
+                    {
+                            <li class="list-group-item">
+                                <h6 class="text-dark"><span class="text-warning">Owner/Developer:</span> @Model.OwnerOrDeveloper</h6>
+                            </li>
+                    }
+
+                    @if (Model.IsLocation)
+                    {
+                            <li class="list-group-item">
+                                <h6 class="text-dark"><span class="text-warning">Location:</span> @Model.Location</h6>
+                            </li>
+                    }
+
+                    @if (Model.IsStatusForeignKey)
+                    {
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Status:</span> @Model.Status</h6>
+                        </li>
+                    }
+
+                    @if (Model.IsScopeForeignKey)
+                    {
+
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Scope:</span> @Model.Scope</h6>
+                        </li>
+                    }
                 </ul>
             </div>
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                <p>@Html.Raw(Model.Description)</p>
+                @if (Model.IsDescription)
+                {
+                    <p>@Html.Raw(Model.Description)</p>
+                }
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 p-3">
                 <h6>Services:</h6><hr />
                 @foreach (var item in Model.Services!)
                 {
-                    <a class="Tag">@item.Title</a>
+                        <a class="Tag">@item.Title</a>
                 }
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
-                <div class="alert alert-secondary text-center" role="alert">
-                    <span class="font-bold">Start Date:</span>   @Model.StartDate
-                 
-                </div>
-            </div> 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                <div class="alert alert-secondary text-center" role="alert">
-         
-                <span class="font-bold">Completion Date:</span> @Model.CompletionDate
-                </div>
-            </div>
+          @if (Model.IsStartDate)
+          {
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
+                  <div class="alert alert-secondary text-center" role="alert">
+                      <span class="font-bold">Start Date:</span>   @Model.StartDate
+
+                  </div>
+              </div> 
+          }
+           @if (Model.IsCompletionDate)
+           {
+               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+                   <div class="alert alert-secondary text-center" role="alert">
+
+                       <span class="font-bold">Completion Date:</span> @Model.CompletionDate
+                   </div>
+               </div>
+           }
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
+                    <tr>
+                        
+                        @if (Model.IsReferenceContactName)
+                        {
                             <th scope="col">Name</th>
-                            <th scope="col">Email</th>
+                        }
+                        @if (Model.IsReferenceContactEmail)
+                        {
+                                <th scope="col">Email</th>
+                        }
+                        @if (Model.IsReferenceContactPhone)
+                        {
+                                <th scope="col">Phone Number</th>
+                        }
+                       
+                       
 
-                            <th scope="col">Phone Number</th>
-                        </tr>
+                       
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-
+                    <tr>
+                        @if (Model.IsReferenceContactName)
+                        {
                             <td>@Model.ReferenceContactName</td>
+                        }
+                        @if (Model.IsReferenceContactEmail)
+                        {
                             <td>@Model.ReferenceContactEmail</td>
-
+                        }
+                        @if (Model.IsReferenceContactPhone)
+                        {
                             <td>@Model.ReferenceContactPhone</td>
-                        </tr>
-                        <tr>
+                        }
+                          
+                           
+
+                           
+                    </tr>
+                    @if (Model.IsReferenceContactAddress)
+                    {
+                            <tr>
 
 
-                            <td colspan="12">@Model.ReferenceContactAddress</td>
-                        </tr>
+                                <td colspan="12">@Model.ReferenceContactAddress</td>
+                            </tr>
+                    }
+                        
                     </tbody>
                 </table>
             </div>
             <div class="text-center col-xl-8 col-lg-8 col-md-8 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
                 <a class="btn btn-warning text-dark" asp-controller="Project" asp-action="GeneratePdf" asp-route-projectId="@Model.Id">Download File</a>
             </div>
-        
-        
+
+
             </div>
     </div>
 </section>

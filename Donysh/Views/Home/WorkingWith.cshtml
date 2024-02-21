@@ -1,0 +1,137 @@
+﻿@using Domain.Enum
+@model List<Application.ViewModels.Company.CompanyViewModel>
+@{
+    ViewData["Title"] = "Working With";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Component.InvokeAsync("HeaderComponent","Working With")
+
+<section class="mb-5 p-5" style="margin-bottom: 500px;">
+
+    <div class="container">
+        <div class="row justify-content-center m-25px-b md-m-20px-b">
+            <div class="col-md-10 col-lg-5">
+                <div class="section-title">
+                    <h2 class="theme-after">Customer</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Where(w => w.Type == CompanyType.Customer))
+            {
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
+
+                    <a href="@item.Link">
+                        <img src="~/Company/@item.LogoPath" class="img-thumbnail"
+                             width="150" height="150"
+                             alt="@item.Name" title="@item.Name">
+                    </a>
+
+                </div>
+            }
+        </div>
+
+
+        <div class="row justify-content-center m-25px-b md-m-20px-b">
+            <div class="col-md-10 col-lg-5">
+                <div class="section-title">
+                    <h2 class="theme-after">Partner</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Where(w => w.Type == CompanyType.Partner))
+            {
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
+
+                    <a href="@item.Link">
+                        <img src="~/Company/@item.LogoPath" class="img-thumbnail"
+                             width="150" height="150"
+                             alt="@item.Name" title="@item.Name">
+                    </a>
+
+                </div>
+            }
+        </div>
+
+        <div class="row justify-content-center m-25px-b md-m-20px-b">
+            <div class="col-md-10 col-lg-5">
+                <div class="section-title">
+                    <h2 class="theme-after">Supplier</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Where(w => w.Type == CompanyType.Supplier))
+            {
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
+
+                    <a href="@item.Link">
+                        <img src="~/Company/@item.LogoPath" class="img-thumbnail"
+                             width="150" height="150"
+                             alt="@item.Name" title="@item.Name">
+                    </a>
+
+                </div>
+            }
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <a role="button" class="btn btn-sm btn-danger text-white"
+                   data-toggle="modal" data-target="#exampleModalCenter">Live Feedback</a>
+            </div>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Record feedback </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input id="fullName" type="text" class="form-control form-control-sm" placeholder="Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input id="companyName" type="text" class="form-control form-control-sm" placeholder="Company Name">
+                                </div>
+                                <div class="form-group">
+                                    <label >Email address</label>
+                                    <input type="email" id="email" class="form-control form-control-sm"  aria-describedby="emailHelp" placeholder="Enter email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+
+                                    <textarea class="form-control" id="description"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Upload File</label>
+                                    <input type="file" class="form-control-file" id="file"/>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a onclick="SendFeedback()" class="btn btn-primary text-white">Send feedback </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

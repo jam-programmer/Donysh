@@ -1,9 +1,7 @@
-﻿using Application.DataTransferObjects.Identity.Role.RoleValidator;
-using Application.DataTransferObjects.Identity.User;
+﻿using Application.DataTransferObjects.Identity.User;
 using Application.DataTransferObjects.Identity.User.UserValidator;
 using Application.Services.Identity.Role;
 using Application.Services.Identity.User;
-using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,7 +23,7 @@ namespace Donysh.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10, string search = "")
         {
-            var pageModel = await _user.GetUsers(page,pageSize,search);
+            var pageModel = await _user.GetUsers(page, pageSize, search);
             return View(pageModel);
         }
 
@@ -74,7 +72,7 @@ namespace Donysh.Areas.Admin.Controllers
             var results = await validate.ValidateAsync(model);
             if (results.IsValid)
             {
-                var result=await _user.UpdateUser(model);
+                var result = await _user.UpdateUser(model);
                 if (string.IsNullOrEmpty(result))
                 {
                     return RedirectToAction(nameof(Index));
@@ -83,7 +81,7 @@ namespace Donysh.Areas.Admin.Controllers
                 ViewBag.Alert += result + "\n\r";
             }
             await Roles(model.Role);
-         
+
             foreach (var error in results.Errors)
             {
                 ViewBag.Alert += error.ErrorMessage + "\n\r";
@@ -112,9 +110,9 @@ namespace Donysh.Areas.Admin.Controllers
         public async Task Roles(List<string>? selected)
         {
             var roles = await _role.GetSelectRoles();
-          
 
-            if (selected!=null)
+
+            if (selected != null)
             {
                 ViewBag.Roles = new SelectList(roles, "Title", "Title", selected);
             }
@@ -122,7 +120,7 @@ namespace Donysh.Areas.Admin.Controllers
             {
                 ViewBag.Roles = new SelectList(roles, "Title", "Title");
             }
-       
+
         }
 
         #endregion

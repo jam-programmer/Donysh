@@ -22,7 +22,7 @@ namespace Application.Services.Ui
         Task<Footer> GetFooter();
         Task<PageDetail> GetPage(string id);
         Task<Header> GetMenu();
-        Task<ListGenerics<ProjectCard>> GetListProject(int page);
+        Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null);
         Task<bool> AddRequest(RequestInfo request);
         Task<AboutPage> GetAboutPage();
         Task<bool> AddContactRequest(RequestContact request);

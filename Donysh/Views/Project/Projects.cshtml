@@ -329,6 +329,9 @@
 
    @foreach (var item in Model.List!)
    {
+        <a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">
+
+     
        <div class="projcard projcard-blue">
            <div class="projcard-innerbox">
                <img class="projcard-img" src="~/Project/@item.ProjectImage" />
@@ -344,7 +347,8 @@
                    </div>
                </div>
            </div>
-       </div>
+            </div>
+        </a>
    }
    
 

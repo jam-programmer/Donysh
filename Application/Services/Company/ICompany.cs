@@ -16,5 +16,7 @@ namespace Application.Services.Company
         Task<bool> DeleteCompanyById(string id);
         Task<bool> BackCompanyById(string id);
         Task<bool> RemoveCompanyById(string id);
+
+        Task<List<CompanyViewModel>> GetAllAsync();
     }
 }

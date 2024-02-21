@@ -284,12 +284,16 @@ namespace Application.Services.Ui
             return header;
         }
 
-        public async Task<ListGenerics<ProjectCard>> GetListProject(int page)
+        public async Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null)
         {
             int pageSelected = page;
             int count =await _projectRepository.GetCount();
             int pageSkip = (page - 1) * 10;
             var query = await _projectRepository.GetByQuery();
+            if (!string.IsNullOrEmpty(filter))
+            {
+                query = query.Where(w => w.StatusForeignKey == filter);
+            }
             var projects =await query.Skip(pageSkip).Take(10).ToListAsync();
             count = count.PageCount(10);
             ListGenerics<ProjectCard> result = new();

@@ -28,5 +28,22 @@ namespace Application.ViewModels.Ui.Project
         public string? Scope { set; get; }
         public List<ProjectServices>? Services { set; get; }
         public List<PictureProject>? Pictures { set; get; }
+
+
+        public bool IsLocation { set; get; }
+        public bool IsProjectName { set; get; }
+        public bool IsDescription { set; get; }
+        public bool IsOwnerOrDeveloper { set; get; }
+        public bool IsArchitect { set; get; }
+        public bool IsBuilder { set; get; }
+        public bool IsStartDate { set; get; }
+        public bool IsCompletionDate { set; get; }
+        public bool IsContractAmount { set; get; }
+        public bool IsReferenceContactName { set; get; }
+        public bool IsReferenceContactEmail { set; get; }
+        public bool IsReferenceContactPhone { set; get; }
+        public bool IsReferenceContactAddress { set; get; }
+        public bool IsStatusForeignKey { set; get; }
+        public bool IsScopeForeignKey { set; get; }
     }
 }

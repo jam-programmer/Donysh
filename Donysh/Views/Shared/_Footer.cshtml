@@ -1,32 +1,34 @@
-﻿<footer class="footer" style="margin-top: 50px;">
+﻿
+
+<footer class="footer">
     <section class="footer-section">
         <div class="container">
             <div class="row">
                 @await Component.InvokeAsync("FooterComponent")
-
-                <div class="col-md-5 col-lg-3 sm-m-15px-tb">
-                    <div class="p-25px-l sm-p-0px-l md-p-0px-l md-m-30px-t">
-                        <h4 class="font-alt">Get in touch</h4>
-                        <p class="color-medium-gray">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                        <div class="newsletter-box m-20px-t">
-                            <input name="email" placeholder="Email Address" class="input-medium" type="text">
-                            <button type="submit" class="m-btn m-btn-l m-btn-icon"><i class="fab fa-telegram-plane"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- col -->
-
             </div>
 
         </div> <!-- container -->
         <div class="footer-copy">
             <div class="row">
-                <div class="col-12">
+                <div class="col-8">
                     <p>
                         Powered by <a href="https://darnogroup.com/">Darno Group </a>- Donysh Building Finishes © 2023 All Rights Reserved
                     </p>
+                </div> <div class="col-4">
+                  @if (User.Identity!.IsAuthenticated)
+                  {
+                      <p>
+                          <a asp-controller="Account" asp-action="SignOut" >Log Out</a>
+                      </p>
+                  }
+                  else
+                  {
+                      <p>
+                          <a asp-controller="Account" asp-action="SignIn" >Login </a>
+                      </p>
+                  }
                 </div><!-- col -->
             </div> <!-- row -->
         </div> <!-- footer-copy -->
     </section>
-</footer>
+</footer> 

@@ -8,6 +8,7 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Mapster;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Company
 {
@@ -182,6 +183,15 @@ namespace Application.Services.Company
                 }
             }
             return result;
+        }
+
+        public async Task<List<CompanyViewModel>> GetAllAsync()
+        {
+            var query= await _repository.GetByQuery();
+            List<CompanyViewModel> companies = new();
+            var list = await query.ToListAsync();
+            companies = list.Adapt<List<CompanyViewModel>>();
+            return companies;
         }
     }
 }

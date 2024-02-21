@@ -13,9 +13,9 @@ namespace Donysh.Controllers
         {
             _userInterface = userInterface;
         }
-        public async Task<IActionResult> Projects(int page=1)
+        public async Task<IActionResult> Projects(int page=1,string? filter=null)
         {
-            var pageModel = await _userInterface.GetListProject(page);
+            var pageModel = await _userInterface.GetListProject(page, filter);
             return View(pageModel);
         }
 

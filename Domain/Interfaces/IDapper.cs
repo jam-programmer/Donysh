@@ -12,7 +12,8 @@ namespace Domain.Interfaces
        /// <param name="page"></param>
        /// <param name="pageSize"></param>
        /// <returns>List Of Entity</returns>
-        Task<List<TEntity>> GetListAsync(bool isDelete, string storedProcedure, int page, int pageSize, string search = "");
+        Task<List<TEntity>> GetListAsync(bool isDelete, string storedProcedure, int page, 
+           int pageSize, string search = "",object? filter=null);
 
         /// <summary>
         /// 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Application.ViewModels.Company
         public string? LogoPath { set; get; }
         public string? Link { set; get; }
         public  string? Name { set;get; }
+        public CompanyType Type { set; get; }
     }
 }

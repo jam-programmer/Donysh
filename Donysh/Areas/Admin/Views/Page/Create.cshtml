@@ -48,20 +48,43 @@
                     <div >
                         <div class="mb-5">
                             <label class="form-label">Body</label>
-                            <textarea asp-for="Body" class="form-control editor ck ck-editor__main"></textarea>
+                            <textarea asp-for="Body" id="content"></textarea>
                         </div>
                     </div>
                 </div>
 
-            </div>
-            <button class=" btn btn-primary " type="submit">Submit</button>
+            </div>      <button class=" btn btn-primary " type="submit">Submit</button>
             <a asp-controller="Page" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
         </form>
     </div>
 </div>
 
 @section Script{
-    <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
+    
+    <script src="~/lib/ckeditor5/ckeditor.js"></script>
+     
+    <script>
+        ClassicEditor.create(document.querySelector('#content'), {
+            ckfinder:{uploadUrl:'/CKUpload/'}
+        });
+    </script>
+    
+    
+    
+    
+
+    @*  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    @*   <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
     <script src="~/adminPanel/src/js/ckeditor.js"></script>
-    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script>
+    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script> 
+    <script src="~/adminPanel/dist/js/ckeditor-document.js"></script>  *@
+ @**   <script>
+      
+        CKEDITOR.replace('Body', {
+            filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+            filebrowserUploadUrl: '/ckfinder/core/connector/dotnet/connector.aspx?command=QuickUpload&type=Files',
+            filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?Type=Images',
+            filebrowserImageUploadUrl: '/ckfinder/core/connector/dotnet/connector.aspx?command=QuickUpload&type=Images'
+        });
+    </script> *@
 }

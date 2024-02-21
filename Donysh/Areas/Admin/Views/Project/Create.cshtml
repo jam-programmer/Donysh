@@ -34,36 +34,53 @@
                 </h2>
 
             </div>
-            <div  class="p-5">
+            <div class="p-5">
                 <div>
                     <label for="ProjectName" class="form-label mt-3">Project Name</label>
                     <input asp-for="ProjectName" id="ProjectName" placeholder="Project Name..." type="text" class="form-control">
+
                 </div>
                 <div>
                     <label for="Location" class="form-label mt-3">Location</label>
                     <input asp-for="Location" id="Location" placeholder="Location..." type="text" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsLocation" class="form-check-switch" />
+                    </div>
                 </div>
-                
+
                 <div>
                     <label for="Builder" class="form-label mt-3">General Contractor/Builder/Construction Manager</label>
                     <input asp-for="Builder" id="Builder" placeholder="General Contractor/Builder/Construction Manager..." type="text" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsBuilder" class="form-check-switch" />
+                    </div>
                 </div>
-                
-                
+
+
                 <div>
                     <label for="Architect" class="form-label mt-3">Architect</label>
                     <input asp-for="Architect" id="Architect" placeholder="Architect..." type="text" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsArchitect" class="form-check-switch" />
+                    </div>
                 </div>
 
 
                 <div>
                     <label for="OwnerOrDeveloper" class="form-label mt-3">Owner / Developer</label>
                     <input asp-for="OwnerOrDeveloper" id="OwnerOrDeveloper" placeholder="Owner / Developer..." type="text" class="form-control">
-                </div> 
-                
+
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsOwnerOrDeveloper" class="form-check-switch" />
+                    </div>
+                </div>
+
                 <div>
                     <label for="ContractAmount" class="form-label mt-3">Contract Amount</label>
                     <input asp-for="ContractAmount" id="ContractAmount" placeholder="ContractAmount..." type="number" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsContractAmount" class="form-check-switch" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,25 +96,38 @@
                 <div>
                     <label for="ReferenceContactName" class="form-label mt-3">Name</label>
                     <input asp-for="ReferenceContactName" id="ReferenceContactName" placeholder="Name..." type="text" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsReferenceContactName" class="form-check-switch" />
+                    </div>
+
                 </div>
                 <div>
                     <label for="ReferenceContactEmail" class="form-label mt-3">Email</label>
                     <input asp-for="ReferenceContactEmail" id="ReferenceContactEmail" placeholder="Email..." type="text" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsReferenceContactEmail" class="form-check-switch" />
+                    </div>
                 </div>
-                
+
                 <div>
                     <label for="ReferenceContactPhone" class="form-label mt-3">Phone</label>
                     <input asp-for="ReferenceContactPhone" id="ReferenceContactPhone" placeholder="Phone..." type="number" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsReferenceContactPhone" class="form-check-switch" />
+                    </div>
                 </div>
-               
-                
+
+
                 <div>
                     <label for="ReferenceContactAddress" class="form-label mt-3">Address</label>
                     <textarea asp-for="ReferenceContactAddress" id="ReferenceContactAddress" rows="9" class="form-control"></textarea>
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsReferenceContactAddress" class="form-check-switch" />
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="intro-y col-span-12 lg:col-span-6 box mt-5 ">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
@@ -105,22 +135,32 @@
                 </h2>
 
             </div>
-            <div  class="p-5">
+            <div class="p-5">
                 <div>
                     <label for="StartDate" class="form-label mt-3">Start Date</label>
-                    <input asp-for="StartDate" id="StartDate" type="date" class="form-control">
+                    <input asp-for="StartDate" id="StartDate" type="text" class="form-control" placeholder="Start Date" />
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsStartDate" class="form-check-switch" />
+                    </div>
                 </div>
                 <div>
                     <label for="CompletionDate" class="form-label mt-3">Completion Date</label>
-                    <input asp-for="CompletionDate" id="CompletionDate" type="date" class="form-control">
+                    <input asp-for="CompletionDate" id="CompletionDate" type="text"
+                           placeholder="Completion Date" class="form-control">
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsCompletionDate" class="form-check-switch" />
+                    </div>
                 </div>
-                
+
                 <div>
                     <label for="status" class="form-label mt-3">Status</label>
                     <select class="form-select  sm:mr-2" id="status" asp-for="StatusForeignKey" asp-items="@ViewBag.Status">
                         <option disabled="disabled">Please select a status</option>
 
                     </select>
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsStatusForeignKey" class="form-check-switch" />
+                    </div>
                 </div>
                 <div>
                     <label for="Scope" class="form-label mt-3">Scope of work</label>
@@ -128,11 +168,14 @@
                         <option disabled="disabled">Please select a Scope</option>
 
                     </select>
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsScopeForeignKey" class="form-check-switch" />
+                    </div>
                 </div>
             </div>
         </div>
-        
-        
+
+
         <div class="intro-y col-span-12 lg:col-span-6 box mt-5 ">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
@@ -143,24 +186,24 @@
             <div class="p-5">
                 <div>
                     <label>Select services</label>
-                    
-                    
+
+
                     @foreach (var item in (ViewBag.Services as List<ItemViewModel>)!)
                     {
                         <div class="form-check mt-2">
                             <input id="checkbox-switch-1" name="Services" class="form-check-input" type="checkbox" value="@item.Id">
                             <label class="form-check-label" for="checkbox-switch-1">@item.Title</label>
                         </div>
-                 
+
                     }
-                   
+
                 </div>
             </div>
         </div>
 
 
-        
-        
+
+
 
         <div class="intro-y col-span-12 lg:col-span-8 box mt-5 ">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
@@ -173,6 +216,9 @@
                 <div class="mb-5">
                     <label class="form-label">Description</label>
                     <textarea asp-for="Description" class="form-control editor ck ck-editor__main"></textarea>
+                    <div class="mt-2">
+                        <input type="checkbox" asp-for="IsDescription" class="form-check-switch" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,7 +226,7 @@
         <div class="intro-y col-span-12 lg:col-span-4 box mt-5 ">
             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
-                   Media
+                    Media
                 </h2>
 
             </div>
@@ -188,10 +234,10 @@
                 <div>
                     <div class="fallback">
                         <div class="w-60 h-20 sm:w-60 sm:h-24 flex-none lg:w-70 lg:h-32 image-fit relative">
-                            
-                                <img id="imagePath_1" src="~/img/default.jpg" >
-                
-                            
+
+                            <img id="imagePath_1" src="~/img/default.jpg">
+
+
                         </div>
                         <label for="image_1" class="form-label" style="margin-top: 120px;">Image File</label><br />
                         <input onchange="ChangeImage(this,1)" asp-for="ProjectImage" type="file" id="image_1" class="mt-1" />
@@ -199,9 +245,9 @@
                 </div>
             </div>
         </div>
-       
 
-        <button class="btn btn-primary " type="submit">Submit</button> 
+
+        <button class="btn btn-primary " type="submit">Submit</button>
         <a asp-controller="Project" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
     </div>
 </form>

@@ -19,18 +19,21 @@
 
            @foreach (var item in Model.Services!)
            {
-               <div class="col-12 col-md-6 col-lg-4 m-30px-t">
-                   <div class="feature-box-03">
-                       <div class="text-center">
-                            <img src="~/Service/@item.Image" style="width: 150px; height: 90px;" />
-                       </div>
-                       <br/>
-                       <div class="feature-content">
-                           <h5>@item.Title</h5>
-                           <p>@item.SmallDescription</p>
-                       </div>
-                   </div> <!-- feature-box-02 -->
-               </div>
+              
+                   <div class="col-12 col-md-6 col-lg-4 m-30px-t"> <a asp-controller="Service" asp-action="ServiceDetail" asp-route-serviceId="@item.Id">
+                       <div class="feature-box-03">
+                           <div class="text-center">
+                               <img src="~/Service/@item.Image" style="width: 150px; height: 90px;" />
+                           </div>
+                           <br/>
+                           <div class="feature-content">
+                               <h5>@item.Title</h5>
+                               <p>@item.SmallDescription</p>
+                           </div>
+                       </div> <!-- feature-box-02 -->
+
+                    </a>
+                </div>
            }
 
             

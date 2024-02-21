@@ -9,6 +9,7 @@ using Donysh.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+;
 builder.Services.AddSingleton<Generator>();
 //*************************CustomConfiguration
 builder.Services.InfrastructureServices(builder.Configuration);

@@ -7,7 +7,7 @@ namespace Application.Services.Project
 {
     public interface IProject
     {
-        Task<ListGenerics<ProjectViewModel>> GetProjectsAsync(int page, int pageSize, string search = "");
+        Task<ListGenerics<ProjectViewModel>> GetProjectsAsync(int page, int pageSize, string search = "", string? status = null);
         Task<ListGenerics<ProjectViewModel>> GetTrashProjectsAsync(int page, int pageSize, string search = "");
         Task AddProject(AddProjectDto model);
         Task UpdateProject(UpdateProjectDto model);

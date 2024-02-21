@@ -85,10 +85,11 @@ namespace Application.Services.Project
 
 
 
-        public async Task<ListGenerics<ProjectViewModel>> GetProjectsAsync(int page, int pageSize, string search = "")
+        public async Task<ListGenerics<ProjectViewModel>> 
+            GetProjectsAsync(int page, int pageSize, string search = "", string? status = null)
         {
             var projects = await _dapper
-                .GetListAsync(false, "[dbo].[SP_GetProjects]", page, pageSize, search);
+                .GetListAsync(false, "[dbo].[SP_GetProjects]", page, pageSize, search,status);
             if (!projects.Any())
             {
 

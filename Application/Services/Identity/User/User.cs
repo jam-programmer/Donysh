@@ -24,7 +24,11 @@ namespace Application.Services.Identity.User
         public async Task AddUser(AddUserDto model)
         {
             IdentityUser user = model.Adapt<IdentityUser>(UserMapster.MapUserToAddUserDto());
+
+            user.EmailConfirmed = model.Active;
+            user.PhoneNumberConfirmed = model.Active;
             var resultAddUser = await _userManager.CreateAsync(user, model.Password!);
+
             if (resultAddUser.Succeeded)
             {
                 var resultAddUserRole = await _userManager.AddToRolesAsync(user, model.Role!);
@@ -96,6 +100,10 @@ namespace Application.Services.Identity.User
             string message = "";
             var user = await _userManager.FindByIdAsync(model.Id!);
             model.Adapt(user, UserMapster.MapUserToUpdateUserDto());
+           
+                user.EmailConfirmed = model.Active;
+                user.PhoneNumberConfirmed = model.Active;
+            
             var resultUpdateUser = await _userManager.UpdateAsync(user!);
             if (resultUpdateUser.Succeeded)
             {

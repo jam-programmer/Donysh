@@ -119,6 +119,43 @@ namespace Infrastructure.Migrations
                     b.ToTable("Contact", "Dy");
                 });
 
+            modelBuilder.Entity("Domain.Entities.FeedbackEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsShow")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("UpdateTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedback", "Dy");
+                });
+
             modelBuilder.Entity("Domain.Entities.PageEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -197,8 +234,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Builder")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CompletionDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("CompletionDate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContractAmount")
                         .HasColumnType("nvarchar(max)");
@@ -211,7 +248,52 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<bool?>("IsArchitect")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsBuilder")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsCompletionDate")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsContractAmount")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDescription")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsLocation")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsOwnerOrDeveloper")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsProjectName")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsReferenceContactAddress")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsReferenceContactEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsReferenceContactName")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsReferenceContactPhone")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsScopeForeignKey")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsStartDate")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsStatusForeignKey")
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
@@ -243,8 +325,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ScopeForeignKey")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("StartDate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StatusForeignKey")
                         .HasColumnType("nvarchar(450)");

@@ -99,7 +99,8 @@ namespace Infrastructure.Repositories
                 throw;
             }
         }
-        public async Task<List<TEntity>> GetListAsync(bool isDelete, string storedProcedure, int page, int pageSize, string search = "")
+        public async Task<List<TEntity>> GetListAsync(bool isDelete, string storedProcedure, 
+            int page, int pageSize, string search = "",object? filter=null)
         {
             IEnumerable<TEntity> entities;
             DynamicParameters parameters = new DynamicParameters();
@@ -107,6 +108,10 @@ namespace Infrastructure.Repositories
             parameters.Add("@pageSize", pageSize, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@search", search, DbType.String, ParameterDirection.Input);
             parameters.Add("@delete", isDelete, DbType.Boolean, ParameterDirection.Input);
+            if (filter != null)
+            {
+                parameters.Add("@filter", filter, DbType.String, ParameterDirection.Input);
+            }
             try
             {
                 _connection.Open();

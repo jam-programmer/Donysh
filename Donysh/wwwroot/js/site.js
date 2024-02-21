@@ -237,3 +237,108 @@ async function ContactRequest() {
 
 
 }
+
+
+
+
+
+ function SendFeedback() {
+
+    var fullName = document.getElementById("fullName");
+    var companyName = document.getElementById("companyName");
+    var email = document.getElementById("email");
+    var description = document.getElementById("description");
+    var file = document.getElementById("file");
+
+
+    if (fullName.value === "" || companyName.value === "" || email.value === "" ) {
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Email, company name is required",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        return;
+
+    }
+
+    var formData = new FormData();
+    formData.append('FilePath', file.files[0]);
+    formData.append('Description', description.value);
+    formData.append('EmailAddress', email.value);
+    formData.append('CompanyName', companyName.value);
+    formData.append('FullName', fullName.value);
+
+
+    try {
+
+        Swal.fire({
+            title: " Information processing ",
+            html: "Please wait",
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
+
+        fetch('/RequestFeedback', {
+
+                method: 'POST',
+                body: formData,
+                
+
+             
+                headers: {
+                    'enctype': 'multipart/form-data'
+                }
+              
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data) {
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Thank you for your feedback",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#exampleModalCenter').modal('hide');
+
+                   
+
+                     fullName.value = "";
+                    companyName.value = ""; 
+                    email.value = ""; 
+                    description.value = "";
+                    file.value = "";
+
+                } 
+
+            })
+            .catch(error => {
+                
+                Swal.fire({
+                    position: "center",
+                    icon: "Error",
+                    title: "A system error has occurred. Please try again later",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+    } catch (error) {
+        console.log('error', 'خطا: ' + error);
+    }
+ }
+

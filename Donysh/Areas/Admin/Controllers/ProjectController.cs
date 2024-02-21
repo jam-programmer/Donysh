@@ -11,6 +11,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Donysh.Areas.Admin.Controllers
 {
@@ -33,10 +34,14 @@ namespace Donysh.Areas.Admin.Controllers
             _status = status;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int page = 1, int pageSize = 10, string search = "")
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 10, 
+            string search = "",string? status=null)
         {
+            ViewBag.Status = new SelectList(await _status.GetStatusesItemAsync(), 
+                "Id", "Title");
+
             ViewBag.Base = _generator.UrlSite() + "/Project/";
-            var pageModel = await _project.GetProjectsAsync(page, pageSize, search);
+            var pageModel = await _project.GetProjectsAsync(page, pageSize, search,status);
             return View(pageModel);
         }
 

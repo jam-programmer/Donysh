@@ -27,6 +27,7 @@ namespace Infrastructure.Context
         public virtual DbSet<PictureEntity>? Picture { set; get; }
         public virtual DbSet<PageEntity>? Page { set; get; }    
         public virtual DbSet<ContactEntity>? Contact { set; get; }    
+        public virtual DbSet<FeedbackEntity>? Feedback { set; get; }    
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
