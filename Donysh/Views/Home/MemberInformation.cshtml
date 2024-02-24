@@ -1,0 +1,36 @@
+﻿@model Application.ViewModels.Team.MemberInformationViewModel
+@{
+    
+        ViewData["Title"] = Model.FullName;
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Component.InvokeAsync("HeaderComponent",Model.FullName);
+
+<section class="section">
+    <div class="container">
+        <div class="row" >
+            <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-6 offset-lg-4 offset-xl-4 offset-md-3 offset-sm-4">
+                <div class="text-center">
+                    @if (Model.AvatarPath == "default.jpg")
+                   {
+                        <img src="~/img/default.jpg" width="240" height="240" style="border-radius: 35px;" />
+                   }
+                   else
+                   {
+                       <img src="~/Team/@Model.AvatarPath" width="240" height="240" style="border-radius: 35px;"/>
+                   }
+                    <div>
+                        <h4 class="text-dark mt-2">@Model.FullName</h4>
+                        <h6 class=" mt-2" style="color: orangered">@Model.JobTitle</h6>
+                      
+                    </div>
+                </div>
+            </div>
+            <div class ="col-12 text-center">
+                <p>
+                  @Model.Description
+            </p></div>
+        </div>
+    </div>
+</section>

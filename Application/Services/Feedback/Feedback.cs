@@ -13,6 +13,7 @@ using Application.DataTransferObjects.Feedback;
 using Mapster;
 using Application.ConfigMapster.CompanyMap;
 using Application.Services.Company;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Feedback
 {
@@ -29,7 +30,9 @@ namespace Application.Services.Feedback
 
         public async Task<UpdateFeedbackDto> GetById(string id)
         {
-            throw new NotImplementedException();
+            var model= await _repository.GetByIdAsync(id);
+            UpdateFeedbackDto feedback = model!.Adapt<UpdateFeedbackDto>();
+            return feedback;
         }
 
         public async Task AddAsync(AddFeedbackDto model)
@@ -103,6 +106,14 @@ namespace Application.Services.Feedback
                 }
             }
             return result;
+        }
+
+        public async Task<List<FeedbackItemViewModel>> GetActiveFeedbackAsync()
+        {
+            var query =await _repository.GetByQuery();
+            var model=await query.Where(w => w.IsShow == true).ToListAsync();
+            List<FeedbackItemViewModel> items = model.Adapt<List<FeedbackItemViewModel>>();
+            return items;
         }
     }
 }

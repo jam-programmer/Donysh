@@ -1,11 +1,7 @@
 ﻿using Application.DataTransferObjects.Team;
 using Application.ViewModels.Team;
 using Application.ViewModels.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Services.Team
 {
@@ -63,5 +59,6 @@ namespace Application.Services.Team
         /// <param name="id"></param>
         /// <returns></returns>
         Task<bool> RemoveTeamAsync(string id);
+        Task<MemberInformationViewModel> GetMemberInformationByIdAsync(string id);
     }
 }

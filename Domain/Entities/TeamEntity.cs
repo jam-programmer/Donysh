@@ -11,5 +11,6 @@ namespace Domain.Entities
         public string? FullName { set; get; }
         public string? AvatarPath { set; get; }
         public string? JobTitle { set; get; }
+        public string? Description { set; get;}
     }
 }

@@ -185,5 +185,12 @@ namespace Application.Services.Team
             }
             return result;
         }
+
+        public async Task<MemberInformationViewModel> GetMemberInformationByIdAsync(string id)
+        {
+            var model = await _repository.GetByIdAsync(id);
+            MemberInformationViewModel information = model!.Adapt<MemberInformationViewModel>();
+            return information;
+        }
     }
 }

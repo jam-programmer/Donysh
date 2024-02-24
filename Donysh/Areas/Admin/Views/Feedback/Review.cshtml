@@ -1,0 +1,60 @@
+﻿
+@model Application.DataTransferObjects.Feedback.UpdateFeedbackDto
+@{
+    ViewData["Title"] = "Review feedback";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="intro-y box px-5 pt-5 mt-5">
+    <div class="flex flex-col lg:flex-row border-b border-gray-200 dark:border-dark-5 pb-5 -mx-5">
+        <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
+           
+            <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
+                @if (Model.FilePath == "default.jpg")
+                {
+                    <img src="~/img/default.jpg" />
+                }
+                else
+                {
+                    <img src="@(ViewBag.Base+Model.FilePath)" />
+                }
+              
+            </div>
+           
+        </div>
+        <div class="mt-6 lg:mt-0 flex-1 dark:text-gray-300 px-5 border-l border-r border-gray-200 dark:border-dark-5 border-t lg:border-t-0 pt-5 lg:pt-0">
+            <div class="font-medium text-center lg:text-left lg:mt-3">Contact Details</div>
+            <div class="flex flex-col justify-center items-center lg:items-start mt-4">
+                <div class="truncate sm:whitespace-normal flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user block mx-auto"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>        
+          @Model.FullName
+                    </div>
+                <div class="truncate sm:whitespace-normal flex items-center mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-codesandbox block mx-auto"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> 
+                       @Model.CompanyName</div>
+               
+                <div class="truncate sm:whitespace-normal flex items-center mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail block mx-auto"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> 
+                      @Model.EmailAddress</div>
+               
+            </div>
+        </div>
+        <div class="mt-6 lg:mt-0 flex-1 px-5 border-t lg:border-0 border-gray-200 dark:border-dark-5 pt-5 lg:pt-0">
+            <div class="font-medium text-center lg:text-left lg:mt-3">Description </div>    <div class="font-medium text-center lg:text-left lg:mt-5">
+                <p>
+                  @Model.Description
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <form asp-area="Admin" asp-controller="Feedback" asp-action="Review" method="POST">
+        <div class="form-check p-3">
+            <input asp-for="IsShow" id="checkbox-switch-7" class="form-check-switch" type="checkbox">
+            <label class="form-check-label" for="checkbox-switch-7">Show feedback on the site</label>
+        </div>
+        <input type="hidden" asp-for="IsShow"/>
+        <div class="text-right  p-3">
+           <a asp-area="Admin" asp-controller="Feedback" asp-action="Index" class="btn btn-outline-secondary w-24 mr-1">Back to list</a>
+           <button type="submit" class="btn btn-primary w-24">Save</button>
+       </div></form> 
+</div>

@@ -15,5 +15,7 @@ namespace Application.Services.Feedback
         Task AddAsync(AddFeedbackDto model);
         Task UpdateAsync(UpdateFeedbackDto model);
         Task<bool> RemoveById(string id);
+
+        Task<List<FeedbackItemViewModel>> GetActiveFeedbackAsync();
     }
 }

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
-namespace Application.DataTransferObjects.Team
+namespace Application.ViewModels.Feedback
 {
-    public class AddTeamDto
+    public class FeedbackItemViewModel
     {
         public string? FullName { set; get; }
-        public IFormFile? AvatarFile { set; get; }
-        public string? JobTitle { set; get; }
+        public string? CompanyName { set; get; }
         public string? Description { set; get; }
+        public string? FilePath { set; get; }
     }
 }
