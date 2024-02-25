@@ -29,5 +29,13 @@ namespace Domain.Entities
         public string? WorkExperience { set; get; }
         public string? CompletedProject { set; get; }
         public string? BannerPageHeader { set; get; }
+
+        public string? MailSender { set; get; }
+        public string? MailReceiver { set; get; }
+        public string? MailHost { set; get; }
+        public string? SmtpUserName { set; get; }
+        public string? SmtpPassword { set; get; }
+        public int? MailHostPort { set; get; }
+        public bool ActiveMailService { set; get; }
     }
 }

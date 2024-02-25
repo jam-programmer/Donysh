@@ -51,5 +51,12 @@ namespace Application.DataTransferObjects.Setting
         public string? CompletedProject { set; get; }
         public string? BannerPageHeader { set; get; }
         public IFormFile? BannerPageHeaderFile { set; get; }
+        public string? MailSender { set; get; }
+        public string? MailReceiver { set; get; }
+        public string? MailHost { set; get; }
+        public string? SmtpUserName { set; get; }
+        public string? SmtpPassword { set; get; }
+        public int MailHostPort { set; get; } = 0;
+        public bool ActiveMailService { set; get; }
     }
 }

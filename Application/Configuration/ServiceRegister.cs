@@ -14,6 +14,7 @@ using Application.Services.Ui;
 using Microsoft.Extensions.DependencyInjection;
 using Application.Services.Dashboard;
 using Application.Services.Feedback;
+using Application.Services.Sender;
 
 namespace Application.Configuration
 {
@@ -36,6 +37,7 @@ namespace Application.Configuration
             service.AddScoped<IRequest,Request>();
             service.AddScoped<IDashboard, Dashboard>();
             service.AddScoped<IFeedback, Feedback>();
+            service.AddScoped<ISender, Sender>();
         }
     }
 }

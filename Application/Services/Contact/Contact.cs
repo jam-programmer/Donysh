@@ -11,6 +11,7 @@ using Application.ConfigMapster.CompanyMap;
 using Application.ViewModels.Company;
 using Mapster;
 using Application.Core;
+using Application.Services.Sender;
 
 namespace Application.Services.Contact
 {
@@ -18,13 +19,14 @@ namespace Application.Services.Contact
     {
         private readonly IDapper<ContactEntity> _contact;
         private readonly IRepository<ContactEntity> _repository;
+        private readonly ISender _sender;
 
-        public Contact(IDapper<ContactEntity> contact, IRepository<ContactEntity> repository)
+        public Contact(IDapper<ContactEntity> contact, IRepository<ContactEntity> repository, ISender sender)
         {
             _contact = contact;
             _repository = repository;
+            _sender = sender;
         }
-
         public async Task<ContactDetail> 
             GetById(string id)
         {

@@ -1,6 +1,4 @@
-﻿using Application.DataTransferObjects.Company;
-using Application.DataTransferObjects.Feedback;
-using Application.ViewModels.Contact;
+﻿using Application.DataTransferObjects.Feedback;
 using Application.ViewModels.Feedback;
 using Application.ViewModels.Main;
 

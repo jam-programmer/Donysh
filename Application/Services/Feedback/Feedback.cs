@@ -1,36 +1,32 @@
-﻿using Application.ViewModels.Contact;
+﻿using Application.Core;
+using Application.DataTransferObjects.Feedback;
+using Application.Services.Sender;
 using Application.ViewModels.Feedback;
 using Application.ViewModels.Main;
+using Application.ViewModels.Sender;
 using Domain.Entities;
 using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Core;
-using Application.DataTransferObjects.Feedback;
 using Mapster;
-using Application.ConfigMapster.CompanyMap;
-using Application.Services.Company;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services.Feedback
 {
-    public class Feedback: IFeedback
+    public class Feedback : IFeedback
     {
         private readonly IDapper<FeedbackEntity> _contact;
         private readonly IRepository<FeedbackEntity> _repository;
+        private readonly ISender _sender;
 
-        public Feedback(IDapper<FeedbackEntity> contact, IRepository<FeedbackEntity> repository)
+        public Feedback(IDapper<FeedbackEntity> contact, IRepository<FeedbackEntity> repository, ISender sender)
         {
             _contact = contact;
             _repository = repository;
+            _sender = sender;
         }
 
         public async Task<UpdateFeedbackDto> GetById(string id)
         {
-            var model= await _repository.GetByIdAsync(id);
+            var model = await _repository.GetByIdAsync(id);
             UpdateFeedbackDto feedback = model!.Adapt<UpdateFeedbackDto>();
             return feedback;
         }
@@ -42,6 +38,10 @@ namespace Application.Services.Feedback
             feedback.FilePath = FileProcessing.FileUpload(model.FilePath, null, "Feedback");
 
             await _repository.Insert(feedback);
+            SenderViewModel sender = new();
+            sender.Body = $"{model.FullName} from {model.CompanyName} Company wrote a feedback for you. Feedback text:{ (string.IsNullOrEmpty(model.Description) ? "" : model.Description) }";
+            sender.Subject = "New feedback has been registered";
+            await _sender.SendAsync(sender);
         }
 
         public async Task UpdateAsync(UpdateFeedbackDto model)
@@ -110,8 +110,8 @@ namespace Application.Services.Feedback
 
         public async Task<List<FeedbackItemViewModel>> GetActiveFeedbackAsync()
         {
-            var query =await _repository.GetByQuery();
-            var model=await query.Where(w => w.IsShow == true).ToListAsync();
+            var query = await _repository.GetByQuery();
+            var model = await query.Where(w => w.IsShow == true).ToListAsync();
             List<FeedbackItemViewModel> items = model.Adapt<List<FeedbackItemViewModel>>();
             return items;
         }

@@ -19,6 +19,8 @@ using Application.ConfigMapster.CompanyMap;
 using Application.ViewModels.Company;
 using System.Drawing.Printing;
 using Application.Core;
+using Application.Services.Sender;
+using Application.ViewModels.Sender;
 
 namespace Application.Services.Ui
 {
@@ -36,8 +38,9 @@ namespace Application.Services.Ui
         private readonly IRepository<RequestEntity> _requestRepository;
         private readonly IRepository<AboutEntity> _about;
         private readonly IRepository<ContactEntity> _contactRepository;
+        private readonly ISender _sender;
 
-        public UserInterface(ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository)
+        public UserInterface(ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender)
         {
             _setting = setting;
             _dapperService = dapperService;
@@ -51,6 +54,7 @@ namespace Application.Services.Ui
             _requestRepository = requestRepository;
             _about = about;
             _contactRepository = contactRepository;
+            _sender = sender;
         }
 
 
@@ -351,6 +355,10 @@ namespace Application.Services.Ui
            try
            {
                await _contactRepository.Insert(contactEntity);
+               SenderViewModel sender = new SenderViewModel();
+               sender.Subject = "New message from the donysh site";
+               sender.Body = $"{request.FullName} wrote a new message for you.";
+               await _sender.SendAsync(sender);
                return true;
            }
            catch (Exception e)
