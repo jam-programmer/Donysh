@@ -193,5 +193,12 @@ namespace Application.Services.Service
             }
             return items;
         }
+
+        public async Task<List<ServiceBoxViewModel>> GetBoxOfServicesAsync()
+        {
+            var model = await _repository.GetAll();
+            List<ServiceBoxViewModel> boxs = model.Adapt<List<ServiceBoxViewModel>>();
+            return boxs;
+        }
     }
 }

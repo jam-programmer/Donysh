@@ -8,4 +8,6 @@
                asp-route-filter="@item.Id">@item.Title</a>
         </li>
     }
+    <hr/>
+    @await Component.InvokeAsync("ServiceItemComponent")
 </ul>

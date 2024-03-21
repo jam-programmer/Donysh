@@ -1,0 +1,10 @@
+﻿@model List<Application.ViewModels.Main.ItemViewModel>
+@foreach (var item in Model)
+{
+    
+        <li>
+            <a asp-controller="Service" asp-action="ServiceDetail"
+           asp-route-serviceId="@item.Id">@item.Title</a>
+        </li>
+    
+}

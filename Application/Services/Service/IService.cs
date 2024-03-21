@@ -62,5 +62,7 @@ namespace Application.Services.Service
         /// </summary>
         /// <returns></returns>
         Task<List<ItemViewModel>> GetServiceItemAsync();
+
+        Task<List<ServiceBoxViewModel>> GetBoxOfServicesAsync();
     }
 }

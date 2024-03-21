@@ -17,7 +17,7 @@ namespace Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Dy")
+                .HasDefaultSchema("dbo")
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -45,7 +45,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("About", "Dy");
+                    b.ToTable("About", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.CompanyEntity", b =>
@@ -78,7 +78,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Company", "Dy");
+                    b.ToTable("Company", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.ContactEntity", b =>
@@ -116,7 +116,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contact", "Dy");
+                    b.ToTable("Contact", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.FeedbackEntity", b =>
@@ -153,7 +153,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedback", "Dy");
+                    b.ToTable("Feedback", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.PageEntity", b =>
@@ -183,7 +183,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Page", "Dy");
+                    b.ToTable("Page", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.PictureEntity", b =>
@@ -220,7 +220,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Picture", "Dy");
+                    b.ToTable("Picture", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProjectEntity", b =>
@@ -342,7 +342,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("StatusForeignKey");
 
-                    b.ToTable("Project", "Dy");
+                    b.ToTable("Project", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.RequestEntity", b =>
@@ -386,7 +386,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("LastName");
 
-                    b.ToTable("Request", "Dy");
+                    b.ToTable("Request", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.ScopeWorkEntity", b =>
@@ -409,7 +409,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ScopeWork", "Dy");
+                    b.ToTable("ScopeWork", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.ServiceEntity", b =>
@@ -442,7 +442,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Service", "Dy");
+                    b.ToTable("Service", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.SettingEntity", b =>
@@ -542,7 +542,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Setting", "Dy");
+                    b.ToTable("Setting", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.StatusEntity", b =>
@@ -566,7 +566,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status", "Dy");
+                    b.ToTable("Status", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.TeamEntity", b =>
@@ -601,7 +601,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Team", "Dy");
+                    b.ToTable("Team", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -628,7 +628,7 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", "Dy");
+                    b.ToTable("AspNetRoles", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -653,7 +653,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", "Dy");
+                    b.ToTable("AspNetRoleClaims", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -718,7 +718,7 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", "Dy");
+                    b.ToTable("AspNetUsers", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -743,7 +743,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", "Dy");
+                    b.ToTable("AspNetUserClaims", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -765,7 +765,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", "Dy");
+                    b.ToTable("AspNetUserLogins", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -780,7 +780,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", "Dy");
+                    b.ToTable("AspNetUserRoles", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -799,7 +799,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", "Dy");
+                    b.ToTable("AspNetUserTokens", "dbo");
                 });
 
             modelBuilder.Entity("ProjectEntityServiceEntity", b =>
@@ -814,7 +814,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("ProjectEntityServiceEntity", "Dy");
+                    b.ToTable("ProjectEntityServiceEntity", "dbo");
                 });
 
             modelBuilder.Entity("RequestEntityServiceEntity", b =>
@@ -829,7 +829,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("RequestEntityServiceEntity", "Dy");
+                    b.ToTable("RequestEntityServiceEntity", "dbo");
                 });
 
             modelBuilder.Entity("Domain.Entities.PictureEntity", b =>

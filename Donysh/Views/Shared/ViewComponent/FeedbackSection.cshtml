@@ -7,11 +7,11 @@
                 <div class="col-sm-3">
                 @if (item.FilePath == "default.jpg")
                    {
-                       <img src="~/img/default.jpg" alt="" class="rounded-circle img-fluid" />
+                       <img  src="~/img/default.jpg" alt="" class="rounded-circle img-fluid" />
                    }
                    else
                    {
-                       <img src="~/Feedback/@item.FilePath" alt="" class="rounded-circle img-fluid" />
+                    <img onclick="ShowImage('@item.CompanyName','@item.Description','@item.FilePath')" src="~/Feedback/@item.FilePath" alt="" class="rounded-circle img-fluid" />
                    }
                 </div>
                 <div class="col-sm-9">

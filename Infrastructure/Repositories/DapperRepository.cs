@@ -60,17 +60,19 @@ namespace Infrastructure.Repositories
 
         public async Task<List<TEntity>> ExecuteQuery(string query)
         {
-
             if (string.IsNullOrEmpty(query))
             {
-
+                // Handle the case where the query is empty
+                return new List<TEntity>();
             }
             try
             {
-
-                await _connection.OpenAsync();
-                var model = await _connection.QueryAsync<TEntity>(query, commandType: CommandType.Text);
-                return model.ToList();
+                using (var connection = new SqlConnection(ConnectionOptions.ConnectionString))
+                {
+                    await connection.OpenAsync();
+                    var model = await connection.QueryAsync<TEntity>(query, commandType: CommandType.Text);
+                    return model.ToList();
+                }
             }
             catch (Exception e)
             {
@@ -78,6 +80,7 @@ namespace Infrastructure.Repositories
                 throw;
             }
         }
+
         public async Task<TEntity> ExecuteSP(string sp)
         {
 

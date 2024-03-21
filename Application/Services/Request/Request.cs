@@ -32,7 +32,7 @@ namespace Application.Services.Request
             RequestDetail request = new();
             request = result!.Adapt<RequestDetail>();
             var relations = await _dapper.
-                GetRelations("Dy.RequestEntityServiceEntity", "ServiceId", "RequestsId", id);
+                GetRelations("Dbo.RequestEntityServiceEntity", "ServiceId", "RequestsId", id);
             List<ItemViewModel> items = new List<ItemViewModel>();
             foreach (var rel in relations)
             {

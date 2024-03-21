@@ -316,73 +316,84 @@
                 top: 0;
             }
 
-        Run Pen
-
-        Resources
+      
     </style>
 }
 @await Component.InvokeAsync("HeaderComponent","Projects")
 
 
 
-<div class="projcard-container">
+<div class="container" >
+    
+    <div class="alert alert-primary mt-5 w-50">You can have a list of projects in pdf file format<a onclick="GeneratePdf()"  class="btn ml-5 btn-primary text-white">Generate PDF</a></div>
+    
 
-   @foreach (var item in Model.List!)
-   {
-        <a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">
+    <div class="row mb-3">
+        @foreach (var item in Model.List!)
+        {
 
-     
-       <div class="projcard projcard-blue">
-           <div class="projcard-innerbox">
-               <img class="projcard-img" src="~/Project/@item.ProjectImage" />
-               <div class="projcard-textbox">
-                   <div class="projcard-title">@item.ProjectName</div>
-                    <div class="projcard-subtitle">@item.Architect</div>
-                   <div class="projcard-bar"></div>
-                   <div class="projcard-description">@Html.Raw(item.Description.Substring(0, Math.Min(200, item.Description.Length)))</div>
+            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-12  md-m-25px-b mt-3">
+                <div class="services-item">
+                    <a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">
+                        <div class="img">
+                            <img src="~/Project/@item.ProjectImage" title="@item.ProjectName" alt="@item.ProjectName ">
+                        </div>
+                    </a>
+                    <div class="services-content"> <span class="projcard-tag">@item.Location</span>
+                        <br/>
+                        <h4 class="mt-3"><a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">@item.ProjectName</a></h4>
+                        <p> @Html.Raw(item.Description.Substring(0, Math.Min(200, item.Description.Length)))</p>
+                        <hr/>
+                        <a class="m-btn  text-white"
+                           style="background-color: #ff5722 !important"
+                           asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">View more</a>
 
-                   <div class="projcard-tagbox">
-                       <span class="projcard-tag">@item.Location</span>
-                    
-                   </div>
-               </div>
-           </div>
+                        <a class="m-btn  text-white"
+                           id="@item.Id" data-pdf="false" onclick="PdfAppend('@item.Id')"
+
+                           style="background-color: red !important"><i class="fas fa-print"></i></a>
+                    </div>
+                </div>
             </div>
-        </a>
-   }
-   
 
-   <nav aria-label="...">
-       <ul class="pagination">
-         
-           @if (Model.Count > 1 && Model.Pagination)
-           {
 
-               <li class="page-item">
-                   <a class="page-link" class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="1" aria-label="Previous">
-                       <span aria-hidden="true">&laquo;</span>
-                       <span class="sr-only">Previous</span>
-                   </a>
-               </li>
-       
-               @for (int i = 1; i <= Model.Count; i++)
-               {
-           
-                   <li class="page-item ac @(Model.CurrentPage == i ? "active" : "") tive">
-                       <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@i">@i <span class="sr-only">(current)</span></a>
-                   </li>
-               }
 
-               <li class="page-item">
-                   <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@Model.Count" aria-label="Next">
-                       <span aria-hidden="true">&raquo;</span>
-                       <span class="sr-only">Next</span>
-                   </a>
-               </li>
 
-       
-           }
-       </ul>
-   </nav>
+
+        }
+
+    </div>
+    <nav aria-label="...">
+        <ul class="pagination">
+
+            @if (Model.Count > 1 && Model.Pagination)
+            {
+
+                <li class="page-item">
+                    <a class="page-link" class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= Model.Count; i++)
+                {
+
+                    <li class="page-item ac @(Model.CurrentPage == i ? "active" : "") tive">
+                        <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@i">@i <span class="sr-only">(current)</span></a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@Model.Count" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+
+
+            }
+        </ul>
+    </nav>
 
 </div>

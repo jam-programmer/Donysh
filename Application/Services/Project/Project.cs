@@ -31,7 +31,7 @@ namespace Application.Services.Project
             await _repository.Insert(project);
             if (model.Services != null)
             {
-                await _dapper.InsertWithOutColumn("Dy.ProjectEntityServiceEntity", project.Id, model.Services!);
+                await _dapper.InsertWithOutColumn("Dbo.ProjectEntityServiceEntity", project.Id, model.Services!);
             }
 
         }
@@ -70,7 +70,7 @@ namespace Application.Services.Project
         {
             var model = await _repository.GetByIdAsync(id);
             UpdateProjectDto project = model!.Adapt<UpdateProjectDto>(ProjectMapster.MapProjectToUpdateProjectDto());
-            project.Services = await _dapper.GetRelations("[Dy].[ProjectEntityServiceEntity]", "ServiceId", "ProjectsId", id);
+            project.Services = await _dapper.GetRelations("[dbo].[ProjectEntityServiceEntity]", "ServiceId", "ProjectsId", id);
             return project;
         }
 
@@ -139,7 +139,7 @@ namespace Application.Services.Project
             var model = await _repository.GetDeletedByIdAsync(id);
             try
             {
-                await _dapper.DeleteAsync("[Dy].[ProjectEntityServiceEntity]", "ProjectsId", model!.Id!);
+                await _dapper.DeleteAsync("[dbo].[ProjectEntityServiceEntity]", "ProjectsId", model!.Id!);
                 FileProcessing.RemoveFile(model!.ProjectImage!, "Project");
                 await _repository.Delete(model!);
                 return true;
@@ -205,8 +205,8 @@ namespace Application.Services.Project
 
             if (model.Services != null)
             {
-                await _dapper.DeleteAsync("[Dy].[ProjectEntityServiceEntity]", "ProjectsId", model.Id!);
-                await _dapper.InsertWithOutColumn("[Dy].[ProjectEntityServiceEntity]", project.Id, model.Services!);
+                await _dapper.DeleteAsync("[dbo].[ProjectEntityServiceEntity]", "ProjectsId", model.Id!);
+                await _dapper.InsertWithOutColumn("[dbo].[ProjectEntityServiceEntity]", project.Id, model.Services!);
             }
 
             await _repository.Update(project);

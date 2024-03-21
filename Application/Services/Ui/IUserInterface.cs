@@ -1,4 +1,5 @@
-﻿using Application.ViewModels.Main;
+﻿using Application.DataTransferObjects.Project;
+using Application.ViewModels.Main;
 using Application.ViewModels.Ui.General;
 using Application.ViewModels.Ui.Home;
 using Application.ViewModels.Ui.Project;
@@ -26,5 +27,7 @@ namespace Application.Services.Ui
         Task<bool> AddRequest(RequestInfo request);
         Task<AboutPage> GetAboutPage();
         Task<bool> AddContactRequest(RequestContact request);
+        Task<List<ItemViewModel>> GetServices();
+        Task<PdfOptions> ProjectsPdfOption(List<Export> projectIds);
     }
 }

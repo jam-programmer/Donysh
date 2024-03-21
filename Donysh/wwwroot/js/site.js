@@ -111,26 +111,26 @@ async function Request() {
                     showConfirmButton: false,
                     timer: 1500
                 });
-              
+
 
 
 
             } else {
-               
 
-                    
-                    Swal.fire({
-                        position: "center",
-                        icon: "warning",
-                        title: "The request was not registered",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+
+
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "The request was not registered",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
 
         })
         .catch(error => {
-           
+
 
 
             Swal.fire({
@@ -181,17 +181,17 @@ async function ContactRequest() {
 
 
     fetch('/Home/ContactRequest', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(request)
-        })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(request)
+    })
         .then(response => response.json())
         .then(data => {
 
             if (data) {
-                
+
                 document.getElementById("name").value = "";
                 document.getElementById("subject").value = "";
                 document.getElementById("email").value = "";
@@ -242,7 +242,7 @@ async function ContactRequest() {
 
 
 
- function SendFeedback() {
+function SendFeedback() {
 
     var fullName = document.getElementById("fullName");
     var companyName = document.getElementById("companyName");
@@ -251,7 +251,7 @@ async function ContactRequest() {
     var file = document.getElementById("file");
 
 
-    if (fullName.value === "" || companyName.value === "" || email.value === "" ) {
+    if (fullName.value === "" || companyName.value === "" || email.value === "") {
         Swal.fire({
             position: "center",
             icon: "warning",
@@ -292,16 +292,16 @@ async function ContactRequest() {
 
         fetch('/RequestFeedback', {
 
-                method: 'POST',
-                body: formData,
-                
+            method: 'POST',
+            body: formData,
 
-             
-                headers: {
-                    'enctype': 'multipart/form-data'
-                }
-              
-            })
+
+
+            headers: {
+                'enctype': 'multipart/form-data'
+            }
+
+        })
             .then(response => response.json())
             .then(data => {
 
@@ -316,19 +316,19 @@ async function ContactRequest() {
                     });
                     $('#exampleModalCenter').modal('hide');
 
-                   
 
-                     fullName.value = "";
-                    companyName.value = ""; 
-                    email.value = ""; 
+
+                    fullName.value = "";
+                    companyName.value = "";
+                    email.value = "";
                     description.value = "";
                     file.value = "";
 
-                } 
+                }
 
             })
             .catch(error => {
-                
+
                 Swal.fire({
                     position: "center",
                     icon: "Error",
@@ -340,5 +340,138 @@ async function ContactRequest() {
     } catch (error) {
         console.log('error', 'خطا: ' + error);
     }
- }
+}
 
+
+function PdfAppend(id) {
+
+    var pdfList = getCache("PdfCache");
+    var list = [];
+    var project = document.getElementById(id);
+    var value = project.getAttribute('data-pdf');
+    if (value === "false") {
+        project.setAttribute('data-pdf', 'true');
+        project.style.backgroundColor = "green";
+
+
+        if (pdfList) {
+            ClearCache("PdfCache");
+            var obg1= {
+                id:id
+            }
+            pdfList.push(obg1);
+            setCache("PdfCache", pdfList);
+            return;
+        } else {
+            var obg2 = {
+                id: id
+            }
+            list.push(obg2);
+            setCache("PdfCache", list); return;
+        }
+
+
+    } else {
+        project.setAttribute('data-pdf', 'false');
+        project.style.backgroundColor = "red";
+
+        if (pdfList) {
+            {
+
+              let index = pdfList.findIndex(item => item.id === id);  
+              
+                if (index > -1) {
+                    pdfList.splice(index, 1); ClearCache("PdfCache");
+                    setCache("PdfCache", pdfList);
+                } return;
+            }
+        }
+    }
+}
+
+function GeneratePdf() {
+    var pdfList = getCache("PdfCache");
+    if (pdfList && pdfList.length>0) {
+        try {
+
+            fetch('/ExportSelectedProjects', {
+                    method: 'POST',
+                body: JSON.stringify(pdfList),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(new Blob([blob]));
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'DonyshProjects.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                });
+            ClearCache("PdfCache");
+        } catch (error) {
+            console.log('error', 'خطا: ' + error);
+        }
+    }
+
+
+    if (!pdfList || pdfList.length === 0) {
+
+
+
+        Swal.fire({
+            title: "No project selected!",
+            text: "Please select one or more projects",
+            imageUrl: "/img/select.png",
+            imageWidth: 400,
+            imageHeight: 100,
+            imageAlt: "Select image"
+        });
+    }
+}
+
+// Function to set a value in cache
+function setCache(key, value) {
+    localStorage.setItem(key, JSON.stringify({ value: value, expiration: Date.now() + 15 * 60 * 1000 })); // Cache for 3 minutes
+}
+
+// Function to get a value from cache
+function getCache(key) {
+    let cachedData = localStorage.getItem(key);
+
+    if (cachedData) {
+        let parsedData = JSON.parse(cachedData);
+        if (parsedData.expiration > Date.now()) {
+            return parsedData.value;
+        } else {
+            localStorage.removeItem(key);
+            return null;
+        }
+    } else {
+        return null;
+    }
+}
+
+function ClearCache(key) {
+    localStorage.removeItem(key);
+}
+document.addEventListener('DOMContentLoaded', function () {
+    ClearCache("PdfCache");
+});
+
+
+function ShowImage(name,text,image) {
+
+    Swal.fire({
+        title:name,
+        text: text,
+        imageUrl: "/Feedback/"+image+"",
+        imageWidth: 400,
+     
+        imageAlt: "Select image"
+    });
+}

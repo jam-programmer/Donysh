@@ -8,6 +8,8 @@ namespace Application.ViewModels.Ui.Home
 {
     public class ProjectBox
     {
+        public string? Location { set; get; }
+        public string? Description { set; get; }
         public string?ServiceId { set; get; }
         public string?ServiceTitle { set; get; }
         public string? Id { set; get; }

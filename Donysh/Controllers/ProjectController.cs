@@ -1,4 +1,5 @@
-﻿using Application.Services.Ui;
+﻿using Application.DataTransferObjects.Project;
+using Application.Services.Ui;
 using iText;
 using iText.Html2pdf;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +41,20 @@ namespace Donysh.Controllers
 
             return File(Path.Combine("PDF", options.File!), "application/pdf", options.File!);
         }
+        [HttpPost]
+        [Route("/ExportSelectedProjects")]
+        public async Task<IActionResult> ExportProject([FromBody] List<Export> request)
+        {
+            var options = await _userInterface.ProjectsPdfOption(request);
+            using (var writer = new FileStream(options.FilePath!, FileMode.Create))
+            {
+                ConverterProperties properties = new ConverterProperties();
+                HtmlConverter.ConvertToPdf(options.Content, writer, properties);
+            }
 
-    
+            return File(Path.Combine("PDF", options.File!), "application/pdf", options.File!);
+        }
+
+
     }
 }

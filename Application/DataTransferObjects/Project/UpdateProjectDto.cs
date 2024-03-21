@@ -18,8 +18,8 @@ namespace Application.DataTransferObjects.Project
         public string? OwnerOrDeveloper { set; get; }
         public string? Architect { set; get; }
         public string? Builder { set; get; }
-        public DateTime StartDate { set; get; }
-        public DateTime CompletionDate { set; get; }
+        public string? StartDate { set; get; }
+        public string? CompletionDate { set; get; }
         public string? ContractAmount { set; get; }
         public string? ReferenceContactName { set; get; }
         public string? ReferenceContactEmail { set; get; }

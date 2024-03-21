@@ -32,7 +32,7 @@ namespace Infrastructure.Context
         {
 
             RegisterMapping.AddMapping(builder);
-            builder.HasDefaultSchema("Dy");
+            builder.HasDefaultSchema("dbo");
             base.OnModelCreating(builder);
         }
     }

@@ -1,4 +1,5 @@
-﻿using Application.DataTransferObjects.Picture;
+﻿using Application.DataTransferObjects.Feedback;
+using Application.DataTransferObjects.Picture;
 using Application.DataTransferObjects.Picture.PictureValidator;
 using Application.DataTransferObjects.Project;
 using Application.DataTransferObjects.Project.ProjectValidator;
@@ -6,11 +7,14 @@ using Application.Services.Project;
 using Application.Services.ScopeWork;
 using Application.Services.Service;
 using Application.Services.Status;
+using Application.Services.Ui;
 using Donysh.Tools;
 using FluentValidation;
+using iText.Html2pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace Donysh.Areas.Admin.Controllers
@@ -24,15 +28,18 @@ namespace Donysh.Areas.Admin.Controllers
         private readonly IService _service;
         private readonly IScopeWork _scopeWork;
         private readonly IStatus _status;
+        private readonly IUserInterface _userInterface;
 
-        public ProjectController(IProject project, Generator generator, IService service, IScopeWork scopeWork, IStatus status)
+        public ProjectController(IProject project, Generator generator, IService service, IScopeWork scopeWork, IStatus status, IUserInterface userInterface)
         {
             _project = project;
             _generator = generator;
             _service = service;
             _scopeWork = scopeWork;
             _status = status;
+            _userInterface = userInterface;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10, 
             string search = "",string? status=null)
@@ -216,6 +223,22 @@ namespace Donysh.Areas.Admin.Controllers
             ViewBag.Status = new SelectList(await _status.GetStatusesItemAsync(), "Id", "Title", status);
             ViewBag.Scope = new SelectList(await _scopeWork.GetScopsItemAsync(), "Id", "Title", scope);
         }
+
+
+        [HttpPost]
+        [Route("/ExportProject")]
+        public async Task<IActionResult> ExportProject([FromBody] List<Export> request)
+        {
+            var options = await _userInterface.ProjectsPdfOption(request);
+            using (var writer = new FileStream(options.FilePath!, FileMode.Create))
+            {
+                ConverterProperties properties = new ConverterProperties();
+                HtmlConverter.ConvertToPdf(options.Content, writer, properties);
+            }
+
+            return File(Path.Combine("PDF", options.File!), "application/pdf", options.File!);
+        }
+
         #endregion
 
     }
