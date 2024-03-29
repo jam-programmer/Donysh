@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
 using Application.Services.Setting;
 using Mapster;
 using Application.ViewModels.Ui.Home;
@@ -15,18 +12,22 @@ using Application.ViewModels.Ui.Service;
 using Microsoft.EntityFrameworkCore;
 using Application.ViewModels.Ui.General;
 using Application.ViewModels.Main;
-using Application.ConfigMapster.CompanyMap;
-using Application.ViewModels.Company;
-using System.Drawing.Printing;
 using Application.Core;
 using Application.Services.Sender;
 using Application.ViewModels.Sender;
-using Application.DataTransferObjects.Project;
+using Donysh.Models;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace Application.Services.Ui
 {
     public class UserInterface : IUserInterface
     {
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
         private readonly ISetting _setting;
         private readonly IDapper<ProjectServices> _dapperService;
         private readonly IRepository<ServiceEntity> _service;
@@ -40,9 +41,11 @@ namespace Application.Services.Ui
         private readonly IRepository<AboutEntity> _about;
         private readonly IRepository<ContactEntity> _contactRepository;
         private readonly ISender _sender;
-
-        public UserInterface(ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender)
+        private readonly IHttpContextAccessor _accessor;
+        public UserInterface(IHttpContextAccessor accessor, IWebHostEnvironment environment, ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender)
         {
+            _hostingEnvironment = environment;
+            _accessor = accessor;
             _setting = setting;
             _dapperService = dapperService;
             _service = service;
@@ -123,18 +126,71 @@ namespace Application.Services.Ui
             return homeInformationSection;
         }
 
-        public async Task<HeaderPage> GetHeaderPage()
+        public async Task<HeaderPage> GetHeaderPage(string titlePage)
         {
             var setting = await _setting.GetSetting();
             HeaderPage page = setting.Adapt<HeaderPage>();
+            switch (titlePage)
+            {
+                case "About":
+                    page.BannerPageHeader = setting.AboutBanner == "default.jpg" ? setting.BannerPageHeader : setting.AboutBanner;
+
+                    break;
+                case "Contat Us":
+                    page.BannerPageHeader = setting.ContactBanner == "default.jpg" ? setting.BannerPageHeader : setting.ContactBanner;
+                    break;
+
+                case "REQUEST A QUOTE":
+                    page.BannerPageHeader = setting.RequestBanner == "default.jpg" ? setting.BannerPageHeader : setting.RequestBanner;
+                    break;
+                case "Working With":
+                    page.BannerPageHeader = setting.WorkWithBanner == "default.jpg" ? setting.BannerPageHeader : setting.WorkWithBanner;
+                    break;
+                case "Projects":
+                    page.BannerPageHeader = setting.ProjectBanner == "default.jpg" ? setting.BannerPageHeader : setting.ProjectBanner;
+                    break;
+                case "Project Detail":
+                    page.BannerPageHeader = setting.ProjectBanner == "default.jpg" ? setting.BannerPageHeader : setting.ProjectBanner;
+                    break;
+                case "Categories":
+                    page.BannerPageHeader = setting.CategoryBanner == "default.jpg" ? setting.BannerPageHeader : setting.CategoryBanner;
+                    break;
+                case "Category Detail":
+                    page.BannerPageHeader = setting.CategoryBanner == "default.jpg" ? setting.BannerPageHeader : setting.CategoryBanner;
+                    break;
+                default:
+                    page.BannerPageHeader = setting.BannerPageHeader;
+                    break;
+            }
             return page;
         }
 
         public async Task<ProjectDetail> GetProjectById(string id)
         {
             ProjectDetail detail = new();
-            var project = await _projectRepository.GetByIdAsync(id);
+            var projectQuery = await _projectRepository.GetByQuery();
+
+           
+
+            var project = await projectQuery.Include(i => i.Status)
+                .Include(i => i.ScopeWork).SingleOrDefaultAsync(s => s.Id == id);
+
             detail = project!.Adapt<ProjectDetail>();
+
+            if (project!.Status!=null)
+            {
+                detail.Status = project.Status.Status;
+            }
+
+            if (project!.ScopeWork != null)
+            {
+                detail.Scope = project.ScopeWork.Title;
+            }
+
+
+
+          
+
             var services = await _dapperService.ExecuteQuery(
                 $"select s.Id,s.Title from dbo.ProjectEntityServiceEntity as ps with(nolock)\r\nInner Join dbo.[Service] as s with(nolock) On ps.ServiceId=s.Id\r\nwhere ps.ProjectsId='{id}'");
             detail.Services = services;
@@ -157,96 +213,7 @@ namespace Application.Services.Ui
 
         public async Task<PdfOptions> ProjectPdfOption(string projectId)
         {
-            var data = await GetProjectById(projectId);
-
-            string htmlCode = $@"
-<html lang=""en"">
-<head>
-    <meta charset=""UTF-8"">
-    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-    <title>Document</title>
-</head>
-
-<body>
-    <div style=""padding: 10px;"">
-        <h1 style=""background-color: goldenrod;
-        padding: 5px;"">{data.ProjectName}</h1>
-        <hr />
-        <h3>Detail:</h3>
-        <dl>
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">General Contractor/Builder/Construction Manager:</dt>
-            <dd style=""color: red;
-        font-family: bold;
-        font-size: 20px;"">{data.Builder}</dd>
-
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">Architect:</dt>
-            <dd  style=""color: red;
-        font-family: bold;
-        font-size: 20px;"">{data.Architect}</dd>
-
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">Contract Amount:</dt>
-            <dd  style=""color: red;
-        font-family: bold;
-        font-size: 20px;"">{data.ContractAmount}</dd>
-
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">Owner/Developer:</dt>
-            <dd>{data.Builder}</dd>
-
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">Location:</dt>
-            <dd  style=""color: red;
-        font-family: bold;
-        font-size: 20px;"">{data.Location}</dd>
-
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">Status:</dt>
-            <dd  style=""color: red;
-        font-family: bold;
-        font-size: 20px;"">{data.Status}</dd>
-
-            <dt style="" color: darkblue;
-        font-family: bold;
-        font-size: 18px;"">Scope:</dt>
-            <dd  style=""color: red;
-        font-family: bold;
-        font-size: 20px;"">{data.Scope}</dd>
-        </dl>
-        <ul>
-            <li>Name:<strong>{data.ReferenceContactName}</strong></li>
-            <li>Email:<strong>{data.ReferenceContactEmail}</strong></li>
-            <li>Phone Number:<strong>{data.ReferenceContactPhone}</strong></li>
-            <li>Address:<strong>{data.ReferenceContactAddress}</strong></li>
-        </ul>
-        <br><h3>Service:</h3>";
-
-            if (data.Services != null)
-            {
-                foreach (var item in data.Services!)
-                {
-                    htmlCode += $@"<span style="" border: 1px solid black;padding: 5px;margin: 5px;"">{item.Title}</span>";
-                }
-            }
-
-
-            htmlCode += $@"<br/><h3>Description:</h3>{data.Description}";
-            if (data.Pictures != null)
-            {
-                foreach (var item in data.Pictures!)
-                {
-                    htmlCode += $@" <img style=""width: 250;height: 150;"" src=""{data.ProjectImage}"" />";
-                }
-            }
-            htmlCode += @"</div></body></html> ";
+           
 
             var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "PDF");
             if (!Directory.Exists(fileDirectory))
@@ -255,7 +222,158 @@ namespace Application.Services.Ui
             }
             var fileName = $"{Guid.NewGuid().ToString()}-file.pdf";
             PdfOptions options = new();
-            options.Content = htmlCode;
+           
+            try
+            {
+                StringBuilder htmlCodeBuilder = new StringBuilder();
+
+                htmlCodeBuilder.Append(@"
+    <html lang=""en"">
+    <head>
+        <meta charset=""UTF-8"">
+        <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+        <title>Project List</title>
+    </head>
+    <body>
+        <div style=""padding: 10px;"">
+            <h1 style=""background-color: goldenrod; padding: 5px;"">Project information </h1>
+            ");
+
+                    var data = await GetProjectById(projectId);
+                    string itemProject = string.Empty;
+                    itemProject = "<hr />";
+
+                   
+
+                        var webRootPath = _hostingEnvironment.WebRootPath;
+                        var filePath = webRootPath + "/Project/" + data.ProjectImage!;
+                        string base64String = string.Empty;
+                        if (File.Exists(filePath))
+                        {
+                            byte[] fileBytes = await File.ReadAllBytesAsync(filePath);
+                            base64String = Convert.ToBase64String(fileBytes);
+                        }
+
+                        itemProject += $" <img src=\"data:image/jpeg;base64, {base64String}\" style=\"width:200px;height:auto;\" >\r\n";
+                    
+
+
+                    itemProject += $"<h2>{data.ProjectName}</h2>";
+                    itemProject += "<dl>";
+                    if (data.IsBuilder && !string.IsNullOrEmpty(data.Builder))
+                    {
+                        itemProject += $"<dt>General Contractor/Builder/Construction Manager:</dt><dd>{data.Builder}</dd>";
+                    }
+
+                    if (data.IsArchitect && !string.IsNullOrEmpty(data.Architect))
+                    {
+                        itemProject += $"<dt>Architect:</dt><dd>{data.Architect}</dd>";
+                    }
+
+                    if (data.IsContractAmount && !string.IsNullOrEmpty(data.ContractAmount))
+                    {
+                        itemProject += $" <dt>Contract Amount:</dt><dd>{data.ContractAmount}</dd>";
+                    }
+
+                    if (data.IsOwnerOrDeveloper && !string.IsNullOrEmpty(data.OwnerOrDeveloper))
+                    {
+                        itemProject += $"<dt>Owner/Developer:</dt> <dd>{data.OwnerOrDeveloper}</dd>";
+                    }
+                    if (data.IsLocation && !string.IsNullOrEmpty(data.Location))
+                    {
+                        itemProject += $"<dt>Location:</dt><dd>{data.Location}</dd>";
+                    }
+                    if (data.IsStatusForeignKey && !string.IsNullOrEmpty(data.Status))
+                    {
+                        itemProject += $"<dt>Status:</dt><dd>{data.Status}</dd>";
+                    }
+
+                    if (data.IsScopeForeignKey && !string.IsNullOrEmpty(data.Scope))
+                    {
+                        itemProject += $"<dt>Scope:</dt><dd>{data.Scope}</dd>";
+                    }
+
+                    itemProject += "</dl><ul>";
+
+                    if (data.IsScopeForeignKey && !string.IsNullOrEmpty(data.Scope))
+                    {
+                        itemProject += $"<dt>Scope:</dt><dd>{data.Scope}</dd>";
+                    }
+
+                    if (data.IsReferenceContactName && !string.IsNullOrEmpty(data.ReferenceContactName))
+                    {
+                        itemProject += $"<li> Name: < strong >{data.ReferenceContactName}</ strong ></ li >";
+                    }
+
+                    if (data.IsReferenceContactEmail && !string.IsNullOrEmpty(data.ReferenceContactEmail))
+                    {
+                        itemProject += $"<li> Email: < strong >{data.ReferenceContactEmail}</ strong ></ li >";
+                    }
+
+                    if (data.IsReferenceContactPhone && !string.IsNullOrEmpty(data.ReferenceContactPhone))
+                    {
+                        itemProject += $"<li> Phone Number: < strong >{data.ReferenceContactPhone}</ strong ></ li >";
+                    }
+
+                    if (data.IsReferenceContactAddress && !string.IsNullOrEmpty(data.ReferenceContactAddress))
+                    {
+                        itemProject += $"<li> Address: < strong >{data.ReferenceContactAddress}</ strong ></ li >";
+                    }
+
+
+                    itemProject += "</ul>";
+
+
+
+
+
+
+
+
+
+
+
+                    htmlCodeBuilder.Append(itemProject);
+
+
+
+
+                    if (data.Services != null && data.Services.Any())
+                    {
+                        htmlCodeBuilder.Append($@"  <h3>Service:</h3>");
+                        foreach (var item in data.Services)
+                        {
+                            htmlCodeBuilder.Append($@"<span style=""border: 1px solid black; padding: 5px; margin: 5px;"">{item.Title}</span>");
+                        }
+                    }
+
+                    if (data.IsDescription && !string.IsNullOrEmpty(data.Description))
+                    {
+                        string description = $"<br/><h3>Description:</h3>{data.Description}";
+                        htmlCodeBuilder.Append(description);
+                    }
+
+
+
+                    //if (data.Pictures != null)
+                    //{
+                    //    foreach (var item in data.Pictures)
+                    //    {
+                    //        htmlCodeBuilder.Append($@"<img style=""width: 250px; height: 150px;"" src=""{item}"" />");
+                    //    }
+                    //}
+                
+
+                htmlCodeBuilder.Append(@"</div></body></html>");
+                options.Content = htmlCodeBuilder.ToString();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
             options.File = fileName;
             options.FilePath = fileDirectory = Path.Combine(fileDirectory, fileName!);
             return options;
@@ -384,7 +502,7 @@ namespace Application.Services.Ui
             return items;
         }
 
-        public async Task<PdfOptions> ProjectsPdfOption(List<Export> projectIds)
+        public async Task<PdfOptions> ProjectsPdfOption(ExportRequest request)
         {
             var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "PDF");
             if (!Directory.Exists(fileDirectory))
@@ -411,61 +529,134 @@ namespace Application.Services.Ui
     <body>
         <div style=""padding: 10px;"">
             <h1 style=""background-color: goldenrod; padding: 5px;"">Project List</h1>
-            <hr />");
+            ");
 
-                foreach (var projectId in projectIds)
+                foreach (var projectId in request.request)
                 {
                     var data = await GetProjectById(projectId.Id);
+                    string itemProject = string.Empty;
+                    itemProject = "<hr />";
 
-                    htmlCodeBuilder.Append($@"
-            <h2>{data.ProjectName}</h2>
-            <dl>
-                <dt>General Contractor/Builder/Construction Manager:</dt>
-                <dd>{data.Builder}</dd>
-
-                <dt>Architect:</dt>
-                <dd>{data.Architect}</dd>
-
-                <dt>Contract Amount:</dt>
-                <dd>{data.ContractAmount}</dd>
-
-                <dt>Owner/Developer:</dt>
-                <dd>{data.Builder}</dd>
-
-                <dt>Location:</dt>
-                <dd>{data.Location}</dd>
-
-                <dt>Status:</dt>
-                <dd>{data.Status}</dd>
-
-                <dt>Scope:</dt>
-                <dd>{data.Scope}</dd>
-            </dl>
-            <ul>
-                <li>Name: <strong>{data.ReferenceContactName}</strong></li>
-                <li>Email: <strong>{data.ReferenceContactEmail}</strong></li>
-                <li>Phone Number: <strong>{data.ReferenceContactPhone}</strong></li>
-                <li>Address: <strong>{data.ReferenceContactAddress}</strong></li>
-            </ul>
-            <h3>Service:</h3>");
-
-                    if (data.Services != null)
+                    if (request.Image == 1)
                     {
+
+                        var webRootPath = _hostingEnvironment.WebRootPath;
+                        var filePath = webRootPath + "/Project/" + data.ProjectImage!;
+                        string base64String = string.Empty;
+                        if (File.Exists(filePath))
+                        {
+                            byte[] fileBytes = await File.ReadAllBytesAsync(filePath);
+                            base64String = Convert.ToBase64String(fileBytes);
+                        }
+
+                        itemProject += $" <img src=\"data:image/jpeg;base64, {base64String}\" style=\"width:200px;height:auto;\" >\r\n";
+                    }
+
+
+                    itemProject += $"<h2>{data.ProjectName}</h2>";
+                    itemProject += "<dl>";
+                    if (data.IsBuilder && !string.IsNullOrEmpty(data.Builder))
+                    {
+                        itemProject += $"<dt>General Contractor/Builder/Construction Manager:</dt><dd>{data.Builder}</dd>";
+                    }
+
+                    if (data.IsArchitect && !string.IsNullOrEmpty(data.Architect))
+                    {
+                        itemProject += $"<dt>Architect:</dt><dd>{data.Architect}</dd>";
+                    }
+
+                    if (data.IsContractAmount && !string.IsNullOrEmpty(data.ContractAmount))
+                    {
+                        itemProject += $" <dt>Contract Amount:</dt><dd>{data.ContractAmount}</dd>";
+                    }
+
+                    if (data.IsOwnerOrDeveloper && !string.IsNullOrEmpty(data.OwnerOrDeveloper))
+                    {
+                        itemProject += $"<dt>Owner/Developer:</dt> <dd>{data.OwnerOrDeveloper}</dd>";
+                    }
+                    if (data.IsLocation && !string.IsNullOrEmpty(data.Location))
+                    {
+                        itemProject += $"<dt>Location:</dt><dd>{data.Location}</dd>";
+                    }
+                    if (data.IsStatusForeignKey && !string.IsNullOrEmpty(data.Status))
+                    {
+                        itemProject += $"<dt>Status:</dt><dd>{data.Status}</dd>";
+                    }
+
+                    if (data.IsScopeForeignKey && !string.IsNullOrEmpty(data.Scope))
+                    {
+                        itemProject += $"<dt>Scope:</dt><dd>{data.Scope}</dd>";
+                    }
+
+                    itemProject += "</dl><ul>";
+
+                    if (data.IsScopeForeignKey && !string.IsNullOrEmpty(data.Scope))
+                    {
+                        itemProject += $"<dt>Scope:</dt><dd>{data.Scope}</dd>";
+                    }
+
+                    if (data.IsReferenceContactName && !string.IsNullOrEmpty(data.ReferenceContactName))
+                    {
+                        itemProject += $"<li> Name: < strong >{data.ReferenceContactName}</ strong ></ li >";
+                    }
+
+                    if (data.IsReferenceContactEmail && !string.IsNullOrEmpty(data.ReferenceContactEmail))
+                    {
+                        itemProject += $"<li> Email: < strong >{data.ReferenceContactEmail}</ strong ></ li >";
+                    }
+
+                    if (data.IsReferenceContactPhone && !string.IsNullOrEmpty(data.ReferenceContactPhone))
+                    {
+                        itemProject += $"<li> Phone Number: < strong >{data.ReferenceContactPhone}</ strong ></ li >";
+                    }
+
+                    if (data.IsReferenceContactAddress && !string.IsNullOrEmpty(data.ReferenceContactAddress))
+                    {
+                        itemProject += $"<li> Address: < strong >{data.ReferenceContactAddress}</ strong ></ li >";
+                    }
+
+
+                    itemProject += "</ul>";
+
+
+
+
+
+
+
+
+
+
+
+                    htmlCodeBuilder.Append(itemProject);
+
+
+                   
+
+                    if (data.Services != null && data.Services.Any())
+                    {
+                        htmlCodeBuilder.Append($@"  <h3>Service:</h3>");
                         foreach (var item in data.Services)
                         {
                             htmlCodeBuilder.Append($@"<span style=""border: 1px solid black; padding: 5px; margin: 5px;"">{item.Title}</span>");
                         }
                     }
 
-                    htmlCodeBuilder.Append($@"<br/><h3>Description:</h3>{data.Description}");
-
-                    if (data.Pictures != null)
+                    if (data.IsDescription && !string.IsNullOrEmpty(data.Description))
                     {
-                        foreach (var item in data.Pictures)
-                        {
-                            htmlCodeBuilder.Append($@"<img style=""width: 250px; height: 150px;"" src=""{item}"" />");
-                        }
+                        string description = $"<br/><h3>Description:</h3>{data.Description}";
+                        htmlCodeBuilder.Append(description);
                     }
+
+                   
+
+                    //if (data.Pictures != null)
+                    //{
+                    //    foreach (var item in data.Pictures)
+                    //    {
+                    //        htmlCodeBuilder.Append($@"<img style=""width: 250px; height: 150px;"" src=""{item}"" />");
+                    //    }
+                    //}
                 }
 
                 htmlCodeBuilder.Append(@"</div></body></html>");
@@ -477,7 +668,7 @@ namespace Application.Services.Ui
                 throw;
             }
 
-         
+
             return options;
         }
 

@@ -9,6 +9,7 @@ namespace Domain.Entities
 {
     public class PageEntity:BaseEntity
     {
+        public string Banner { set; get; }
         public string Title { set; get; }
         public string Body { set; get; }
         public TabLocation Location { set; get; }

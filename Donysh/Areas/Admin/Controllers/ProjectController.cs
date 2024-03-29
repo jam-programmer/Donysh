@@ -8,6 +8,7 @@ using Application.Services.ScopeWork;
 using Application.Services.Service;
 using Application.Services.Status;
 using Application.Services.Ui;
+using Donysh.Models;
 using Donysh.Tools;
 using FluentValidation;
 using iText.Html2pdf;
@@ -229,7 +230,10 @@ namespace Donysh.Areas.Admin.Controllers
         [Route("/ExportProject")]
         public async Task<IActionResult> ExportProject([FromBody] List<Export> request)
         {
-            var options = await _userInterface.ProjectsPdfOption(request);
+            ExportRequest export = new();
+            export.request = request;
+            export.Image = 1;
+            var options = await _userInterface.ProjectsPdfOption(export);
             using (var writer = new FileStream(options.FilePath!, FileMode.Create))
             {
                 ConverterProperties properties = new ConverterProperties();

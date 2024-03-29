@@ -389,14 +389,19 @@ function PdfAppend(id) {
     }
 }
 
-function GeneratePdf() {
+function GeneratePdf(image) {
+    debugger;
     var pdfList = getCache("PdfCache");
     if (pdfList && pdfList.length>0) {
         try {
 
+            var model = {
+                request:  pdfList, Image: image
+            };
+
             fetch('/ExportSelectedProjects', {
                     method: 'POST',
-                body: JSON.stringify(pdfList),
+                body: JSON.stringify(model),
                     headers: {
                         'Content-Type': 'application/json'
                     }

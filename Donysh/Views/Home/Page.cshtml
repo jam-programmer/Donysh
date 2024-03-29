@@ -3,8 +3,18 @@
     ViewData["Title"] = $"{Model.Title}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@await Component.InvokeAsync("HeaderComponent",$"{Model.Title}");
-
+<section class="section page-title-section bg-center-center bg-cover"
+         style="background-image: url(/Page/@Model.Banner);">
+    <div class="container">
+        <div class="page-title text-center">
+            <h1>@Model.Title</h1>
+        </div>
+        <ol class="breadcrumb justify-content-center">
+            <li><a href="/">Home</a></li>
+            <li class="active">@Model.Title</li>
+        </ol>
+    </div>
+</section>
 <div class="container">
     <div class="row">
         @Html.Raw(Model.Body)

@@ -79,7 +79,6 @@ namespace Application.Services.Setting
             {
                 setting.Banner = FileProcessing.FileUpload(setting.BannerFile, setting.Banner, "Setting");
             }
-
             if (setting.LogoFile != null)
             {
                 setting.Logo = FileProcessing.FileUpload(setting.LogoFile, setting.Logo, "Setting");
@@ -87,12 +86,42 @@ namespace Application.Services.Setting
             if (setting.AboutImageFile != null)
             {
                 setting.AboutImage = FileProcessing.FileUpload(setting.AboutImageFile, setting.AboutImage, "Setting");
-            }  
+            }
             if (setting.BannerPageHeaderFile != null)
             {
                 setting.BannerPageHeader = FileProcessing.FileUpload(setting.BannerPageHeaderFile, setting.BannerPageHeader, "Setting");
             }
 
+
+            if (setting.FileCategoryBanner != null)
+            {
+                setting.CategoryBanner = FileProcessing.FileUpload(setting.FileCategoryBanner, setting.CategoryBanner, "Setting");
+            }
+
+            if (setting.FileWorkWithBanner != null)
+            {
+                setting.WorkWithBanner = FileProcessing.FileUpload(setting.FileWorkWithBanner, setting.WorkWithBanner, "Setting");
+            }
+
+            if (setting.FileRequestBanner != null)
+            {
+                setting.RequestBanner = FileProcessing.FileUpload(setting.FileRequestBanner, setting.RequestBanner, "Setting");
+            }
+
+            if (setting.FileContactBanner != null)
+            {
+                setting.ContactBanner = FileProcessing.FileUpload(setting.FileContactBanner, setting.ContactBanner, "Setting");
+            }
+            if (setting.FileProjectBanner != null)
+            {
+                setting.ProjectBanner = FileProcessing.FileUpload(setting.FileProjectBanner, setting.ProjectBanner, "Setting");
+            }
+
+            if (setting.FileAboutBanner != null)
+            {
+                setting.AboutBanner = FileProcessing.FileUpload(setting.FileAboutBanner, setting.AboutBanner, "Setting");
+            }
+            
             var findSetting = await _repository.FirstOrDefaultAsync();
             if (findSetting == null)
             {

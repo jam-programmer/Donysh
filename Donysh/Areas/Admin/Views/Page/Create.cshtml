@@ -25,13 +25,13 @@
 
     </div>
     <div id="input" class="p-5">
-        <form asp-area="Admin" asp-controller="Page" asp-action="Create"  method="post">
+        <form asp-area="Admin" asp-controller="Page" asp-action="Create" method="post" enctype="multipart/form-data">
             <div class="mb-5 grid grid-cols-12 gap-6">
                 <div class="intro-y col-span-12 lg:col-span-8">
                     <label for="NamePage" class="form-label mt-3">Page Title</label>
                     <input asp-for="Title" id="NamePage" placeholder="Name..." type="text" class="form-control">
                 </div>
-               
+
                 <div class="intro-y col-span-12 lg:col-span-4">
                     <div>
                         <label for="status" class="form-label mt-3">Location</label>
@@ -40,46 +40,55 @@
 
                         </select>
                     </div>
-                
-                
+
+
                 </div>
                 <div class="intro-y col-span-12 lg:col-span-12  mt-5 ">
-                   
-                    <div >
+
+                    <div>
                         <div class="mb-5">
                             <label class="form-label">Body</label>
                             <textarea asp-for="Body" id="content"></textarea>
                         </div>
                     </div>
                 </div>
+                <div class="fallback">
+                    <div class="w-60 h-20 sm:w-60 sm:h-24 flex-none lg:w-70 lg:h-32 image-fit relative">
+                       
+                            <img id="imagePath_3" src="~/img/default.jpg">
 
-            </div>      <button class=" btn btn-primary " type="submit">Submit</button>
+                    </div>
+                    <label for="image_3" class="form-label mt-5">Banner File</label><br />
+                    <input onchange="ChangeImage(this,3)" asp-for="BannerFile" type="file" id="image_3" class="mt-1" />
+                </div>
+            </div>    
+            <button class=" btn btn-primary " type="submit">Submit</button>
             <a asp-controller="Page" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
         </form>
     </div>
 </div>
 
-@section Script{
-    
+@section Script {
+
     <script src="~/lib/ckeditor5/ckeditor.js"></script>
-     
+
     <script>
         ClassicEditor.create(document.querySelector('#content'), {
-            ckfinder:{uploadUrl:'/CKUpload/'}
+            ckfinder: { uploadUrl: '/CKUpload/' }
         });
     </script>
-    
-    
-    
-    
+
+
+
+
 
     @*  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     @*   <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
     <script src="~/adminPanel/src/js/ckeditor.js"></script>
-    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script> 
+    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script>
     <script src="~/adminPanel/dist/js/ckeditor-document.js"></script>  *@
- @**   <script>
-      
+    @**   <script>
+
         CKEDITOR.replace('Body', {
             filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
             filebrowserUploadUrl: '/ckfinder/core/connector/dotnet/connector.aspx?command=QuickUpload&type=Files',

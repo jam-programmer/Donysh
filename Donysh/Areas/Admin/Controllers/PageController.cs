@@ -1,6 +1,7 @@
 ﻿using Application.DataTransferObjects.Page;
 using Application.DataTransferObjects.Page.PageValidator;
 using Application.Services.Page;
+using Donysh.Tools;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Donysh.Areas.Admin.Controllers
@@ -8,10 +9,12 @@ namespace Donysh.Areas.Admin.Controllers
     [Area("Admin")]
     public class PageController : Controller
     {
+        private readonly Generator _generator;
         private readonly IPage _page;
         private string rootStatic;
-        public PageController(IPage page,IWebHostEnvironment environment)
+        public PageController(IPage page,IWebHostEnvironment environment, Generator generator)
         {
+            _generator = generator;
             _page = page;
             rootStatic = environment.WebRootPath;
         }
@@ -46,6 +49,7 @@ namespace Donysh.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
+            ViewBag.Base = _generator.UrlSite() + "/Page/";
             var pageModel = await _page.GetPageById(id);
             return View(pageModel);
         }
@@ -59,7 +63,7 @@ namespace Donysh.Areas.Admin.Controllers
                 await _page.UpdatePage(model);
                 return RedirectToAction(nameof(Index));
             }
-
+            ViewBag.Base = _generator.UrlSite() + "/Page/";
             ViewBag.Alert = "";
             foreach (var error in result.Errors)
             {

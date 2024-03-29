@@ -161,6 +161,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Banner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Body")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -450,6 +454,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AboutBanner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AboutDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -468,7 +476,15 @@ namespace Infrastructure.Migrations
                     b.Property<string>("BannerPageHeader")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CategoryBanner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CompletedProject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactBanner")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("CreateTime")
@@ -513,7 +529,15 @@ namespace Infrastructure.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProjectBanner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProjectDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestBanner")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceDescription")
@@ -538,6 +562,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("WorkExperience")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkWithBanner")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -13,7 +13,7 @@ namespace Donysh.Components
         }
         public async Task<IViewComponentResult> InvokeAsync(string title)
         {
-            var model = await _userInterface.GetHeaderPage();
+            var model = await _userInterface.GetHeaderPage(title);
             model.PageTitle=title;
             return View("/Views/Shared/ViewComponent/Header.cshtml", model);
         }

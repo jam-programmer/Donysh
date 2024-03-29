@@ -3,7 +3,7 @@
     ViewData["Title"] = "Setting";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@section Script{
+@section Script {
     <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
     <script src="~/adminPanel/src/js/ckeditor.js"></script>
     <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script>
@@ -161,9 +161,16 @@
 
                         }
                     </div>
-                    <label for="image_3" class="form-label mt-5">Banner File</label><br />
+                    <label for="image_3" class="form-label mt-5">Banner </label><br />
                     <input onchange="ChangeImage(this,3)" asp-for="AboutImageFile" type="file" id="image_3" class="mt-1" />
                 </div>
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">About Page Banner </label><br />
+                    <input  asp-for="FileAboutBanner" type="file"  class="mt-1" />
+                </div>
+
+                
+
                 <div class="mt-3 ">
                     <label for="regular-form-8" class="form-label">Work Experience</label>
                     <input id="regular-form-8" asp-for="WorkExperience" type="number" class="form-control w-75">
@@ -185,23 +192,48 @@
                 </h2>
 
             </div>
-            <div id="input" class="p-5 mt-5">
+            <div id="input" class="p-5 ">
+
                 <div class="fallback">
-                    <div class="w-60 h-20 sm:w-60 sm:h-24 flex-none lg:w-70 lg:h-32 image-fit relative">
-                        @if (Model.BannerPageHeader == "default.jpg")
-                        {
-                            <img id="imagePath_4" src="~/img/default.jpg">
-
-                        }
-                        else
-                        {
-                            <img id="imagePath_4" src="@(ViewBag.Base + Model.BannerPageHeader)">
-
-                        }
-                    </div>
-                    <label for="image_4" class="form-label mt-5">Banner File</label><br />
-                    <input onchange="ChangeImage(this,4)" asp-for="BannerPageHeaderFile" type="file" id="image_4" class="mt-1" />
+                    <label for="image_4" class="form-label mt-5">Defult Banner File</label><br />
+                    <input  asp-for="BannerPageHeaderFile" type="file"  class="mt-1" />
                 </div>
+
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">Category Page Banner File</label><br />
+                    <input  asp-for="FileCategoryBanner" type="file"  class="mt-1" />
+                </div>
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">Wok with Page Banner File</label><br />
+                    <input  asp-for="FileWorkWithBanner" type="file" class="mt-1" />
+                </div>
+
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">Request Page Banner File</label><br />
+                    <input  asp-for="FileRequestBanner" type="file" class="mt-1" />
+                </div>
+
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">Contact Page Banner File</label><br />
+                    <input  asp-for="FileContactBanner" type="file" class="mt-1" />
+                </div>
+
+
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">Project Page Banner File</label><br />
+                    <input  asp-for="FileProjectBanner" type="file" class="mt-1" />
+                </div>
+
+
+                <input type="hidden" asp-for="CategoryBanner"/>
+                <input type="hidden" asp-for="WorkWithBanner" />
+                <input type="hidden" asp-for="RequestBanner" />
+                <input type="hidden" asp-for="ContactBanner" />
+                <input type="hidden" asp-for="ProjectBanner" />
+                <input type="hidden" asp-for="AboutBanner" />
+
+
+
 
             </div>
         </div>

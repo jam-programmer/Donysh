@@ -325,7 +325,6 @@
 
 <div class="container" >
     
-    <div class="alert alert-primary mt-5 w-50">You can have a list of projects in pdf file format<a onclick="GeneratePdf()"  class="btn ml-5 btn-primary text-white">Generate PDF</a></div>
     
 
     <div class="row mb-3">
@@ -362,7 +361,8 @@
 
         }
 
-    </div>
+    </div> 
+    
     <nav aria-label="...">
         <ul class="pagination">
 
@@ -395,5 +395,18 @@
             }
         </ul>
     </nav>
+    <div class="btn-group mb-3" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-print"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" onclick="GeneratePdf(1)" style="cursor: pointer;">Generate With Image</a>
+            <a class="dropdown-item" onclick="GeneratePdf(2)" style="cursor: pointer;">Generate With Out Image</a>
+        </div>
+    </div>
+    
+ 
+       
+   
 
 </div>

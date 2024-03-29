@@ -37,5 +37,12 @@ namespace Domain.Entities
         public string? SmtpPassword { set; get; }
         public int? MailHostPort { set; get; }
         public bool ActiveMailService { set; get; }
+        //*****************************************//
+        public string CategoryBanner { set; get; }
+        public string WorkWithBanner { set; get; }
+        public string RequestBanner { set; get; }
+        public string ContactBanner { set; get; }
+        public string ProjectBanner { set; get; }
+        public string AboutBanner { set; get; }
     }
 }

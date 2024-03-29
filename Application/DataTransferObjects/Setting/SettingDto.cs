@@ -58,5 +58,19 @@ namespace Application.DataTransferObjects.Setting
         public string? SmtpPassword { set; get; }
         public int MailHostPort { set; get; } = 0;
         public bool ActiveMailService { set; get; }
+
+        public string CategoryBanner { set; get; }
+        public string WorkWithBanner { set; get; }
+        public string RequestBanner { set; get; }
+        public string ContactBanner { set; get; }
+        public string ProjectBanner { set; get; }
+        public string AboutBanner { set; get; }
+
+        public IFormFile? FileCategoryBanner { set; get; }
+        public IFormFile? FileWorkWithBanner { set; get; }
+        public IFormFile? FileRequestBanner { set; get; }
+        public IFormFile? FileContactBanner { set; get; }
+        public IFormFile? FileProjectBanner { set; get; }
+        public IFormFile? FileAboutBanner { set; get; }
     }
 }

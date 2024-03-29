@@ -1,5 +1,6 @@
 ﻿using Application.DataTransferObjects.Project;
 using Application.Services.Ui;
+using Donysh.Models;
 using iText;
 using iText.Html2pdf;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace Donysh.Controllers
         }
         [HttpPost]
         [Route("/ExportSelectedProjects")]
-        public async Task<IActionResult> ExportProject([FromBody] List<Export> request)
+        public async Task<IActionResult> ExportProject([FromBody] ExportRequest request)
         {
             var options = await _userInterface.ProjectsPdfOption(request);
             using (var writer = new FileStream(options.FilePath!, FileMode.Create))

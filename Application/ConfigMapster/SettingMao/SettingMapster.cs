@@ -37,6 +37,13 @@ namespace Application.ConfigMapster.SettingMao
                 .Map(d => d.BannerPageHeader, e => e.BannerPageHeader)
                 .Map(d => d.AboutImage, e => e.AboutImage)
                 .Map(d => d.Twitter, e => e.Twitter)
+
+                .Map(d => d.CategoryBanner, e => e.CategoryBanner)
+                .Map(d => d.WorkWithBanner, e => e.WorkWithBanner)
+                .Map(d => d.RequestBanner, e => e.RequestBanner)
+                .Map(d => d.ContactBanner, e => e.ContactBanner)
+                .Map(d => d.ProjectBanner, e => e.ProjectBanner)
+                .Map(d => d.AboutBanner, e => e.AboutBanner)
                 .Compile();
             return config;
 

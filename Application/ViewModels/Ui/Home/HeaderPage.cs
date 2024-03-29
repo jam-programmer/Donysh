@@ -8,6 +8,7 @@ namespace Application.ViewModels.Ui.Home
 {
     public class HeaderPage
     {
+     
         public string? PageTitle { set; get; }
         public string? SiteTitle { set; get; }
         public string? BannerPageHeader { set; get; }

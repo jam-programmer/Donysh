@@ -1,4 +1,6 @@
-﻿using Application.DataTransferObjects.Page;
+﻿using Application.Core;
+using Application.DataTransferObjects.Page;
+using Application.Services.Company;
 using Application.ViewModels.Page;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -32,6 +34,7 @@ namespace Application.Services.Page
         public async Task AddPage(AddPageDto model)
         {
             PageEntity page = model.Adapt<PageEntity>();
+            page.Banner = FileProcessing.SaveFile(model.BannerFile,  "Page");
             await _repository.Insert(page);
 
         }
@@ -40,6 +43,7 @@ namespace Application.Services.Page
         {
             var page = await _repository.GetByIdAsync(model.Id);
             page = model.Adapt<PageEntity>();
+            page.Banner = FileProcessing.FileUpload(model.BannerFile,model.Banner, "Page");
             await _repository.Update(page);
         }
 

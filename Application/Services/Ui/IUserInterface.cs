@@ -4,6 +4,7 @@ using Application.ViewModels.Ui.General;
 using Application.ViewModels.Ui.Home;
 using Application.ViewModels.Ui.Project;
 using Application.ViewModels.Ui.Service;
+using Donysh.Models;
 
 namespace Application.Services.Ui
 {
@@ -16,7 +17,7 @@ namespace Application.Services.Ui
         Task<HomeTeamSection> GetHomeTeamSection();
         Task<HomeCompanySection> GetHomeCompanySection();
         Task<HomeInformationSection> GetHomeInformationSection();
-        Task<HeaderPage> GetHeaderPage();
+        Task<HeaderPage> GetHeaderPage(string titlePage);
         Task<ProjectDetail> GetProjectById(string id);
         Task<ServiceDetail> GetServiceDetailById(string id);
         Task<PdfOptions> ProjectPdfOption(string projectId);
@@ -28,6 +29,6 @@ namespace Application.Services.Ui
         Task<AboutPage> GetAboutPage();
         Task<bool> AddContactRequest(RequestContact request);
         Task<List<ItemViewModel>> GetServices();
-        Task<PdfOptions> ProjectsPdfOption(List<Export> projectIds);
+        Task<PdfOptions> ProjectsPdfOption(ExportRequest request);
     }
 }

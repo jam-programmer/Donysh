@@ -8,6 +8,7 @@ namespace Application.ViewModels.Ui.General
 {
     public class PageDetail
     {
+        public string Banner { set; get; }
         public string Title { set; get; }
         public string Body { set; get; }
         public string Id { set; get; }

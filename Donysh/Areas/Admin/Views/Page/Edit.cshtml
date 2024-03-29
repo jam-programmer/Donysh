@@ -26,7 +26,7 @@
 
     </div>
     <div id="input" class="p-5">
-        <form asp-area="Admin" asp-controller="Page" asp-action="Edit" method="post">
+        <form asp-area="Admin" asp-controller="Page" enctype="multipart/form-data" asp-action="Edit" method="post">
             <div class="mb-5 grid grid-cols-12 gap-6">
                 <div class="intro-y col-span-12 lg:col-span-8">
                     <label for="NamePage" class="form-label mt-3">Page Title</label>
@@ -54,6 +54,27 @@
                     </div>
                 </div>
                 <input type="hidden" asp-for="Id"/>
+                <input type="hidden" asp-for="Banner"/>
+                
+                <div class="fallback">
+                    <div class="w-60 h-20 sm:w-60 sm:h-24 flex-none lg:w-70 lg:h-32 image-fit relative">
+                        @if (Model.Banner == "default.jpg")
+                        {
+                            <img id="imagePath_2" src="~/img/default.jpg">
+
+                        }
+                        else
+                        {
+                            <img id="imagePath_3" src="@(ViewBag.Base + Model.Banner)">
+
+                        }
+                    </div>
+                    <label for="image_3" class="form-label mt-5">Banner File</label><br />
+                    <input onchange="ChangeImage(this,3)" asp-for="BannerFile" type="file" id="image_3" class="mt-1" />
+                </div>
+                
+                
+
             </div>
             <button class=" btn btn-primary " type="submit">Submit</button>
             <a asp-controller="Page" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
