@@ -1,7 +1,5 @@
-﻿using Application.DataTransferObjects.Project;
-using Application.Services.Ui;
+﻿using Application.Services.Ui;
 using Donysh.Models;
-using iText;
 using iText.Html2pdf;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +13,9 @@ namespace Donysh.Controllers
         {
             _userInterface = userInterface;
         }
-        public async Task<IActionResult> Projects(int page=1,string? filter=null)
+        public async Task<IActionResult> Projects(string? title, int page=1,string? filter=null)
         {
+            ViewBag.PageTitle=title;
             var pageModel = await _userInterface.GetListProject(page, filter);
             return View(pageModel);
         }

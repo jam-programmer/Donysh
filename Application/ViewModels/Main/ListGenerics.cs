@@ -13,5 +13,6 @@ namespace Application.ViewModels.Main
         public int ? CurrentPage { set; get; }
         public  string? SearchKeyword { set; get; }
         public bool Pagination { set; get; }=true;
+        public string? data { set; get; }
     }
 }

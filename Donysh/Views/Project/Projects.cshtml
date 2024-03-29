@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Projects";
     Layout = "~/Views/Shared/_Layout.cshtml";
+  
 }
 
 @section Script
@@ -319,8 +320,7 @@
       
     </style>
 }
-@await Component.InvokeAsync("HeaderComponent","Projects")
-
+@await Component.InvokeAsync("HeaderComponent", string.IsNullOrEmpty(Model.data) ? ViewBag.PageTitle : Model.data)
 
 
 <div class="container" >

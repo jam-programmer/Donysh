@@ -415,6 +415,7 @@ namespace Application.Services.Ui
             var query = await _projectRepository.GetByQuery();
             if (!string.IsNullOrEmpty(filter))
             {
+                query = query.Include(i => i.Status);
                 query = query.Where(w => w.StatusForeignKey == filter);
             }
             var projects = await query.Skip(pageSkip).Take(10).ToListAsync();
@@ -423,7 +424,7 @@ namespace Application.Services.Ui
             result.List = projects.Adapt<List<ProjectCard>>();
             result.Count = count;
             result.CurrentPage = page;
-
+            result.data =await query.Select(s => s.Status.Status).FirstOrDefaultAsync();
             if (count > 1 && projects.Count < 10 && page == 1)
             {
                 result.Pagination = false;
