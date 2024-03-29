@@ -9,7 +9,10 @@
                         <i class="fa fa-map theme-color"></i>
                     </div>
                     @* <h3 class="font-alt">Satisfy Clients</h3> *@
-                    <p>@Model.Address</p>
+                    <p>
+                        <a href="https://www.google.com/maps/search/?api=1&query= @(Model.Address)" style="color: white" target="_blank"> @Model.Address</a>
+                       
+                    </p>
                 </div>
             </div> <!-- col -->
 

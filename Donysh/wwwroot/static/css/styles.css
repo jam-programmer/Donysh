@@ -559,7 +559,7 @@ color: #fc8902;
 
 @media(min-width: 992px) {
   .header-nav .navbar-nav > li .sub-menu {
-    background: #fff;
+   /* background: #fff;*/
     margin: 0;
     padding: 10px 0;
     min-width: 200px;
@@ -570,7 +570,7 @@ color: #fc8902;
     list-style: none;
     border-radius: 1px;
     opacity: 0;
-    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.16);
+    /*box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.16);*/
     pointer-events: none;
     -webkit-transition: ease all 0.3s;
     -moz-transition: ease all 0.3s;
@@ -592,21 +592,27 @@ color: #fc8902;
     color: #222;
   }
 }
-
+.sub-menu {
+    border-radius: 10px !important;
+    padding: 10px;
+}
 .header-nav .navbar-nav > li .sub-menu li > a {
-  color: #333;
-  font-size: 13px;
-  display: block;
-  padding: 5px 20px 5px 20px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  position: relative;
-  text-decoration: none;
-  -webkit-transition: ease all 0.3s;
-  -moz-transition: ease all 0.3s;
-   -o-transition: ease all 0.3s;
-   transition: ease all 0.3s;
-
+    color: white;
+    font-size: 13px;
+    display: block;
+    padding: 5px 20px 5px 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    text-decoration: none;
+    -webkit-transition: ease all 0.3s;
+    -moz-transition: ease all 0.3s;
+    -o-transition: ease all 0.3s;
+    transition: ease all 0.3s;
+/*    border: 1px solid #fc8902 !important;
+*/    margin: 2px;
+    margin-top: 8px;
+    background-color: #fc8902;
 }
 
 .header-nav .navbar-nav > li .sub-menu li > a:after {
@@ -624,8 +630,9 @@ color: #fc8902;
 }
 
 .header-nav .navbar-nav > li .sub-menu li:hover > a {
-  padding-left: 28px;
-  color: #fc8902;
+    padding-left: 28px;
+    background-color: #F0EDED;
+    color: #fc8902;
 }
 .header-nav .navbar-nav > li .sub-menu li:hover > a:after {
   width: 8px;
