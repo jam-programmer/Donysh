@@ -30,5 +30,6 @@ namespace Application.Services.Ui
         Task<bool> AddContactRequest(RequestContact request);
         Task<List<ItemViewModel>> GetServices();
         Task<PdfOptions> ProjectsPdfOption(ExportRequest request);
+        Task<List<ScopeItem>> GetScopes();
     }
 }

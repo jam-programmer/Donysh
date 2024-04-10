@@ -1,6 +1,6 @@
 ﻿@model UpdateScopeWorkDto
 @{
-    ViewData["Title"] = "Edit ScopeWork";
+    ViewData["Title"] = "Edit Category";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -22,7 +22,7 @@
 <div class="intro-y box mt-5">
     <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto">
-            Edit ScopeWork
+            Edit Category
         </h2>
         
     </div>
@@ -30,7 +30,7 @@
         <form asp-area="Admin" asp-controller="ScopeWork" asp-action="Edit" method="post">
             <div class="mb-5">
                 <div>
-                    <label for="TitleScopeWork" class="form-label">Scope Title</label>
+                    <label for="TitleScopeWork" class="form-label">Scope Category</label>
                     <input asp-for="Title" id="TitleScopeWork" placeholder="Title..."  type="text" class="form-control" >
                 </div>
                 <input type="hidden" asp-for="Id"/>

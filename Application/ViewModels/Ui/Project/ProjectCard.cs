@@ -14,5 +14,6 @@ namespace Application.ViewModels.Ui.Project
         public string? Description { set; get; }
         public string? Architect { set; get; }
         public string? Location { set; get; }
+        public string? ScopeForeignKey { set; get; }
     }
 }

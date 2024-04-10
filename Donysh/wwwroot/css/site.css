@@ -20,6 +20,16 @@ html {
 body {
   
 }
+.timeBox {
+    margin-top: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    color: white;
+    border-radius: 7px;
+    text-align: center;
+    padding: 5px;
+    width: 300px;
+    background-color: #fc8902;
+}
 
 
 

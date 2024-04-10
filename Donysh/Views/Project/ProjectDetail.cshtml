@@ -17,23 +17,52 @@
         </div>
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="slider">
-                    <div class="slide">
-                        <img src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName">
+                <div class="splide">
+                    <div class="splide__track">
+                        <ul class="splide__list ">
+                            <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 400px;" /></figure></li>
+                            
+                            @if (Model.Pictures!.Count > 1)
+                            {
+                                @foreach (var item in Model.Pictures)
+                                {
+                                  
+
+                                    <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
+                                }
+                            }
+                       
+                        </ul>
                     </div>
-
-
-                    @if (Model.Pictures!.Count > 1)
-                    {
-                        @foreach (var item in Model.Pictures)
-                        {
-                                   <div class="slide">
-                                       <img src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title"/>
-                                   </div>
-                        }
-                    }
-
                 </div>
+                <div class="splide thumbnails " >
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 100px;" /></figure></li>
+                        
+                            @if (Model.Pictures!.Count > 1)
+                            {
+                                @foreach (var item in Model.Pictures)
+                                {
+
+                                    <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
+                                }
+                            }
+                            
+                            
+                            
+                            
+                            
+
+                        </ul>
+                    </div>
+                </div>
+                        
+                    
+
+
+
+              
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 
@@ -42,38 +71,38 @@
 
                     @if (Model.IsBuilder)
                     {
-                            <li class="list-group-item">
-                                <h6 class="text-dark"><span class="text-warning">Builder:</span> @Model.Builder</h6>
-                            </li>
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Builder:</span> @Model.Builder</h6>
+                        </li>
                     }
                     @if (Model.IsArchitect)
                     {
 
-                          <li class="list-group-item">
-                              <h6 class="text-dark"><span class="text-warning">Architect:</span> @Model.Architect</h6>
-                          </li>
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Architect:</span> @Model.Architect</h6>
+                        </li>
                     }
 
 
                     @if (Model.IsContractAmount)
                     {
-                            <li class="list-group-item">
-                                <h6 class="text-dark"><span class="text-warning">Contract Amount:</span> @Model.ContractAmount</h6>
-                            </li>
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Contract Amount:</span> @Model.ContractAmount</h6>
+                        </li>
                     }
 
                     @if (Model.IsOwnerOrDeveloper)
                     {
-                            <li class="list-group-item">
-                                <h6 class="text-dark"><span class="text-warning">Owner/Developer:</span> @Model.OwnerOrDeveloper</h6>
-                            </li>
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Owner/Developer:</span> @Model.OwnerOrDeveloper</h6>
+                        </li>
                     }
 
                     @if (Model.IsLocation)
                     {
-                            <li class="list-group-item">
-                                <h6 class="text-dark"><span class="text-warning">Location:</span> @Model.Location</h6>
-                            </li>
+                        <li class="list-group-item">
+                            <h6 class="text-dark"><span class="text-warning">Location:</span> @Model.Location</h6>
+                        </li>
                     }
 
                     @if (Model.IsStatusForeignKey)
@@ -87,7 +116,7 @@
                     {
 
                         <li class="list-group-item">
-                            <h6 class="text-dark"><span class="text-warning">Scope:</span> @Model.Scope</h6>
+                            <h6 class="text-dark"><span class="text-warning">Category:</span> @Model.Scope</h6>
                         </li>
                     }
                 </ul>
@@ -102,27 +131,27 @@
                 <h6>Services:</h6><hr />
                 @foreach (var item in Model.Services!)
                 {
-                        <a class="Tag">@item.Title</a>
+                    <a class="Tag">@item.Title</a>
                 }
             </div>
-          @if (Model.IsStartDate)
-          {
-              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
-                  <div class="alert alert-secondary text-center" role="alert">
-                      <span class="font-bold">Start Date:</span>   @Model.StartDate
+            @if (Model.IsStartDate)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
+                    <div class="alert alert-secondary text-center" role="alert">
+                        <span class="font-bold">Start Date:</span>   @Model.StartDate
 
-                  </div>
-              </div> 
-          }
-           @if (Model.IsCompletionDate)
-           {
-               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                   <div class="alert alert-secondary text-center" role="alert">
+                    </div>
+                </div> 
+            }
+            @if (Model.IsCompletionDate)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="alert alert-secondary text-center" role="alert">
 
-                       <span class="font-bold">Completion Date:</span> @Model.CompletionDate
-                   </div>
-               </div>
-           }
+                        <span class="font-bold">Completion Date:</span> @Model.CompletionDate
+                    </div>
+                </div>
+            }
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
                 <table class="table table-bordered">
                     <thead>
@@ -134,11 +163,11 @@
                         }
                         @if (Model.IsReferenceContactEmail)
                         {
-                                <th scope="col">Email</th>
+                            <th scope="col">Email</th>
                         }
                         @if (Model.IsReferenceContactPhone)
                         {
-                                <th scope="col">Phone Number</th>
+                            <th scope="col">Phone Number</th>
                         }
                        
                        
@@ -167,11 +196,11 @@
                     </tr>
                     @if (Model.IsReferenceContactAddress)
                     {
-                            <tr>
+                        <tr>
 
 
-                                <td colspan="12">@Model.ReferenceContactAddress</td>
-                            </tr>
+                            <td colspan="12">@Model.ReferenceContactAddress</td>
+                        </tr>
                     }
                         
                     </tbody>
@@ -182,6 +211,65 @@
             </div>
 
 
-            </div>
+        </div>
     </div>
 </section>
+@section Script
+{
+    <script src="~/Slider/js/splide.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mainSplide = new Splide('.splide', {
+                type: 'loop',
+                autoplay: true,
+                interval: 2000,
+            });
+
+            const thumbnailsSplide = new Splide('.splide.thumbnails', {
+                type: 'loop',
+                fixedWidth: 100,
+                fixedHeight: 50,
+                gap: 10,
+                isNavigation: true,
+                pagination: false,
+            });
+
+            mainSplide.sync(thumbnailsSplide);
+
+            mainSplide.mount();
+            thumbnailsSplide.mount();
+        });
+    </script>
+}
+@section Style
+{
+    <link rel="stylesheet" href="~/Slider/css/splide.min.css"/>
+    <link rel="stylesheet" href="~/Slider/css/splide-core.min.css"/>
+    <style>
+        .splide {
+            width: 100%;
+
+        }
+
+        .splide__slide {
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            height: 100%;
+        }
+        .is-active{
+            border: none !important;
+        }
+        .splide.thumbnails {
+            height: 80px;
+            margin-top: 1rem;
+        }
+
+        .splide.thumbnails .splide__slide {
+            height: 100%;
+            width: 100px;
+        }
+    </style>
+}

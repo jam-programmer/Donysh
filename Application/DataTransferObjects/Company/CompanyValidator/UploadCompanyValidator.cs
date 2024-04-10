@@ -30,7 +30,7 @@ namespace Application.DataTransferObjects.Company.CompanyValidator
                 }
                 return true;
             }
-            return false;
+            return true;
         }
     }
 }

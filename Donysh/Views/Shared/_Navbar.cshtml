@@ -14,7 +14,20 @@
                     <li><a class="nav-link" asp-controller="Project" asp-action="Projects">Projects</a>
                         @await Component.InvokeAsync("StatusSectionComponent")
                     </li>
-                    <li><a class="nav-link" asp-controller="Service" asp-action="Services">Services</a></li>
+                    <li><a class="nav-link" asp-controller="Service" asp-action="Services">Services</a>
+                        <span class="sub-menu-toggle" data-toggle="dropdown" aria-haspopup="true"><i class="ti-angle-down"></i></span>
+
+                        <ul class="sub-menu">
+                           
+  
+                            @await Component.InvokeAsync("ServiceItemComponent")
+                        </ul>
+
+                    
+                    
+                    
+                    
+                        </li>
                     <li><a class="nav-link" asp-controller="Home" asp-action="WorkingWith">Working with</a></li>
                     <li><a class="nav-link" asp-controller="Home" asp-action="Request">REQUEST A QUOTE</a></li>
                     <li><a class="nav-link" asp-controller="Home" asp-action="Contactus"> Contact us</a></li>

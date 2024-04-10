@@ -8,6 +8,32 @@
 @section Script
 {
     <script>
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+                var value = $(this).attr('data-filter');
+
+                if (value == "all") {
+                    //$('.filter').removeClass('hidden');
+                    $('.filter').show('1000');
+                }
+                else {
+                    //            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
+                    //            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
+                    $(".filter").not('.' + value).hide('3000');
+                    $('.filter').filter('.' + value).show('3000');
+
+                }
+            });
+
+            if ($(".filter-button").removeClass("active")) {
+                $(this).removeClass("active");
+            }
+            $(this).addClass("active");
+
+        });</script>
+   
+    <script>
         description:
             document.querySelectorAll(".projcard-description").forEach(function(box) {
                 $clamp(box, {clamp: 6});
@@ -18,17 +44,56 @@
 @section Style
 {
     <style>
+       
+        .filter-button
+        {
+            font-size: 18px;
+            border: 1px solid #ee5c26;
+            border-radius: 5px;
+            text-align: center;
+            color: #ee5c26;
+            margin-bottom: 30px;
+
+        }
+        .filter-button:hover
+        {
+            font-size: 18px;
+                border: 1px solid #ee5c26;
+            border-radius: 5px;
+            text-align: center;
+            color: #ffffff;
+                background-color: #ee5c26;
+
+        }
+        .btn-default:active .filter-button:active
+        {
+            background-color: #ee5c26;
+            color: white;
+        }
+
+        .port-image
+        {
+            width: 100%;
+        }
+
+        .gallery_product
+        {
+            margin-bottom: 30px;
+        }
+    </style>
+
+    <style>
     
 
         .projcard-container {
             margin: 50px 0;
         }
 
-            /* Actual Code: */
-            .projcard-container,
-            .projcard-container * {
-                box-sizing: border-box;
-            }
+        /* Actual Code: */
+        .projcard-container,
+        .projcard-container * {
+            box-sizing: border-box;
+        }
 
         .projcard-container {
             margin-left: auto;
@@ -51,25 +116,25 @@
             transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
 
-            .projcard:hover {
-                box-shadow: 0 34px 32px -33px rgba(0, 0, 0, .18);
-                transform: translate(0px, -3px);
-            }
+        .projcard:hover {
+            box-shadow: 0 34px 32px -33px rgba(0, 0, 0, .18);
+            transform: translate(0px, -3px);
+        }
 
-            .projcard::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                background-image: linear-gradient(-70deg, #424242, transparent 50%);
-                opacity: 0.07;
-            }
+        .projcard::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: linear-gradient(-70deg, #424242, transparent 50%);
+            opacity: 0.07;
+        }
 
-            .projcard:nth-child(2n)::before {
-                background-image: linear-gradient(-250deg, #424242, transparent 50%);
-            }
+        .projcard:nth-child(2n)::before {
+            background-image: linear-gradient(-250deg, #424242, transparent 50%);
+        }
 
         .projcard-innerbox {
             position: absolute;
@@ -295,27 +360,27 @@
             transition: color 0.2s;
         }
 
-            .projcard-tag::before {
-                content: '';
-                position: absolute;
-                background: #fff;
-                border-radius: 10px;
-                box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-                height: 6px;
-                left: 10px;
-                width: 6px;
-                top: 10px;
-            }
+        .projcard-tag::before {
+            content: '';
+            position: absolute;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+            height: 6px;
+            left: 10px;
+            width: 6px;
+            top: 10px;
+        }
 
-            .projcard-tag::after {
-                content: '';
-                position: absolute;
-                border-bottom: 13px solid transparent;
-                border-left: 10px solid #E0E0E0;
-                border-top: 13px solid transparent;
-                right: -10px;
-                top: 0;
-            }
+        .projcard-tag::after {
+            content: '';
+            position: absolute;
+            border-bottom: 13px solid transparent;
+            border-left: 10px solid #E0E0E0;
+            border-top: 13px solid transparent;
+            right: -10px;
+            top: 0;
+        }
 
       
     </style>
@@ -323,10 +388,115 @@
 @await Component.InvokeAsync("HeaderComponent", string.IsNullOrEmpty(Model.data) ? ViewBag.PageTitle : Model.data)
 
 
-<div class="container" >
+
+
+<div class="container">
+    <div class="row text-center mt-3" style="justify-content: center;">
+      
+
+        <button class="btn btn-default filter-button mx-1" data-filter="all">All</button>
+        @await Component.InvokeAsync("ScopeItemComponent")
+    </div>
+    <div class="row">
+
+        
+      
+        
+        
+        @foreach (var item in Model.List!)
+        {  <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter @item.ScopeForeignKey ">
+
+
+
+               <div class="services-item">
+                   <a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">
+                       <div class="img">
+                           <img src="~/Project/@item.ProjectImage" title="@item.ProjectName" alt="@item.ProjectName ">
+                       </div>
+                   </a>
+                   <div class="services-content"> <span class="projcard-tag">@item.Location</span>
+                       <br/>
+                       <h4 class="mt-3"><a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">@item.ProjectName</a></h4>
+                       <p> @Html.Raw(item.Description.Substring(0, Math.Min(200, item.Description.Length)))</p>
+                       <hr/>
+                       <a class="m-btn  text-white"
+                          style="background-color: #ff5722 !important"
+                          asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">View more</a>
+
+                       <a class="m-btn  text-white"
+                          id="@item.Id" data-pdf="false" onclick="PdfAppend('@item.Id')"
+
+                          style="background-color: red !important"><i class="fas fa-print"></i></a>
+                   </div>
+               </div>
+           </div>
+
+
+
+
+
+        }
+
+    </div>
+    
+    <div class="row">
+        
+        <nav aria-label="...">
+            <ul class="pagination">
+
+                @if (Model.Count > 1 && Model.Pagination)
+                {
+
+                    <li class="page-item">
+                        <a class="page-link" class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= Model.Count; i++)
+                    {
+
+                        <li class="page-item ac @(Model.CurrentPage == i ? "active" : "") tive">
+                            <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@i">@i <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@Model.Count" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+
+
+                }
+            </ul>
+        </nav>
+        <div class="btn-group mb-3 mx-3" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-print"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" onclick="GeneratePdf(1)" style="cursor: pointer;">Generate With Image</a>
+                <a class="dropdown-item" onclick="GeneratePdf(2)" style="cursor: pointer;">Generate With Out Image</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@* <div class="container" >
+ *@   
+    
+    
+    
     
     
 
+    @* 
     <div class="row mb-3">
         @foreach (var item in Model.List!)
         {
@@ -363,50 +533,10 @@
 
     </div> 
     
-    <nav aria-label="...">
-        <ul class="pagination">
-
-            @if (Model.Count > 1 && Model.Pagination)
-            {
-
-                <li class="page-item">
-                    <a class="page-link" class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="1" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-
-                @for (int i = 1; i <= Model.Count; i++)
-                {
-
-                    <li class="page-item ac @(Model.CurrentPage == i ? "active" : "") tive">
-                        <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@i">@i <span class="sr-only">(current)</span></a>
-                    </li>
-                }
-
-                <li class="page-item">
-                    <a class="page-link" asp-controller="Project" asp-action="Projects" asp-route-page="@Model.Count" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-
-
-            }
-        </ul>
-    </nav>
-    <div class="btn-group mb-3" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-print"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" onclick="GeneratePdf(1)" style="cursor: pointer;">Generate With Image</a>
-            <a class="dropdown-item" onclick="GeneratePdf(2)" style="cursor: pointer;">Generate With Out Image</a>
-        </div>
-    </div>
-    
+  
+     *@
  
        
    
 
-</div>
+@* </div> *@

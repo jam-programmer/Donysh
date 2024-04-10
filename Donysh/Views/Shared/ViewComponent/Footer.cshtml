@@ -4,12 +4,15 @@
     <p class="footer-text">
         @Html.Raw(Model.ColumnOne.AboutDescription)
     </p>
-    <ul class="social-icons">
-        <li><a class="facebook" href="@Model.ColumnOne.FaceBook"><i class="fab fa-facebook-square"></i></a></li>
-        <li><a class="twitter" href="@Model.ColumnOne.Twitter"><i class="fab fa-twitter"></i></a></li>
-        <li><a class="google" href="@Model.ColumnOne.Linkedin"><i class="fab fa-linkedin"></i></a></li>
-        <li><a class="linkedin" href="@Model.ColumnOne.Instagram"><i class="fab fa-instagram"></i></a></li>
-    </ul>
+     <ul class="social-icons">
+         <li><a class="facebook" href="@Model.ColumnOne.FaceBook"><i class="fab fa-facebook-square"></i></a></li>
+         <li><a class="twitter" href="@Model.ColumnOne.Twitter"><i class="fab fa-twitter"></i></a></li>
+         <li><a class="google" href="@Model.ColumnOne.Linkedin"><i class="fab fa-linkedin"></i></a></li>
+         <li><a class="linkedin" href="@Model.ColumnOne.Instagram"><i class="fab fa-instagram"></i></a></li>
+     </ul>
+     <div class="timeBox">
+        Working hours: @Model.WorkingHours
+     </div>
 </div> <!-- col --> 
 
 <div class="col-6 col-md-5 col-lg-2 sm-m-15px-tb">

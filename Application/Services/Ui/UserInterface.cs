@@ -27,7 +27,7 @@ namespace Application.Services.Ui
     public class UserInterface : IUserInterface
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
-
+        private readonly IRepository<ScopeWorkEntity> _scopeRepository;
         private readonly ISetting _setting;
         private readonly IDapper<ProjectServices> _dapperService;
         private readonly IRepository<ServiceEntity> _service;
@@ -206,7 +206,7 @@ namespace Application.Services.Ui
             var service = await _service.GetByIdAsync(id);
             serviceDetail = service!.Adapt<ServiceDetail>();
             var project = await
-                _dapper.ExecuteQuery($"SELECT S.Id AS ServiceId, S.Title AS ServiceTitle,\r\nP.Id,P.ProjectName,P.Location,P.Description,P.ProjectImage\r\nFROM [dbo].[ProjectEntityServiceEntity] AS PS WITH(NOLOCK)\r\nINNER JOIN DY.Project AS P WITH(NOLOCK) ON PS.ProjectsId = P.Id\r\nINNER JOIN DY.[Service] AS S WITH(NOLOCK) ON PS.ServiceId=S.Id\r\nWHERE PS.ServiceId='{id}'");
+                _dapper.ExecuteQuery($"SELECT S.Id AS ServiceId, S.Title AS ServiceTitle,\r\nP.Id,P.ProjectName,P.Location,P.Description,P.ProjectImage\r\nFROM [dbo].[ProjectEntityServiceEntity] AS PS WITH(NOLOCK)\r\nINNER JOIN Dbo.Project AS P WITH(NOLOCK) ON PS.ProjectsId = P.Id\r\nINNER JOIN Dbo.[Service] AS S WITH(NOLOCK) ON PS.ServiceId=S.Id\r\nWHERE PS.ServiceId='{id}'");
             serviceDetail.Projects = project;
             return serviceDetail;
         }
@@ -388,6 +388,7 @@ namespace Application.Services.Ui
             var page = await pageQuery.Where(w => w.Location == TabLocation.Footer).ToListAsync();
             var linkPages = page.Adapt<List<Pages>>();
             footer.ColumnTwo = linkPages;
+            footer.WorkingHours = setting.WorkingHours;
             return footer;
         }
 
@@ -454,17 +455,49 @@ namespace Application.Services.Ui
             }
         }
 
+        //public async Task<AboutPage> GetAboutPage()
+        //{
+        //    AboutPage about = new();
+        //    var setting = await _setting.GetSetting();
+        //    about.TeamDescription = setting?.TeamDescription;
+        //    var aboutEntity = await _about.FirstOrDefaultAsync();
+        //    about = aboutEntity!.Adapt<AboutPage>();
+        //    var companies = await _company.GetAll();
+
+        //    about.Companies = new List<CompanyBox>();
+        //    about.Companies = companies.Adapt<List<CompanyBox>>();
+        //    var members = await _team.GetAll();
+        //    about.Members = members.Adapt<List<TeamBox>>();
+        //    return about;
+        //}
         public async Task<AboutPage> GetAboutPage()
         {
-            AboutPage about = new();
+            AboutPage about = new AboutPage();
+
             var setting = await _setting.GetSetting();
-            about.TeamDescription = setting.TeamDescription;
+            if (setting != null)
+            {
+                about.TeamDescription = setting.TeamDescription;
+            }
+
             var aboutEntity = await _about.FirstOrDefaultAsync();
-            about = aboutEntity!.Adapt<AboutPage>();
+            if (aboutEntity != null)
+            {
+                about = aboutEntity.Adapt<AboutPage>();
+            }
+
             var companies = await _company.GetAll();
-            about.Companies = companies.Adapt<List<CompanyBox>>();
+            if (companies != null)
+            {
+                about.Companies = companies.Adapt<List<CompanyBox>>();
+            }
+
             var members = await _team.GetAll();
-            about.Members = members.Adapt<List<TeamBox>>();
+            if (members != null)
+            {
+                about.Members = members.Adapt<List<TeamBox>>();
+            }
+
             return about;
         }
 
@@ -673,6 +706,11 @@ namespace Application.Services.Ui
             return options;
         }
 
-
+        public async Task<List<ScopeItem>> GetScopes()
+        {
+            var result = await _scopeRepository.GetAll();
+            List<ScopeItem> scopes = result.Adapt<List<ScopeItem>>();
+            return scopes;
+        }
     }
 }
