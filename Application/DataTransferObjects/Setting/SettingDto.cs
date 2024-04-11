@@ -9,6 +9,8 @@ namespace Application.DataTransferObjects.Setting
 {
     public class SettingDto
     {
+        public string Longitude { set; get; }
+        public string Latitude { set; get; }
         public string? WorkingHours { set; get; }
         public string? Id { set; get; }
         public string? Email { set; get; }

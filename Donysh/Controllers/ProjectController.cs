@@ -55,9 +55,6 @@ namespace Donysh.Controllers
             return File(Path.Combine("PDF", options.File!), "application/pdf", options.File!);
         }
 
-        public IActionResult Test()
-        {
-            return View();
-        }
+       
     }
 }

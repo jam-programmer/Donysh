@@ -40,6 +40,9 @@ namespace Domain.Entities
         public int? MailHostPort { set; get; }
         public bool ActiveMailService { set; get; }
         //*****************************************//
+        public string Longitude { set; get; }
+        public string Latitude { set; get; }
+        //*****************************************//
         public string CategoryBanner { set; get; }
         public string WorkWithBanner { set; get; }
         public string RequestBanner { set; get; }

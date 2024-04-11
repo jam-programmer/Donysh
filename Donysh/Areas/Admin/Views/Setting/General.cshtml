@@ -23,7 +23,7 @@
 
             </div>
             <div id="input" class="p-5">
-                <div>
+                <div class="">
                     <label for="regular-form-6" class="form-label">Phone Number</label>
                     <input id="regular-form-6" asp-for="PhoneNumber" type="text" class="form-control w-75" placeholder="Phone Number...">
                 </div>
@@ -31,11 +31,26 @@
                     <label for="regular-form-2" class="form-label">Email</label>
                     <input id="regular-form-2" type="email" asp-for="Email" class="form-control" placeholder="Email...">
                    
-                </div> <div class="mt-3 ">
+                </div> 
+                
+                <div class="mt-3 ">
                     <label for="regular-form-2" class="form-label">  Working Hours </label>
                     <input id="regular-form-2" type="text" asp-for="WorkingHours" class="form-control" placeholder="Working Hours...">
                    
                 </div>
+ 
+                <div class="mt-3 ">
+                    <label for="regular-form-2" class="form-label">  Latitude </label>
+                    <input id="regular-form-2" type="text" asp-for="Latitude" class="form-control" placeholder="Latitude">
+                   
+                </div>
+ 
+                <div class="mt-3 ">
+                    <label for="regular-form-2" class="form-label">  Longitude </label>
+                    <input id="regular-form-2" type="text" asp-for="Longitude" class="form-control" placeholder="Longitude">
+                   
+                </div>
+
                 <div class="mt-3 ">
                     <label for="Address" class="form-label">Address</label>
                     <textarea class="form-control" id="Address" asp-for="Address" rows="3"></textarea>
