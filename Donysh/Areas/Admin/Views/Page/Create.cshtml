@@ -48,7 +48,9 @@
                     <div>
                         <div class="mb-5">
                             <label class="form-label">Body</label>
+                           
                             <textarea asp-for="Body" id="content"></textarea>
+             
                         </div>
                     </div>
                 </div>
@@ -70,16 +72,25 @@
 
 @section Script {
 
-    <script src="~/lib/ckeditor5/ckeditor.js"></script>
-
+    <script src="~/ckeditor/ckeditor.js"></script>
     <script>
-        ClassicEditor.create(document.querySelector('#content'), {
-            ckfinder: { uploadUrl: '/CKUpload/' }
-        });
+        CKEDITOR.replace('Body');
+   
+        // ClassicEditor.create(document.querySelector('#content'), {
+        //     ckfinder: { uploadUrl: '/CKUpload/' }
+        // });
+        
+    
+
     </script>
 
 
+    @*   <script src="~/lib/ckeditor5/ckeditor.js"></script>
 
+  
+
+
+ *@
 
 
     @*  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>

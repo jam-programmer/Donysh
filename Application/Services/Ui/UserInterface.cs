@@ -42,10 +42,11 @@ namespace Application.Services.Ui
         private readonly IRepository<ContactEntity> _contactRepository;
         private readonly ISender _sender;
         private readonly IHttpContextAccessor _accessor;
-        public UserInterface(IHttpContextAccessor accessor, IWebHostEnvironment environment, ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender)
+
+        public UserInterface(IWebHostEnvironment hostingEnvironment, IRepository<ScopeWorkEntity> scopeRepository, ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender, IHttpContextAccessor accessor)
         {
-            _hostingEnvironment = environment;
-            _accessor = accessor;
+            _hostingEnvironment = hostingEnvironment;
+            _scopeRepository = scopeRepository;
             _setting = setting;
             _dapperService = dapperService;
             _service = service;
@@ -59,6 +60,7 @@ namespace Application.Services.Ui
             _about = about;
             _contactRepository = contactRepository;
             _sender = sender;
+            _accessor = accessor;
         }
 
 
@@ -113,7 +115,7 @@ namespace Application.Services.Ui
         {
             HomeCompanySection homeCompanySection = new();
             var companies = await _company.GetAll();
-            companies = companies.Where(w => w.Type == CompanyType.Partner).ToList();
+            companies = companies.ToList();
             homeCompanySection.Companies =
                 companies.Adapt<List<CompanyBox>>();
             return homeCompanySection;

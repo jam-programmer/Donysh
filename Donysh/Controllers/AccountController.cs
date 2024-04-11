@@ -57,6 +57,7 @@ namespace Donysh.Controllers
                     {
                         ViewBag.Alert += "Your entry is unauthorized.";
                     }
+                    ViewBag.Alert += "The username or password is incorrect.";
                 }
                 else if (findByEmail != null)
                 {

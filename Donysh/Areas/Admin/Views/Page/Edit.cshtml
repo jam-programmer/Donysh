@@ -49,7 +49,7 @@
                     <div>
                         <div class="mb-5">
                             <label class="form-label">Body</label>
-                            <textarea asp-for="Body"  id="content"></textarea>
+                            <textarea asp-for="Body" id="content"></textarea>
                         </div>
                     </div>
                 </div>
@@ -87,13 +87,16 @@
     <script src="~/adminPanel/src/js/ckeditor.js"></script>
     <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script> *@
 
+   <script src="~/ckeditor/ckeditor.js"></script>
+   <script>
+        CKEDITOR.replace('Body');
+   
+        // ClassicEditor.create(document.querySelector('#content'), {
+        //     ckfinder: { uploadUrl: '/CKUpload/' }
+        // });
+        
+    
 
-    <script src="~/lib/ckeditor5/ckeditor.js"></script>
-
-    <script>
-        ClassicEditor.create(document.querySelector('#content'), {
-            ckfinder: { uploadUrl: '/CKUpload/' }
-        });
     </script>
 
 

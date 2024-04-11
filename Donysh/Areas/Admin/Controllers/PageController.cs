@@ -134,5 +134,28 @@ namespace Donysh.Areas.Admin.Controllers
             };
             return Json(uploadSuccess);
         }
+        [HttpPost]
+        [Route("/Page/FileUpload")]
+        public IActionResult UploadFile()
+        {
+            var file = Request.Form.Files["upload"]; // استفاده از Request.Form برای دریافت فایل
+
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded");
+            }
+
+            string fileName = DateTime.Now.ToString("yyyy-M-d dddd");
+            fileName += Path.GetExtension(file.FileName);
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","uploadPage" ,fileName);
+
+            using (var stream=new FileStream(filePath,FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            string url = $"/uploadPage/{fileName}";
+            return Json(new{uploaded=true,url});
+        }
     }
 }

@@ -34,7 +34,8 @@ namespace Application.Services.Page
         public async Task AddPage(AddPageDto model)
         {
             PageEntity page = model.Adapt<PageEntity>();
-            page.Banner = FileProcessing.SaveFile(model.BannerFile,  "Page");
+            page.Banner = FileProcessing.FileUpload(model.BannerFile,null, "Page");
+
             await _repository.Insert(page);
 
         }

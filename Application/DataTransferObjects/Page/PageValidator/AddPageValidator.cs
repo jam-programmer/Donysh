@@ -13,6 +13,7 @@ namespace Application.DataTransferObjects.Page.PageValidator
         {
             RuleFor(f => f.Location).NotNull();
             RuleFor(f => f.Title).NotNull();
+            RuleFor(f => f.Body).NotNull();
             
         }
     }

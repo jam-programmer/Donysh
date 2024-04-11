@@ -8,9 +8,9 @@
             @foreach (var item in Model.Companies!)
             {
             
-                    <div class="brand-box">
-                        <a href="@item.Link"><img src="~/Company/@item.LogoPath" alt="@item.Name" title="@item.Name"></a>
-                    </div>
+                <div class="brand-box">
+                    <a href="@item.Link"><img src="~/Company/@item.LogoPath" alt="@item.Name" title="@item.Name"></a>
+                </div>
                
             }
           
@@ -18,3 +18,27 @@
 
     </div> <!-- row -->
 </section>
+<script>
+    $(document).ready(function () {
+        $('#brand-slider-single').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000, // زمان تاخیر بین اسلایدها به میلی ثانیه
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        });
+    });
+
+</script>

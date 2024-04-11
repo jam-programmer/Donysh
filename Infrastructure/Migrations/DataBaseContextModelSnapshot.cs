@@ -499,6 +499,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("FaceBook")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FooterDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Instagram")
                         .HasColumnType("nvarchar(max)");
 

@@ -26,7 +26,7 @@ namespace Application.DataTransferObjects.Setting
         public string? SiteTitle { set; get; } 
 
         public string? AboutDescription { set; get; }
-
+        public string? FooterDescription { set; get; }
         public string? PartnerDescription { set; get; }
 
         public string? ServiceDescription { set; get; }

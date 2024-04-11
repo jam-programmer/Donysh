@@ -17,6 +17,7 @@ namespace Domain.Entities
         public string? Description { set; get; }
         public string? SiteTitle { set; get; } = "Donysh";
         public string? AboutDescription { set; get; }
+        public string? FooterDescription { set; get; }
         public string? PartnerDescription { set; get; }
         public string? ServiceDescription { set; get; }
         public string? TeamDescription { set; get; }
