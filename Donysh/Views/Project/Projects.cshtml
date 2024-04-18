@@ -1,4 +1,5 @@
-﻿@model Application.ViewModels.Main.ListGenerics<ProjectCard>
+﻿@using Donysh.Components
+@model Application.ViewModels.Main.ListGenerics<ProjectCard>
 @{
     ViewData["Title"] = "Projects";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -385,7 +386,11 @@
       
     </style>
 }
-@await Component.InvokeAsync("HeaderComponent", string.IsNullOrEmpty(Model.data) ? ViewBag.PageTitle : Model.data)
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = string.IsNullOrEmpty(Model.data) ? ViewBag.PageTitle : Model.data,
+    project = true
+       })
 
 
 

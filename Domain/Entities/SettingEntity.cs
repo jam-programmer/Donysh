@@ -28,6 +28,7 @@ namespace Domain.Entities
         public string? FaceBook { set; get; }
         public string? Instagram { set; get; }
         public string? AboutImage { set;get; }
+        public bool InfoEnable { set; get; }
         public string? WorkExperience { set; get; }
         public string? CompletedProject { set; get; }
         public string? BannerPageHeader { set; get; }

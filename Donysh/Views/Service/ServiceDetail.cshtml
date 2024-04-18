@@ -5,7 +5,18 @@
 }
 
 
-@await Component.InvokeAsync("HeaderComponent","Category Detail")
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = "Services",
+           project = false
+       })
+
+
+
+
+
+
 
 <section class="section">
     <div class="container">

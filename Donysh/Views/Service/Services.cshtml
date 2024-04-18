@@ -3,11 +3,21 @@
     ViewData["Title"] = "Services";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@await Component.InvokeAsync("HeaderComponent","Categories")
+
+
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+           title = "Services",
+           project = false
+       })
+
+
+
 <section class="section">
     <div class="container">
         <div class="row justify-content-center m-25px-b md-m-20px-b">
-            <div class="col-md-10 col-lg-5">
+            <div class="col-md-10 col-lg-10">
                 <div class="section-title">
                     <h2 class="theme-after">Categories</h2>
                     <p>@Html.Raw(Model.Description)</p>

@@ -5,7 +5,18 @@
 }
 
 
-@await Component.InvokeAsync("HeaderComponent","Project Detail")
+
+
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = "Project Detail",
+           project = false
+       })
+
+
+
+
 
 <section class="mb-5 p-5" style="margin-bottom: 500px;">
 
@@ -20,34 +31,35 @@
                 <div class="splide">
                     <div class="splide__track">
                         <ul class="splide__list ">
-                            <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 400px;" /></figure></li>
+                            <li class="splide__slide"><figure><img onclick="createModal('@Model.ProjectImage',1)" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 400px;" /></figure></li>
                             
                             @if (Model.Pictures!.Count > 1)
                             {
                                 @foreach (var item in Model.Pictures)
                                 {
-                                  
 
-                                    <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
+
+                                    <li class="splide__slide"><figure><img onclick="createModal('@item.Path',2)" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
                                 }
                             }
                        
                         </ul>
                     </div>
                 </div>
-                <div class="splide thumbnails " >
+                <div class="splide thumbnails " >@if (Model.Pictures!.Count > 1)
+                                                 {
                     <div class="splide__track">
                         <ul class="splide__list">
-                            <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 100px;" /></figure></li>
-                        
-                            @if (Model.Pictures!.Count > 1)
-                            {
+
+
+                                <li class="splide__slide"><figure><img onclick="createModal(@Model.ProjectImage,1)" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 100px;" /></figure></li>
+
                                 @foreach (var item in Model.Pictures)
                                 {
 
-                                    <li class="splide__slide"><figure><img onclick="this.requestFullscreen()" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
+                                    <li class="splide__slide"><figure><img onclick="createModal(@item.Path,2)" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
                                 }
-                            }
+                           
                             
                             
                             
@@ -55,9 +67,10 @@
                             
 
                         </ul>
-                    </div>
+                        </div>
+                    }
                 </div>
-                        
+                     
                     
 
 
@@ -239,6 +252,71 @@
             mainSplide.mount();
             thumbnailsSplide.mount();
         });
+
+
+
+        function createModal(img, type) {
+            // Create modal element
+            var modal = document.createElement("div");
+            modal.classList.add("modal", "fade","show" ,"bd-example-modal-lg");
+            modal.setAttribute("tabindex", "-1");
+            modal.setAttribute("id", "image");
+            modal.setAttribute("role", "dialog");
+            modal.setAttribute("aria-labelledby", "myLargeModalLabel");
+            modal.setAttribute("aria-hidden", "true");
+            modal.style.display = "block";
+
+            // Create modal dialog element
+            var modalDialog = document.createElement("div");
+            modalDialog.classList.add("modal-dialog", "modal-lg");
+
+            // Create modal content element
+            var modalContent = document.createElement("div");
+            modalContent.classList.add("modal-content");
+
+            var modalHeader = document.createElement("div");
+            modalHeader.classList.add("modal-header");
+
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.classList.add("close");
+            button.setAttribute("data-dismiss", "modal");
+            button.setAttribute("aria-label", "Close");
+            button.onclick = function () { var modal = document.getElementById("image"); modal.remove(); };
+            // اضافه کردن یک span به داخل دکمه
+            var span = document.createElement("span");
+            span.setAttribute("aria-hidden", "true");
+            span.innerHTML = "&times;";
+
+            button.appendChild(span);
+            modalHeader.appendChild(button);
+
+            var modalBody = document.createElement("div");
+            modalBody.classList.add("modal-body");
+
+            // Create image element
+            var image = document.createElement("img");
+            if (type === 1) {
+                image.src = "/Project/" + img;
+            } else {
+                image.src = "/Picture/" + img;
+            }
+            modalBody.appendChild(image);
+            // Append image to modal content
+            modalContent.appendChild(modalHeader);
+            modalContent.appendChild(modalBody);
+
+            // Append modal content to modal dialog
+            modalDialog.appendChild(modalContent);
+
+            // Append modal dialog to modal
+            modal.appendChild(modalDialog);
+
+            // Append modal to body
+            document.body.appendChild(modal);
+        }
+
     </script>
 }
 @section Style

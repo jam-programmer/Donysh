@@ -5,8 +5,12 @@
    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@await Component.InvokeAsync("HeaderComponent",Model.FullName);
 
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = Model.FullName,
+           project = false
+       })
 <section class="section">
     <div class="container">
         <div class="row" >

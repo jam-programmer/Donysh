@@ -3,7 +3,13 @@
     ViewData["Title"] = "Contatus";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@await Component.InvokeAsync("HeaderComponent","Contat Us");
+
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = "Contat Us",
+           project = false
+       })
 <section class="section gray-bg">
     <div class="container">
         <div class="row justify-content-center m-60px-b  md-m-40px-b">

@@ -199,6 +199,11 @@
                     <label for="regular-form-9" class="form-label">Completed Project</label>
                     <input id="regular-form-9" asp-for="CompletedProject" type="number" class="form-control w-75">
                 </div>
+                <div class="form-check p-3">
+                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" asp-for="InfoEnable" />
+                    <label class="form-check-label" for="checkbox-switch-7">Active Statistical Information</label>
+                </div>
+               
             </div>
         </div>
 
@@ -239,7 +244,7 @@
 
 
                 <div class="fallback">
-                    <label for="image_4" class="form-label mt-5">Project Page Banner File</label><br />
+                    <label for="image_4" class="form-label mt-5">Project Detaill Page Banner File</label><br />
                     <input  asp-for="FileProjectBanner" type="file" class="mt-1" />
                 </div>
 

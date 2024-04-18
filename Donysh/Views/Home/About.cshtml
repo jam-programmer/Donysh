@@ -1,10 +1,25 @@
-﻿@model AboutPage
+﻿
+@model AboutPage
 @{
     ViewData["Title"] = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@await Component.InvokeAsync("HeaderComponent","About");
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = "About",
+           project = false
+       })
+
+
+
+
+
+
+
+
+
 
 <section class="section">
     <div class="container">

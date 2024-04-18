@@ -17,7 +17,7 @@ namespace Application.Services.Ui
         Task<HomeTeamSection> GetHomeTeamSection();
         Task<HomeCompanySection> GetHomeCompanySection();
         Task<HomeInformationSection> GetHomeInformationSection();
-        Task<HeaderPage> GetHeaderPage(string titlePage);
+        Task<HeaderPage> GetHeaderPage(string titlePage,bool project);
         Task<ProjectDetail> GetProjectById(string id);
         Task<ServiceDetail> GetServiceDetailById(string id);
         Task<PdfOptions> ProjectPdfOption(string projectId);

@@ -68,7 +68,7 @@ namespace Application.DataTransferObjects.Setting
         public string ContactBanner { set; get; }
         public string ProjectBanner { set; get; }
         public string AboutBanner { set; get; }
-
+        public bool InfoEnable { set; get; }
         public IFormFile? FileCategoryBanner { set; get; }
         public IFormFile? FileWorkWithBanner { set; get; }
         public IFormFile? FileRequestBanner { set; get; }

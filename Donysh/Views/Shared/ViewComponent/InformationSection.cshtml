@@ -9,7 +9,7 @@
                         <i class="fa fa-map theme-color"></i>
                     </div>
                     @* <h3 class="font-alt">Satisfy Clients</h3> *@
-                    <p>
+                    <p class="mt-2">
                         <a href="https://www.google.com/maps?q=@(Model.Latitude),@(Model.Longitude)" style="color: white" target="_blank"> @Model.Address</a>
                        
                     </p>
@@ -21,8 +21,8 @@
                     <div class="icon">
                         <i class="fa fa-phone theme-color"></i>
                     </div>
-                    <h3 class="font-alt">HIGH QUALITY</h3>
-                    <p>@Model.PhoneNumber</p>
+                    <h3 class="font-alt mt-4">@Model.PhoneNumber </h3>
+                 
                 </div>
             </div> <!-- col -->
 
@@ -31,13 +31,10 @@
                     <div class="icon">
                         <i class="fa fa-envelope theme-color"></i>
                     </div>
-                    <h3 class="font-alt">24/7 SUPPORT</h3>
-                    <p>
-                        <a style="color: white"  href="mailto:@(Model.Email)">
-                            @Model.Email
-                        </a>
-                       
-                    </p>
+                    <h3 class="font-alt mt-4"> <a style="color: white"  href="mailto:@(Model.Email)">
+                        @Model.Email
+                    </a></h3>
+                   
                 </div>
             </div> <!-- col -->
         </div> <!-- row -->

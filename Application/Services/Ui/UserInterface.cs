@@ -128,7 +128,7 @@ namespace Application.Services.Ui
             return homeInformationSection;
         }
 
-        public async Task<HeaderPage> GetHeaderPage(string titlePage)
+        public async Task<HeaderPage> GetHeaderPage(string titlePage, bool project=false)
         {
             var setting = await _setting.GetSetting();
             HeaderPage page = setting.Adapt<HeaderPage>();
@@ -163,6 +163,12 @@ namespace Application.Services.Ui
                 default:
                     page.BannerPageHeader = setting.BannerPageHeader;
                     break;
+            }
+
+            if (project)
+            {
+                page.BannerPageHeader = setting.ProjectBanner == "default.jpg" ? setting.BannerPageHeader : setting.ProjectBanner;
+
             }
             return page;
         }
@@ -427,7 +433,13 @@ namespace Application.Services.Ui
             result.List = projects.Adapt<List<ProjectCard>>();
             result.Count = count;
             result.CurrentPage = page;
-            result.data =await query.Select(s => s.Status.Status).FirstOrDefaultAsync();
+            string title="All Projects";
+            if (!string.IsNullOrEmpty(filter))
+            {
+                title=await query.Select(s => s.Status.Status).FirstOrDefaultAsync();
+            }
+
+            result.data = title;
             if (count > 1 && projects.Count < 10 && page == 1)
             {
                 result.Pagination = false;

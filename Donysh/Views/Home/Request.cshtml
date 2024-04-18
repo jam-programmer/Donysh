@@ -5,7 +5,17 @@
     ViewData["Title"] = "REQUEST A QUOTE";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@await Component.InvokeAsync("HeaderComponent","REQUEST A QUOTE")
+
+
+
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+       {
+    title = "REQUEST A QUOTE",
+           project = false
+       })
+
+
 
 <section class="section gray-bg">
     <div class="container">
