@@ -49,9 +49,9 @@ namespace Application.ConfigMapster.UiMap.HomeMap
         public static TypeAdapterConfig HomePortfolioSectionServiceItem()
         {
             var config=new TypeAdapterConfig();
-            config.NewConfig<ServiceEntity,ServiceItem>()
+            config.NewConfig<StatusEntity,ServiceItem>()
                 .Map(v=>v.Id,e=>e.Id)
-                .Map(v=>v.Title,e=>e.Title)
+                .Map(v=>v.Status,e=>e.Status)
                 .Compile();
             return  config;
         }

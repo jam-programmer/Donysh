@@ -68,7 +68,28 @@ namespace Application.Core
             }
             return "default.jpg";
         }
+        public static string PdfUpload(IFormFile? file, string? fileName, string folder)
+        {
+            if (file == null && string.IsNullOrEmpty(fileName))
+            {
+                return "default.jpg";
+            }
 
-        
+            if (file == null && !string.IsNullOrEmpty(fileName))
+            {
+                return fileName;
+            }
+          
+                var path = FileProcessing.SaveFile(file, folder);
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    FileProcessing.RemoveFile(fileName, folder);
+                }
+                return path;
+            
+            return "default.jpg";
+        }
+
+
     }
 }

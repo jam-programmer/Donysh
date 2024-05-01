@@ -1,14 +1,12 @@
 ﻿using Application.ViewModels.Dashboard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Application.ViewModels.EmploymentAdvertisement;
+
 
 namespace Application.Services.Dashboard
 {
     public interface IDashboard
     {
+        Task<List<RequestEmployment>> GetLastResumes();
         Task<DashboardViewModel> GetDashboardAsync();
     }
 }

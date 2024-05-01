@@ -3,7 +3,7 @@ using Domain.Entities;
 using Infrastructure.Mapping.Register;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
+
 
 namespace Infrastructure.Context
 {
@@ -15,6 +15,8 @@ namespace Infrastructure.Context
         {
 
         }
+        public virtual DbSet<EmploymentAdvertisementEntity>? EmploymentAdvertisement { set; get; }
+        public virtual DbSet<ResumeEntity>? Resume { set; get; }
         public virtual DbSet<AboutEntity>? About { set; get; }
         public virtual DbSet<ScopeWorkEntity>? Scope { set; get; }
         public virtual DbSet<CompanyEntity>? Company { set; get; }

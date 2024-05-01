@@ -389,23 +389,69 @@ function PdfAppend(id) {
     }
 }
 
+//function GeneratePdf() {
+//    var pdfList = getCache("PdfCache");
+//    if (pdfList && pdfList.length>0) {
+//        try {
+
+//            fetch('/ExportSelectedProjects', {
+//                    method: 'POST',
+//                body: JSON.stringify(pdfList),
+//                    headers: {
+//                        'Content-Type': 'application/json'
+//                    }
+//                })
+//                .then(response => response.blob())
+//                .then(blob => {
+//                    const url = window.URL.createObjectURL(new Blob([blob]));
+//                    const a = document.createElement('a');
+//                    a.style.display = 'none';
+//                    a.href = url;
+//                    a.download = 'DonyshProjects.pdf';
+//                    document.body.appendChild(a);
+//                    a.click();
+//                    window.URL.revokeObjectURL(url);
+//                });
+//            ClearCache("PdfCache");
+//        } catch (error) {
+//            console.log('error', 'خطا: ' + error);
+//        }
+//    }
+
+
+//    if (!pdfList || pdfList.length === 0) {
+
+
+
+//        Swal.fire({
+//            title: "No project selected!",
+//            text: "Please select one or more projects",
+//            imageUrl: "/img/select.png",
+//            imageWidth: 400,
+//            imageHeight: 100,
+//            imageAlt: "Select image"
+//        });
+//    }
+//}
+
+
 function GeneratePdf(image) {
     debugger;
     var pdfList = getCache("PdfCache");
-    if (pdfList && pdfList.length>0) {
+    if (pdfList && pdfList.length > 0) {
         try {
 
             var model = {
-                request:  pdfList, Image: image
+                request: pdfList, Image: image
             };
 
             fetch('/ExportSelectedProjects', {
-                    method: 'POST',
+                method: 'POST',
                 body: JSON.stringify(model),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
                 .then(response => response.blob())
                 .then(blob => {
                     const url = window.URL.createObjectURL(new Blob([blob]));
@@ -438,6 +484,7 @@ function GeneratePdf(image) {
         });
     }
 }
+
 
 // Function to set a value in cache
 function setCache(key, value) {

@@ -4,9 +4,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 @section Script {
-    <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
+  @*   <script src="~/adminPanel/src/js/ckeditor-classic.js"></script>
     <script src="~/adminPanel/src/js/ckeditor.js"></script>
-    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script>
+    <script src="~/adminPanel/dist/js/ckeditor-classic.js"></script> *@
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Description');
+        CKEDITOR.replace('AboutDescription');
+        CKEDITOR.replace('PartnerDescription');
+        CKEDITOR.replace('ServiceDescription');
+        CKEDITOR.replace('TeamDescription');
+        CKEDITOR.replace('ProjectDescription');
+        CKEDITOR.replace('FooterDescription');
+    </script>
 }
 
 <form asp-area="Admin" asp-controller="Setting" asp-action="General" method="post" enctype="multipart/form-data">
@@ -247,6 +257,13 @@
                     <label for="image_4" class="form-label mt-5">Project Detaill Page Banner File</label><br />
                     <input  asp-for="FileProjectBanner" type="file" class="mt-1" />
                 </div>
+                <div class="fallback">
+                    <label for="image_4" class="form-label mt-5">
+                        To Carriers
+                        Page Banner File
+                    </label><br />
+                    <input asp-for="FileCarriersBanner" type="file" class="mt-1" />
+                </div>
 
 
                 <input type="hidden" asp-for="CategoryBanner"/>
@@ -256,7 +273,7 @@
                 <input type="hidden" asp-for="ProjectBanner" />
                 <input type="hidden" asp-for="AboutBanner" />
 
-
+                <input type="hidden" asp-for="CarrierBanner" />
 
 
             </div>
@@ -328,42 +345,42 @@
             <div class="p-5 mt-5">
                 <div class="mb-5">
                     <label class="form-label">Description</label>
-                    <textarea asp-for="Description" class="form-control editor ck ck-editor__main"></textarea>
+                    <textarea asp-for="Description" id="content"></textarea>
                 </div>
 
 
                 <div class="mt-5">
                     <label class="form-label">About Description</label>
-                    <textarea asp-for="AboutDescription" class="form-control editor ck ck-editor__main"></textarea>
+                    <textarea asp-for="AboutDescription" id="content"></textarea>
                 </div>
 
                 <div class="mt-5">
                     <label class="form-label">Partner Description</label>
-                    <textarea asp-for="PartnerDescription" class="form-control editor ck ck-editor__main"></textarea>
+                    <textarea asp-for="PartnerDescription" id="content"></textarea>
                 </div>
 
 
                 <div class="mt-5">
                     <label class="form-label">Service Description</label>
-                    <textarea asp-for="ServiceDescription" class="form-control editor ck ck-editor__main"></textarea>
+                    <textarea asp-for="ServiceDescription" id="content"></textarea>
                 </div>
 
 
                 <div class="mt-5">
                     <label class="form-label">Team Description</label>
-                    <textarea asp-for="TeamDescription" class="form-control editor ck ck-editor__main"></textarea>
+                    <textarea asp-for="TeamDescription" id="content"></textarea>
                 </div>
 
 
                 <div class="mt-5">
                     <label class="form-label">Project Description</label>
-                    <textarea class="form-control editor ck ck-editor__main" asp-for="ProjectDescription"></textarea>
+                    <textarea id="content" asp-for="ProjectDescription"></textarea>
                 </div>
 
 
                 <div class="mt-5">
                     <label class="form-label">Footer Description</label>
-                    <textarea class="form-control editor ck ck-editor__main" asp-for="FooterDescription"></textarea>
+                    <textarea id="content" asp-for="FooterDescription"></textarea>
                 </div>
 
 

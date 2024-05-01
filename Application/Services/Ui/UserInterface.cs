@@ -33,6 +33,7 @@ namespace Application.Services.Ui
         private readonly IRepository<ServiceEntity> _service;
         private readonly IDapper<ProjectBox> _dapper;
         private readonly IRepository<TeamEntity> _team;
+        private readonly IRepository<EmploymentAdvertisementEntity> _employment;
         private readonly IRepository<CompanyEntity> _company;
         private readonly IRepository<ProjectEntity> _projectRepository;
         private readonly IRepository<PictureEntity> _pictureRepository;
@@ -42,8 +43,9 @@ namespace Application.Services.Ui
         private readonly IRepository<ContactEntity> _contactRepository;
         private readonly ISender _sender;
         private readonly IHttpContextAccessor _accessor;
-
-        public UserInterface(IWebHostEnvironment hostingEnvironment, IRepository<ScopeWorkEntity> scopeRepository, ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender, IHttpContextAccessor accessor)
+        private readonly IRepository<StatusEntity> _statuses;
+        public UserInterface(IWebHostEnvironment hostingEnvironment, IRepository<StatusEntity> statuses,
+            IRepository<ScopeWorkEntity> scopeRepository, ISetting setting, IDapper<ProjectServices> dapperService, IRepository<ServiceEntity> service, IDapper<ProjectBox> dapper, IRepository<TeamEntity> team, IRepository<EmploymentAdvertisementEntity> employment, IRepository<CompanyEntity> company, IRepository<ProjectEntity> projectRepository, IRepository<PictureEntity> pictureRepository, IRepository<PageEntity> pageRepository, IRepository<RequestEntity> requestRepository, IRepository<AboutEntity> about, IRepository<ContactEntity> contactRepository, ISender sender, IHttpContextAccessor accessor)
         {
             _hostingEnvironment = hostingEnvironment;
             _scopeRepository = scopeRepository;
@@ -52,6 +54,8 @@ namespace Application.Services.Ui
             _service = service;
             _dapper = dapper;
             _team = team;
+            _statuses = statuses;
+            _employment = employment;
             _company = company;
             _projectRepository = projectRepository;
             _pictureRepository = pictureRepository;
@@ -62,7 +66,6 @@ namespace Application.Services.Ui
             _sender = sender;
             _accessor = accessor;
         }
-
 
         public async Task<HomeAboutSection> GetHomeAboutSection()
         {
@@ -83,14 +86,14 @@ namespace Application.Services.Ui
 
         public async Task<HomePortfolioSection> GetHomePortfolioSection(bool home)
         {
-            var service = await _service.GetAll();
+            var statuses = await _statuses.GetAll();
             var setting = await _setting.GetSetting();
             HomePortfolioSection homePortfolioSection = new();
             var projects = await _dapper.Execute("[dbo].[SP_GetLastProject]", home);
             homePortfolioSection.Projects = projects;
             homePortfolioSection.Description = setting.ProjectDescription;
-            var serviceItems = service.ToList();
-            homePortfolioSection.ServiceItems = serviceItems.Adapt<List<ServiceItem>>();
+            //var serviceItems = service.ToList();
+            homePortfolioSection.ServiceItems = statuses.Adapt<List<ServiceItem>>();
             return homePortfolioSection;
         }
 
@@ -154,12 +157,13 @@ namespace Application.Services.Ui
                 case "Project Detail":
                     page.BannerPageHeader = setting.ProjectBanner == "default.jpg" ? setting.BannerPageHeader : setting.ProjectBanner;
                     break;
-                case "Categories":
+                case "Services":
                     page.BannerPageHeader = setting.CategoryBanner == "default.jpg" ? setting.BannerPageHeader : setting.CategoryBanner;
                     break;
-                case "Category Detail":
-                    page.BannerPageHeader = setting.CategoryBanner == "default.jpg" ? setting.BannerPageHeader : setting.CategoryBanner;
+                case "To Carriers":
+                    page.BannerPageHeader = setting.CategoryBanner == "default.jpg" ? setting.BannerPageHeader : setting.CarrierBanner;
                     break;
+
                 default:
                     page.BannerPageHeader = setting.BannerPageHeader;
                     break;
@@ -416,16 +420,41 @@ namespace Application.Services.Ui
             return header;
         }
 
-        public async Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null)
+        public async Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null, string? category = null)
         {
             int pageSelected = page;
-            int count = await _projectRepository.GetCount();
+            int count = 0;
+            var res = await _projectRepository.GetByQuery();
+            if (!string.IsNullOrEmpty(filter) && string.IsNullOrEmpty(category))
+            {
+               
+                count = res.Count(w => w.StatusForeignKey == filter);
+            }else if (!string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
+            {
+                count = res.Count(w => w.StatusForeignKey == filter && w.ScopeForeignKey==category);
+            }else if(string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
+            {
+                count = res.Count(w => w.ScopeForeignKey == category);
+            }
+            else
+            {
+                count = await _projectRepository.GetCount();
+            }
+
             int pageSkip = (page - 1) * 10;
             var query = await _projectRepository.GetByQuery();
-            if (!string.IsNullOrEmpty(filter))
+            query = query.Include(i => i.Status);
+            if (!string.IsNullOrEmpty(filter) && string.IsNullOrEmpty(category))
             {
-                query = query.Include(i => i.Status);
+               
                 query = query.Where(w => w.StatusForeignKey == filter);
+            }
+            else if(!string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
+            {
+                query = query.Where(w => w.StatusForeignKey == filter && w.ScopeForeignKey==category);
+            }else if(string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
+            {
+                query = query.Where(w => w.ScopeForeignKey == category);
             }
             var projects = await query.Skip(pageSkip).Take(10).ToListAsync();
             count = count.PageCount(10);
@@ -725,6 +754,20 @@ namespace Application.Services.Ui
             var result = await _scopeRepository.GetAll();
             List<ScopeItem> scopes = result.Adapt<List<ScopeItem>>();
             return scopes;
+        }
+
+        public async Task<List<EmploymentBox>> GetEmployments()
+        {
+            var list = await _employment.GetAll();
+            List<EmploymentBox> boxes = list.Where(w=>w.IsDeleted==false && w.Active==true).Adapt<List<EmploymentBox>>();
+            return boxes;
+        }
+
+        public async Task<EmploymentDetail> GetEmploymentById(string id)
+        {
+            var model = await _employment.GetByIdAsync(id);
+            EmploymentDetail detail = model!.Adapt<EmploymentDetail>();
+            return detail;
         }
     }
 }

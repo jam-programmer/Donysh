@@ -1,8 +1,10 @@
 ﻿using Donysh.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Application.DataTransferObjects.EmploymentAdvertisement;
 using Application.DataTransferObjects.Feedback;
 using Application.Services.Company;
+using Application.Services.EmploymentAdvertisement;
 using Application.Services.Feedback;
 using Application.Services.Service;
 using Application.Services.Team;
@@ -21,7 +23,9 @@ namespace Donysh.Controllers
 
         private readonly ITeam _team;
 
-        public HomeController(ILogger<HomeController> logger, IUserInterface userInterface, IService service, ICompany company, IFeedback feedback, ITeam team)
+        private readonly IEmploymentAdvertisement _employment;
+
+        public HomeController(ILogger<HomeController> logger, IUserInterface userInterface, IService service, ICompany company, IFeedback feedback, ITeam team, IEmploymentAdvertisement employment)
         {
             _logger = logger;
             _userInterface = userInterface;
@@ -29,6 +33,7 @@ namespace Donysh.Controllers
             _company = company;
             _feedback = feedback;
             _team = team;
+            _employment = employment;
         }
         [Route("/")]
         public async Task<IActionResult> Index()
@@ -118,8 +123,25 @@ namespace Donysh.Controllers
             var model = await _team.GetMemberInformationByIdAsync(id);
             return View(model);
         }
-
-
+        [Route("/Home/ToCarriers")]
+        public async Task<IActionResult> Employments()
+        {
+            var pageModel = await _userInterface.GetEmployments();
+            return View("Carriers", pageModel);
+        }
+        [Route("/Home/CarrierDetail")]
+        public async Task<IActionResult> EmploymentDetail(string id)
+        {
+            var pageModel = await _userInterface.GetEmploymentById(id);
+            return View("CarrierDetail", pageModel);
+        }
+        [HttpPost]
+        [Route("/RequestCV")]
+        public async Task<JsonResult> ResumeRequest([FromForm] AddResumeDto request)
+        {
+            await _employment.AddResumeAsync(request);
+            return Json(true);
+        }
 
     }
 }

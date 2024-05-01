@@ -1,0 +1,118 @@
+﻿@model Application.DataTransferObjects.EmploymentAdvertisement.UpdateEmploymentAdvertisementDto
+@{
+    ViewData["Title"] = "Edit Request";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (ViewBag.Alert != null)
+{
+    <div onclick="closeAlert()" style="width: 60%;" class="alert alert-warning-soft show flex items-center mt-5" id="closeAlert" role="alert">
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x block mx-auto"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <strong class="ml-5">  @ViewBag.Alert</strong>
+    </div>
+
+}
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+        <h2 class="font-medium text-base mr-auto">
+            Edit Request
+        </h2>
+
+    </div>
+    <div id="input" class="p-5">
+        <form asp-area="Admin" asp-controller="EmploymentAdvertisement" asp-action="Edit" method="post">
+            <div class="mb-5">
+                <div>
+                    <label class="form-label mt-3">Job Title</label>
+                    <input asp-for="JobTitle" placeholder="Job Title..." type="text" class="form-control">
+                </div>
+
+
+                <div>
+                    <label class="form-label mt-3">Employment Type</label>
+                    <input asp-for="EmploymentType" placeholder="Employment Type..." type="text" class="form-control">
+                </div>
+
+                <input type="hidden" asp-for="Id"/>
+                <div>
+                    <label class="form-label mt-3">Experience</label>
+                    <input asp-for="Experience" placeholder="Experience..." type="text" class="form-control">
+                </div>
+
+
+                <div>
+                    <label class="form-label mt-3">Specific Duties / Responsibilities </label>
+                    <input asp-for="SpecificDutiesResponsibilities" placeholder="Specific Duties/Responsibilities" type="text" class="form-control">
+                </div>
+
+                <div>
+                    <label class="form-label mt-3">Minimum Position Requirements </label>
+                    <input asp-for="MinimumPositionRequirements" placeholder="Minimum Position Requirements" type="text" class="form-control">
+                </div>
+
+
+
+
+                <div>
+                    <label class="form-label mt-3">Workplace Information</label>
+                    <input asp-for="WorkplaceInformation" placeholder="Workplace Information..." type="text" class="form-control">
+                </div>
+
+
+
+
+
+
+                <div>
+                    <label class="form-label mt-3">Rate </label>
+                    <input asp-for="Rate" placeholder="Rate..." type="text" class="form-control">
+                </div>
+
+
+
+
+
+
+                <div>
+                    <label class="form-label mt-3">Education </label>
+                    <input asp-for="Education" placeholder="Education..." type="text" class="form-control">
+                </div>
+
+
+
+
+
+                <div>
+                    <label class="form-label mt-3"> DatePosted  </label>
+                    <input asp-for=" DatePosted " placeholder=" DatePosted ..." type="text" class="form-control">
+                </div>
+
+
+                <div class="mb-5 mt-3">
+                    <label class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+
+                </div>
+
+                <div class="form-check p-3">
+                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" asp-for="Active" />
+                    <label class="form-check-label" for="checkbox-switch-7">Active / Inactive</label>
+                </div>
+
+
+
+
+
+            </div>
+            <button class=" btn btn-primary " type="submit">Submit</button>
+            <a asp-controller="EmploymentAdvertisement" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
+        </form>
+    </div>
+</div>
+
+
+

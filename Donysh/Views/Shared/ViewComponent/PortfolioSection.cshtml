@@ -21,10 +21,8 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="section-title">
                     <h2 class="theme-after">Our Portfolio</h2>
-                    <p>
-                        @Html.Raw(Model.Description)
-                    </p>
-                </div>
+                   
+                </div>  @Html.Raw(Model.Description)
             </div>
         </div>
 
@@ -33,7 +31,7 @@
                 <li class="active" data-filter="*">All</li>
                 @foreach (var item in Model.ServiceItems!)
                 {
-                    <li data-filter=".@item.Id" class="">@item.Title</li>
+                    <li data-filter=".@item.Id" class="">@item.Status</li>
                 }
 
             </ul>
@@ -43,7 +41,7 @@
             <ul class="portfolio-cols portfolio-cols-4">
               @foreach (var item in Model.Projects!)
               {
-                  <li class="portfolio-item @item.ServiceId" style="position: absolute; left: 0px; top: 0px;">
+                  <li class="portfolio-item @item.StatusForeignKey" style="position: absolute; left: 0px; top: 0px;">
                       <div class="portfolio-col portfolio-hover-04">
                             <img src="~/Project/@item.ProjectImage" title="@item.ProjectName" alt="@item.ProjectName">
                           <a asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id" class="overlay theme-bg"></a>

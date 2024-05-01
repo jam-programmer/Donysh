@@ -10,8 +10,8 @@ namespace Application.ViewModels.Ui.Home
     {
         public string? Location { set; get; }
         public string? Description { set; get; }
-        public string?ServiceId { set; get; }
-        public string?ServiceTitle { set; get; }
+        public string? StatusForeignKey { set; get; }
+        public string? StatusTitle { set; get; }
         public string? Id { set; get; }
         public string? ProjectName { get; set; }
         public string? ProjectImage { set; get; }

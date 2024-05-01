@@ -1,0 +1,143 @@
+﻿@model EmploymentDetail
+@{
+    ViewData["Title"] = "Carrier Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style
+{
+    <style>
+        .text-orange {
+            color: #ee5c26 !important;
+        }
+    </style>
+}
+
+@await Component.InvokeAsync("HeaderComponent", new HeaderModel()
+{
+    title = "To Carriers",
+    project = false
+})
+<section class="section">
+    <div class="container">
+        <div class="row ">
+            <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-orange">@Model.JobTitle</h2>
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a  data-toggle="modal" data-target="#cvForm" class="p-2 font-bold mb-5 btn btn-sm btn-danger text-white">
+                                Submitting CV
+                            </a>
+                           
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Specific Duties/Responsibilities
+
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.SpecificDutiesResponsibilities</a>
+
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Minimum Position Requirements
+
+
+                            </a>
+                            <a class="list-group-item list-group-item-action ">@Model.MinimumPositionRequirements</a>
+
+
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Employment Type
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.EmploymentType</a>
+
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Experience
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.Experience</a>
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Workplace Information
+
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.WorkplaceInformation</a>
+
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Rate
+
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.Rate</a>
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Education
+
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.Education</a>
+
+                            <a class="list-group-item list-group-item-action active text-white">
+                                Date Posted
+
+                            </a>
+                            <a class="list-group-item list-group-item-action">@Model.DatePosted</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="cvForm" tabindex="-1" role="dialog"
+     aria-labelledby="cvForm" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"> Submitting CV </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input id="fullName" type="text" class="form-control form-control-sm" placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input id="PhoneNumber" type="text" class="form-control form-control-sm" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" id="email" class="form-control form-control-sm" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+
+                        <textarea class="form-control" id="description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload File</label>
+                        <input type="file" class="form-control-file" id="file" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a onclick="SendCv('@Model.Id')" class="btn btn-primary text-white">Send </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    @section Script
+                    {
+                        <script src="~/js/site.js"></script>
+                    }

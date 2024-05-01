@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Application.Services.Dashboard;
 using Application.Services.Feedback;
 using Application.Services.Sender;
+using Application.Services.EmploymentAdvertisement;
 
 namespace Application.Configuration
 {
@@ -38,6 +39,7 @@ namespace Application.Configuration
             service.AddScoped<IDashboard, Dashboard>();
             service.AddScoped<IFeedback, Feedback>();
             service.AddScoped<ISender, Sender>();
+            service.AddScoped<IEmploymentAdvertisement, EmploymentAdvertisement>();
         }
     }
 }

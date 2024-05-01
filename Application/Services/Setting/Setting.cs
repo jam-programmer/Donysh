@@ -121,7 +121,11 @@ namespace Application.Services.Setting
             {
                 setting.AboutBanner = FileProcessing.FileUpload(setting.FileAboutBanner, setting.AboutBanner, "Setting");
             }
-            
+            if (setting.FileCarriersBanner != null)
+            {
+                setting.CarrierBanner = FileProcessing.FileUpload(setting.FileCarriersBanner, setting.CarrierBanner, "Setting");
+            }
+
             var findSetting = await _repository.FirstOrDefaultAsync();
             if (findSetting == null)
             {

@@ -23,6 +23,7 @@ namespace Infrastructure.Mapping.Register
             builder.ApplyConfiguration(new SettingMapping());
             builder.ApplyConfiguration(new PictureMapping());
             builder.ApplyConfiguration(new ContactMapping());
+            builder.ApplyConfiguration(new EmploymentAdvertisementMapping());
         }
 
     }

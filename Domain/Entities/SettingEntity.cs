@@ -50,5 +50,6 @@ namespace Domain.Entities
         public string ContactBanner { set; get; }
         public string ProjectBanner { set; get; }
         public string AboutBanner { set; get; }
+        public string CarrierBanner { set; get; }
     }
 }

@@ -9,10 +9,10 @@
 
 
 @await Component.InvokeAsync("HeaderComponent", new HeaderModel()
-       {
+{
     title = "Project Detail",
-           project = false
-       })
+    project = false
+})
 
 
 
@@ -31,51 +31,74 @@
                 <div class="splide">
                     <div class="splide__track">
                         <ul class="splide__list ">
-                            <li class="splide__slide"><figure><img onclick="createModal('@Model.ProjectImage',1)" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 400px;" /></figure></li>
-                            
+                            <li class="splide__slide"><figure>
+                                    <a data-fancybox="images" href="~/Project/@Model.ProjectImage">
+                                        <img  src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 400px;" />
+                                    </a>
+                                </figure>
+                            </li>
+
                             @if (Model.Pictures!.Count > 1)
                             {
                                 @foreach (var item in Model.Pictures)
                                 {
 
 
-                                    <li class="splide__slide"><figure><img onclick="createModal('@item.Path',2)" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
+                                    <li class="splide__slide"><figure>
+                                            <a data-fancybox="images" href="~/Picture/@item.Path">
+                                                <img  src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" />
+                                            </a>
+                                    </figure></li>
                                 }
                             }
-                       
+
                         </ul>
                     </div>
                 </div>
-                <div class="splide thumbnails " >@if (Model.Pictures!.Count > 1)
-                                                 {
-                    <div class="splide__track">
-                        <ul class="splide__list">
+                <div class="splide thumbnails ">
+                    @if (Model.Pictures!.Count > 1)
+                    {
+                        <div class="splide__track">
+                            <ul class="splide__list">
 
 
-                                <li class="splide__slide"><figure><img onclick="createModal(@Model.ProjectImage,1)" src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 100px;" /></figure></li>
+                                <li class="splide__slide">
+                                    <figure>
+                                        <a data-fancybox="images" href="~/Project/@Model.ProjectImage">
+                                            <img src="~/Project/@Model.ProjectImage" alt="@Model.ProjectName" style="width: 100%; height: 100px;" />
+                                        </a>
+                                    </figure>
+
+                                </li>
 
                                 @foreach (var item in Model.Pictures)
                                 {
 
-                                    <li class="splide__slide"><figure><img onclick="createModal(@item.Path,2)" src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" /></figure></li>
+                                    <li class="splide__slide">
+                                        <figure>
+                                            <a data-fancybox="images" href="~/Picture/@item.Path">
+                                                <img src="~/Picture/@item.Path" alt="@item.Alt" id="@item.Id" title="@item.Title" style="width: 100%; height: 400px;" />
+                                            </a>
+                                        </figure>
+                                    </li>
                                 }
-                           
-                            
-                            
-                            
-                            
-                            
 
-                        </ul>
+
+
+
+
+
+
+                            </ul>
                         </div>
                     }
                 </div>
-                     
-                    
 
 
 
-              
+
+
+
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 
@@ -154,7 +177,7 @@
                         <span class="font-bold">Start Date:</span>   @Model.StartDate
 
                     </div>
-                </div> 
+                </div>
             }
             @if (Model.IsCompletionDate)
             {
@@ -168,54 +191,54 @@
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
-                        
-                        @if (Model.IsReferenceContactName)
-                        {
-                            <th scope="col">Name</th>
-                        }
-                        @if (Model.IsReferenceContactEmail)
-                        {
-                            <th scope="col">Email</th>
-                        }
-                        @if (Model.IsReferenceContactPhone)
-                        {
-                            <th scope="col">Phone Number</th>
-                        }
-                       
-                       
-
-                       
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        @if (Model.IsReferenceContactName)
-                        {
-                            <td>@Model.ReferenceContactName</td>
-                        }
-                        @if (Model.IsReferenceContactEmail)
-                        {
-                            <td>@Model.ReferenceContactEmail</td>
-                        }
-                        @if (Model.IsReferenceContactPhone)
-                        {
-                            <td>@Model.ReferenceContactPhone</td>
-                        }
-                          
-                           
-
-                           
-                    </tr>
-                    @if (Model.IsReferenceContactAddress)
-                    {
                         <tr>
 
+                            @if (Model.IsReferenceContactName)
+                            {
+                                <th scope="col">Name</th>
+                            }
+                            @if (Model.IsReferenceContactEmail)
+                            {
+                                <th scope="col">Email</th>
+                            }
+                            @if (Model.IsReferenceContactPhone)
+                            {
+                                <th scope="col">Phone Number</th>
+                            }
 
-                            <td colspan="12">@Model.ReferenceContactAddress</td>
+
+
+
                         </tr>
-                    }
-                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @if (Model.IsReferenceContactName)
+                            {
+                                <td>@Model.ReferenceContactName</td>
+                            }
+                            @if (Model.IsReferenceContactEmail)
+                            {
+                                <td>@Model.ReferenceContactEmail</td>
+                            }
+                            @if (Model.IsReferenceContactPhone)
+                            {
+                                <td>@Model.ReferenceContactPhone</td>
+                            }
+
+
+
+
+                        </tr>
+                        @if (Model.IsReferenceContactAddress)
+                        {
+                            <tr>
+
+
+                                <td colspan="12">@Model.ReferenceContactAddress</td>
+                            </tr>
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -258,7 +281,7 @@
         function createModal(img, type) {
             // Create modal element
             var modal = document.createElement("div");
-            modal.classList.add("modal", "fade","show" ,"bd-example-modal-lg");
+            modal.classList.add("modal", "fade", "show", "bd-example-modal-lg");
             modal.setAttribute("tabindex", "-1");
             modal.setAttribute("id", "image");
             modal.setAttribute("role", "dialog");
@@ -321,12 +344,11 @@
 }
 @section Style
 {
-    <link rel="stylesheet" href="~/Slider/css/splide.min.css"/>
-    <link rel="stylesheet" href="~/Slider/css/splide-core.min.css"/>
+    <link rel="stylesheet" href="~/Slider/css/splide.min.css" />
+    <link rel="stylesheet" href="~/Slider/css/splide-core.min.css" />
     <style>
         .splide {
             width: 100%;
-
         }
 
         .splide__slide {
@@ -337,17 +359,35 @@
             font-size: 3rem;
             height: 100%;
         }
-        .is-active{
+
+        .is-active {
             border: none !important;
         }
+
         .splide.thumbnails {
             height: 80px;
             margin-top: 1rem;
         }
 
-        .splide.thumbnails .splide__slide {
-            height: 100%;
-            width: 100px;
-        }
+            .splide.thumbnails .splide__slide {
+                height: 100%;
+                width: 100px;
+            }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("[data-fancybox]").fancybox({
+                loop: true,
+                buttons: [
+                    "slideShow",
+                    "fullScreen",
+                    "thumbs",
+                    "close"
+                ]
+            });
+        });
+    </script>
 }

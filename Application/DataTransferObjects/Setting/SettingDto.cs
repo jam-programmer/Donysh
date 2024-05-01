@@ -68,6 +68,7 @@ namespace Application.DataTransferObjects.Setting
         public string ContactBanner { set; get; }
         public string ProjectBanner { set; get; }
         public string AboutBanner { set; get; }
+        public string CarrierBanner { set; get; }
         public bool InfoEnable { set; get; }
         public IFormFile? FileCategoryBanner { set; get; }
         public IFormFile? FileWorkWithBanner { set; get; }
@@ -75,5 +76,6 @@ namespace Application.DataTransferObjects.Setting
         public IFormFile? FileContactBanner { set; get; }
         public IFormFile? FileProjectBanner { set; get; }
         public IFormFile? FileAboutBanner { set; get; }
+        public IFormFile? FileCarriersBanner { set; get; }
     }
 }

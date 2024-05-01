@@ -24,12 +24,14 @@ namespace Application.Services.Ui
         Task<Footer> GetFooter();
         Task<PageDetail> GetPage(string id);
         Task<Header> GetMenu();
-        Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null);
+        Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null,string? category=null);
         Task<bool> AddRequest(RequestInfo request);
         Task<AboutPage> GetAboutPage();
         Task<bool> AddContactRequest(RequestContact request);
         Task<List<ItemViewModel>> GetServices();
         Task<PdfOptions> ProjectsPdfOption(ExportRequest request);
         Task<List<ScopeItem>> GetScopes();
+        Task<List<EmploymentBox>> GetEmployments();
+        Task<EmploymentDetail> GetEmploymentById(string id);
     }
 }

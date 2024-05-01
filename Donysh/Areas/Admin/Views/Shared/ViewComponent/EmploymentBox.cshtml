@@ -1,0 +1,63 @@
+﻿@model List<Application.ViewModels.EmploymentAdvertisement.RequestEmployment>
+
+@if (Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        <div class="intro-y col-span-12 lg:col-span-9">
+            <!-- BEGIN: Basic Table -->
+            <div class="intro-y box">
+                <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
+                    <h2 class="font-medium text-base mr-auto">
+                        Job application for: @item.JobTitle
+                    </h2>
+
+                </div>
+                <div class="p-5" id="basic-table">
+                    <div class="preview" style="display: block; opacity: 1;">
+                        <div class="overflow-x-auto">
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Full Name</th>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">
+                                        Time of sending the request
+                                    </th>
+
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Resume File</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach (var request in item.Resumes)
+                                {
+                                    <tr>
+                                        <td class="border-b dark:border-dark-5">@request.FullName</td>
+                                        <td class="border-b dark:border-dark-5">@request.CreateTime.ToString("g")</td>
+
+
+                                        <td class="border-b dark:border-dark-5">
+                                            @if (request.CvFilePath != "default.jpg")
+                                            {
+                                                <a href="~/Resume/@request.CvFilePath" class="btn btn-sm btn-warning">Download</a>
+                                              
+                                            }
+                                            <a onclick="InfoResume('@request.FullName','@request.Email','@request.PhoneNumber','@request.Description')" class="btn btn-sm btn-primary">info</a>
+                                        </td>
+
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END: Basic Table -->
+        </div>
+    }
+}
