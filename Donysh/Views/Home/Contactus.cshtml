@@ -66,14 +66,21 @@
                     <i class="icon fas fa-map-marker-alt theme-color"></i>
                     <div class="feature-content">
                         <h3>Address</h3>
-                        <p>@Model.Address </p>
+                        <p class="mt-2">
+                            <a href="https://www.google.com/maps?q=@(Model.Latitude),@(Model.Longitude)" style="color: white" target="_blank"> @Model.Address</a>
+
+                        </p>
                     </div>
                 </div> <!-- feature-box-02 -->
                 <div class="feature-box box02 m-20px-b">
                     <i class="icon  far fa-envelope theme-color"></i>
                     <div class="feature-content">
                         <h3>E-mail Us</h3>
-                        <p>@Model.Email</p>
+                        <p>
+                            <a style="color: white" href="mailto:@(Model.Email)">
+                                @Model.Email
+                            </a>
+                        </p>
                     </div>
                 </div> <!-- feature-box-02 -->
                 <div class="feature-box m-20px-b">

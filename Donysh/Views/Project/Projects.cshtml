@@ -437,11 +437,13 @@
                        <a class="m-btn  text-white"
                           style="background-color: #ff5722 !important"
                           asp-controller="Project" asp-action="ProjectDetail" asp-route-projectId="@item.Id">View more</a>
-
-                       <a class="m-btn  text-white"
-                          id="@item.Id" data-pdf="false" onclick="PdfAppend('@item.Id')"
-
-                          style="background-color: red !important"><i class="fas fa-print"></i></a>
+@if(User.Identity!.IsAuthenticated)
+                        {
+                            <a class="m-btn  text-white"
+                               id="@item.Id" data-pdf="false" onclick="PdfAppend('@item.Id')"
+                               style="background-color: red !important"><i class="fas fa-print"></i></a>
+                        }
+                      
                    </div>
                </div>
            </div>
@@ -454,7 +456,7 @@
 
     </div>
     
-    <div class="row">
+  @*   <div class="row">
         
         <nav aria-label="...">
             <ul class="pagination">
@@ -488,6 +490,12 @@
                 }
             </ul>
         </nav>
+        
+
+    </div> *@
+    
+    @if(User.Identity!.IsAuthenticated)
+    {
         <div class="btn-group mb-3 mx-3" role="group">
             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-print"></i>
@@ -497,8 +505,8 @@
                 <a class="dropdown-item" onclick="GeneratePdf(2)" style="cursor: pointer;">Generate With Out Image</a>
             </div>
         </div>
-
-    </div>
+    }
+ 
 </div>
 
 

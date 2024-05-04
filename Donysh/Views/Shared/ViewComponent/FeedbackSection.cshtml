@@ -3,7 +3,7 @@
     @foreach (var item in Model)
     {
         <div class="col-md-6 col-xl-6 col-lg-6 col-12 col-sm-12 ">
-            <div class="row" >
+        <div class="row" style="border: 1px solid #e5e4e4;padding:5px;border-radius:15px;margin:2px;">
                 <div class="col-sm-3">
                 @if (item.FilePath == "default.jpg")
                    {
@@ -11,12 +11,12 @@
                    }
                    else
                    {
-                    <img onclick="ShowImage('@item.CompanyName','@item.Description','@item.FilePath')" src="~/Feedback/@item.FilePath" alt="" class="rounded-circle img-fluid" />
+                    <img onclick="ShowImage('@item.CompanyName','@item.Description','@item.FilePath')" src="~/Feedback/@item.FilePath" alt="" class="rounded-circle img-fluid img-feedback" />
                    }
                 </div>
                 <div class="col-sm-9">
                     <h5><span class="text-primary">Company Name:</span>@item.CompanyName</h5>
-                    <small style="color: black">@item.Description</small>
+                    <p style="color: black;font-size:16px;">@item.Description</p>
                     <small class="smallest mute">- @item.FullName</small>
                 </div>
             </div>

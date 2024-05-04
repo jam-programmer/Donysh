@@ -27,8 +27,56 @@ namespace Donysh.Areas.Admin.Controllers
                 await _feedback.GetFeedbackAsync(page, pageSize, search);
             return View(pageModel);
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Review(string id)
+        //{
+        //    var pageModel = await _feedback.GetById(id);
+        //    ViewBag.Base = _generator.UrlSite() + "/Feedback/";
+        //    return View(pageModel);
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> Review(UpdateFeedbackDto model)
+        //{
+
+        //    await _feedback.UpdateAsync(model);
+        //        return RedirectToAction(nameof(Index));
+         
+        //}
         [HttpGet]
-        public async Task<IActionResult> Review(string id)
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(AddFeedbackDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _feedback.AddAsync(model);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(model);
+           
+          
+        }
+
+        [HttpGet]
+        [Route("/Admin/Feedback/Delete/{id}")]
+        public async Task<bool> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return false;
+            }
+
+            var result = await _feedback.DeleteFeedbackById(id);
+            return result;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
         {
             var pageModel = await _feedback.GetById(id);
             ViewBag.Base = _generator.UrlSite() + "/Feedback/";
@@ -36,12 +84,20 @@ namespace Donysh.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Review(UpdateFeedbackDto model)
+        public async Task<IActionResult> Edit(UpdateFeedbackDto model)
         {
-
-            await _feedback.UpdateAsync(model);
+    
+            if (ModelState.IsValid)
+            {
+                await _feedback.UpdateAsync(model);
                 return RedirectToAction(nameof(Index));
-         
+            }
+            ViewBag.Base = _generator.UrlSite() + "/Feedback/";
+          
+            return View(model);
         }
+
+
+
     }
 }

@@ -420,28 +420,28 @@ namespace Application.Services.Ui
             return header;
         }
 
-        public async Task<ListGenerics<ProjectCard>> GetListProject(int page, string? filter = null, string? category = null)
+        public async Task<ListGenerics<ProjectCard>> GetListProject(/*int page,*/ string? filter = null, string? category = null)
         {
-            int pageSelected = page;
-            int count = 0;
-            var res = await _projectRepository.GetByQuery();
-            if (!string.IsNullOrEmpty(filter) && string.IsNullOrEmpty(category))
-            {
+            //int pageSelected = page;
+            //int count = 0;
+            //var res = await _projectRepository.GetByQuery();
+            //if (!string.IsNullOrEmpty(filter) && string.IsNullOrEmpty(category))
+            //{
                
-                count = res.Count(w => w.StatusForeignKey == filter);
-            }else if (!string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
-            {
-                count = res.Count(w => w.StatusForeignKey == filter && w.ScopeForeignKey==category);
-            }else if(string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
-            {
-                count = res.Count(w => w.ScopeForeignKey == category);
-            }
-            else
-            {
-                count = await _projectRepository.GetCount();
-            }
+            //    count = res.Count(w => w.StatusForeignKey == filter);
+            //}else if (!string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
+            //{
+            //    count = res.Count(w => w.StatusForeignKey == filter && w.ScopeForeignKey==category);
+            //}else if(string.IsNullOrEmpty(filter) && !string.IsNullOrEmpty(category))
+            //{
+            //    count = res.Count(w => w.ScopeForeignKey == category);
+            //}
+            //else
+            //{
+            //    count = await _projectRepository.GetCount();
+            //}
 
-            int pageSkip = (page - 1) * 10;
+            //int pageSkip = (page - 1) * 10;
             var query = await _projectRepository.GetByQuery();
             query = query.Include(i => i.Status);
             if (!string.IsNullOrEmpty(filter) && string.IsNullOrEmpty(category))
@@ -456,12 +456,13 @@ namespace Application.Services.Ui
             {
                 query = query.Where(w => w.ScopeForeignKey == category);
             }
-            var projects = await query.Skip(pageSkip).Take(10).ToListAsync();
-            count = count.PageCount(10);
+            //var projects = await query.Skip(pageSkip).Take(10).ToListAsync();
+            var projects = await query.ToListAsync();
+            //count = count.PageCount(10);
             ListGenerics<ProjectCard> result = new();
             result.List = projects.Adapt<List<ProjectCard>>();
-            result.Count = count;
-            result.CurrentPage = page;
+            //result.Count = count;
+            //result.CurrentPage = page;
             string title="All Projects";
             if (!string.IsNullOrEmpty(filter))
             {
@@ -469,10 +470,10 @@ namespace Application.Services.Ui
             }
 
             result.data = title;
-            if (count > 1 && projects.Count < 10 && page == 1)
-            {
-                result.Pagination = false;
-            }
+            //if (count > 1 && projects.Count < 10 && page == 1)
+            //{
+            //    result.Pagination = false;
+            //}
 
             return result;
         }

@@ -13,13 +13,13 @@ namespace Donysh.Controllers
         {
             _userInterface = userInterface;
         }
-        public async Task<IActionResult> Projects(string? title, int page=1,
+        public async Task<IActionResult> Projects(string? title, /*int page=1,*/
             string? filter=null,string? category=null)
         {
             ViewBag.PageTitle=title;
             ViewBag.Filter=filter;
             ViewBag.Category=category;
-            var pageModel = await _userInterface.GetListProject(page, filter, category);
+            var pageModel = await _userInterface.GetListProject(/*page,*/ filter, category);
             return View(pageModel);
         }
 

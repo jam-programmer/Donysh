@@ -33,7 +33,7 @@
         <div class="row">
             @foreach (var item in Model.Where(w => w.Type == CompanyType.Customer))
             {
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6 mt-5">
 
                     <a href="@item.Link">
                         <img src="~/Company/@item.LogoPath" class="img-thumbnail"
@@ -57,7 +57,7 @@
         <div class="row">
             @foreach (var item in Model.Where(w => w.Type == CompanyType.Partner))
             {
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6 mt-5">
 
                     <a href="@item.Link">
                         <img src="~/Company/@item.LogoPath" class="img-thumbnail"
@@ -80,7 +80,7 @@
         <div class="row">
             @foreach (var item in Model.Where(w => w.Type == CompanyType.Supplier))
             {
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6 mt-5">
 
                     <a href="@item.Link">
                         <img src="~/Company/@item.LogoPath" class="img-thumbnail"

@@ -51,8 +51,17 @@ namespace Application.Services.Feedback
             {
 
             }
+            if (model.File != null)
+            {
+                feedback.FilePath = FileProcessing.FileUpload(model.File, model.FilePath, "Feedback");
+            }
             feedback!.IsShow = model.IsShow;
             feedback!.UpdateTime = DateTimeOffset.Now;
+            feedback.Description = model.Description;
+            feedback.FullName = model.FullName;
+            feedback.EmailAddress = model.EmailAddress;
+            feedback.CompanyName = model.CompanyName;
+
             await _repository.Update(feedback);
         }
 
@@ -111,9 +120,37 @@ namespace Application.Services.Feedback
         public async Task<List<FeedbackItemViewModel>> GetActiveFeedbackAsync()
         {
             var query = await _repository.GetByQuery();
-            var model = await query.Where(w => w.IsShow == true).ToListAsync();
+            var model = await query.Where(w => w.IsShow == true && w.IsDeleted == false).ToListAsync();
             List<FeedbackItemViewModel> items = model.Adapt<List<FeedbackItemViewModel>>();
             return items;
+        }
+
+
+
+
+        public async Task<bool> DeleteFeedbackById(string id)
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(id))
+            {
+                result = false;
+            }
+            var model = await _repository.GetByIdAsync(id);
+            if (model != null)
+            {
+                model.IsDeleted = true;
+                try
+                {
+
+                    await _repository.Update(model);
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
     }
 }

@@ -1,0 +1,92 @@
+﻿@model UpdateFeedbackDto
+@{
+    ViewData["Title"] = "Edit Feedback";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (ViewBag.Alert != null)
+{
+    <div onclick="closeAlert()" style="width: 60%;" class="alert alert-warning-soft show flex items-center mt-5" id="closeAlert" role="alert">
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x block mx-auto"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <strong class="ml-5">  @ViewBag.Alert</strong>
+    </div>
+
+}
+
+<div class="intro-y box mt-5">
+    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+        <h2 class="font-medium text-base mr-auto">
+            Edit Feedback
+        </h2>
+
+    </div>
+    <div id="input" class="p-5">
+        <form asp-area="Admin" asp-controller="Feedback" asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div class="mb-5">
+                <div>
+                    <label class="form-label mt-3">Full Name</label>
+                    <input asp-for="FullName" placeholder="Full Name..." type="text" class="form-control">
+                    <span class="text-theme-6" asp-validation-for="FullName"></span>
+                </div>
+                <input type="hidden" asp-for="Id"/>
+                <div>
+                    <label class="form-label mt-3">Company Name</label>
+                    <input asp-for="CompanyName" placeholder="Company Name..." type="text" class="form-control">
+                    <span class="text-theme-6" asp-validation-for="CompanyName"></span>
+                </div>
+
+                <input type="hidden" asp-for="FilePath" />
+                <div>
+                    <label class="form-label mt-3">Email Address</label>
+                    <input asp-for="EmailAddress" placeholder="Email Address..." type="email" class="form-control">
+                </div>
+
+
+
+                <div class="mt-5">
+                    <label for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                    <span class="text-theme-6" asp-validation-for="Description"></span>
+                </div>
+
+
+
+
+                <div class="form-check p-3">
+                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" asp-for="IsShow" />
+                    <label class="form-check-label" for="checkbox-switch-7">Show / Hide</label>
+                </div>
+
+
+
+                <div class="mt-4">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
+                        @if (Model.FilePath == "default.jpg")
+                        {
+                            <img id="imagePath_1" src="~/img/default.jpg">
+                        }
+                        else
+                        {
+                            <img id="imagePath_1" src="~/Feedback/@Model.FilePath">
+                        }
+                    </div>
+                    <label for="image_1" class="form-label mt-3"> File</label><br />
+                    <input onchange="ChangeImage(this,1)" asp-for="File" type="file" id="image_1" class="mt-1" />
+                </div>
+
+
+            </div>
+            <button class=" btn btn-primary " type="submit">Submit</button>
+            <a asp-controller="Feedback" asp-action="Index" asp-area="Admin" class="btn btn-warning text-white">Cancel</a>
+        </form>
+    </div>
+</div>
+
+
+
+<partial name="_ValidationScriptsPartial" />
+
+
