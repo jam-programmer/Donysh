@@ -123,7 +123,7 @@ namespace Donysh.Controllers
             var model = await _team.GetMemberInformationByIdAsync(id);
             return View(model);
         }
-        [Route("/Home/ToCarriers")]
+        [Route("/Home/Careers")]
         public async Task<IActionResult> Employments()
         {
             var pageModel = await _userInterface.GetEmployments();

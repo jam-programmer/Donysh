@@ -242,10 +242,12 @@
                     </tbody>
                 </table>
             </div>
+            @if(User.Identity!.IsAuthenticated)
+                        {
             <div class="text-center col-xl-8 col-lg-8 col-md-8 col-sm-12 offset-xl-2 offset-lg-2 offset-md-3">
                 <a class="btn btn-warning text-dark" asp-controller="Project" asp-action="GeneratePdf" asp-route-projectId="@Model.Id">Download File</a>
             </div>
-
+                        }
 
         </div>
     </div>
